@@ -10,7 +10,7 @@
 
 class Worker
 {
-
+	
 	void start();
 	void worker();
 	void setTestingInt();

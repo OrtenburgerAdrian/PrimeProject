@@ -22,7 +22,9 @@
 	void Observer::startListener() {
 
 	}
-	void Observer::logPrime() {
+	int Observer::logPrime(long a) {
+
+		return 0;
 
 	}
 	void Observer::initCommunicator() {

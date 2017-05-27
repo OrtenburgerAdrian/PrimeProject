@@ -10,9 +10,11 @@
 
 class Communicator
 {
-
-	static void startListener();
+	
 
 public:
+	//Benni:
+	static void startListener();
+	
 	static void run();
 };

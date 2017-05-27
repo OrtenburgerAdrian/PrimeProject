@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
 			std::cout << " run observer.run()" << std::endl;
 		}
 		else if (arg1 == "communicator") {
-			//communicator.run();
+			Communicator::run();
 			std::cout << " run communicator.run();" << std::endl;
 		}
 		else {

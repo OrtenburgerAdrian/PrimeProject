@@ -1,1 +1,2 @@
-#pragma once
+void startListener();
+void run();

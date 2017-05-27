@@ -1,3 +1,4 @@
+#pragma once
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -19,7 +20,7 @@ int main(int argc, char *argv[]) {
 	else {
 		std::string arg1 = argv[1];
 		if (arg1 == "observer") {
-			//Observer::run();
+			Observer::run();
 			std::cout << " run observer.run()" << std::endl;
 		}
 		else if (arg1 == "communicator") {

@@ -1,3 +1,4 @@
+#pragma once
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -7,16 +8,15 @@
 #include "communicator.hpp"
 #include "worker.hpp"
 
-class Communicator
-{
-public:
-	void startListener() {
+
+	
+
+	 void Communicator::startListener() {
 
 	}
-	void run() {
+	void Communicator::run() {
 
 	}
-private:
 
-};
+
 

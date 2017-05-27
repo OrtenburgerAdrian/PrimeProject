@@ -1,3 +1,4 @@
+#pragma once
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -6,9 +7,6 @@
 #include "observer.hpp"
 #include "communicator.hpp"
 #include "worker.hpp"
-class Worker
-{
-public:
 
 
 	void start() {
@@ -30,8 +28,4 @@ public:
 
 	}
 
-
-private:
-
-};
 

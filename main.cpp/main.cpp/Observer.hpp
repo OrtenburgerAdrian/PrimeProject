@@ -4,26 +4,26 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "observer.hpp"
-#include "communicator.hpp"
-#include "worker.hpp"
+#include "Observer.hpp"
+#include "Communicator.hpp"
+#include "Worker.hpp"
 
 	class Observer
 	{
-		//Benni: 
+		//Benni:
 		static void addCommunicator();
-		//Benni: 
+		//Benni:
 		static void initCommunicator();
-		//Benni: 
+		//Benni:
 		static void deleteCommunicator();
-		//Benni: 
+		//Benni:
 		static void startListener();
 		//Adrian:
 		static int logPrime(long a);
 
 
 	public:
-		//Benni: 
+		//Benni:
 		static void run();
 
 	};

@@ -4,13 +4,13 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "observer.hpp"
-#include "communicator.hpp"
-#include "worker.hpp"
+#include "Observer.hpp"
+#include "Communicator.hpp"
+#include "Worker.hpp"
 
 class Worker
 {
-	
+
 	void start();
 	void worker();
 	void setTestingInt();

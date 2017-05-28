@@ -1,15 +1,15 @@
-#pragma once
+//#pragma once
 #include <stdio.h>
 #include <string>
 #include <iostream>
 #include <stdlib.h>
 
-#include "observer.hpp"
-#include "communicator.hpp"
-#include "worker.hpp"
+#include "Observer.hpp"
+#include "Communicator.hpp"
+#include "Worker.hpp"
 
 
-	
+
 
 	 void Communicator::startListener() {
 

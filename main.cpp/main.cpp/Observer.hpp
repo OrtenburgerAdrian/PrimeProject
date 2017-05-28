@@ -19,7 +19,7 @@
 		//Benni: 
 		static void startListener();
 		//Adrian:
-		static int logPrime(long a);
+		static int logPrime(unsigned long long a);
 
 
 	public:

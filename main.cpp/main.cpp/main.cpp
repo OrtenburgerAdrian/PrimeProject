@@ -9,7 +9,8 @@
 #include "worker.hpp"
 
 int main(int argc, char *argv[]) {
-
+	std::cout << argc << std::endl;
+	Observer::run();
 
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;

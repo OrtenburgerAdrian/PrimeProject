@@ -4,9 +4,9 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "observer.hpp"
-#include "communicator.hpp"
-#include "worker.hpp"
+#include "Observer.hpp"
+#include "Communicator.hpp"
+#include "Worker.hpp"
 
 int main(int argc, char *argv[]) {
 	std::cout << argc << std::endl;
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 	}
 	while (true)
 	{
-
+        std::cout << " Test" << std::endl;
 	}
 
 }

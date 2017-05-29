@@ -10,6 +10,7 @@
 
 	class Observer
 	{
+		
 		//Benni:
 		static void addCommunicator();
 		//Benni:
@@ -18,12 +19,15 @@
 		static void deleteCommunicator();
 		//Benni:
 		static void startListener();
-		//Adrian:
-		static int logPrime(unsigned long long a);
+		
 
 
 	public:
 		//Benni:
 		static void run();
+		//Adrian:
+		static int logPrime(unsigned long long prim);
+		//Adrian
+		
 
 	};

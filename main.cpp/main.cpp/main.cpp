@@ -3,14 +3,25 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <stdio.h>
+#include <time.h>
+#include <stdio.h>
+#include <time.h>
+
+#include <dos.h>
+#include <windows.h>
+#include <iostream> 
+#include <stdlib.h>
 
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"
 
 int main(int argc, char *argv[]) {
-	std::cout << argc << std::endl;
-	Observer::run();
+	
 
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;
@@ -34,7 +45,7 @@ int main(int argc, char *argv[]) {
 	}
 	while (true)
 	{
-        std::cout << " Test" << std::endl;
+    
 	}
 
 }

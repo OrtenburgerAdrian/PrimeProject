@@ -1,0 +1,11 @@
+
+LinkedList primesList;
+	LinkedList *head = &primesList;
+	LinkedList* PrimListLast = head;
+	
+
+	LinkedList::initNode(head, 10);
+	LinkedList::display(head);
+
+	PrimListLast = LinkedList::addNode(PrimListLast, 20 );
+	LinkedList::display(head);

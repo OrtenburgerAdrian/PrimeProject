@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdlib.h>
 
+#include "LinkedList.hpp"
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"
@@ -27,7 +28,7 @@
 		static void run();
 		//Adrian:
 		static int logPrime(unsigned long long prim);
-		//Adrian
+		
 		
 
 	};

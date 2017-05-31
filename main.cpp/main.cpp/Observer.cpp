@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <time.h>
 
+#include "LinkedList.hpp"
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"
@@ -39,7 +40,7 @@
 			ofs << prim << std::endl;
 			count++;
 		}
-		else if (ofs.is_open() && count >= maxCount) {
+		else if (count >= maxCount) {//wenn der count >= maxCount ist muss ein ofs offen sein
 			ofs.close();
 			time_t t = time(0); // Systemzeit in sec
 			std::string dateiName = "./log" + std::to_string(t) + ".txt";

@@ -18,28 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Communicator.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Observer.cpp" />
-    <ClCompile Include="Worker.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Communicator.hpp" />
-    <ClInclude Include="MerklistAdrian" />
-    <ClInclude Include="Observer.hpp" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Worker.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="PrimeBreaker.rc" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{34A12B3E-9602-4EBE-A4A0-9C94F40F06A3}</ProjectGuid>
-    <RootNamespace>maincpp</RootNamespace>
+    <ProjectGuid>{CC66C4A2-43C3-422E-8E39-6592C94B2290}</ProjectGuid>
+    <RootNamespace>testLinkedList</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
-    <ProjectName>PrimeBreaker</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -92,11 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
-    <Bscmake>
-      <PreserveSbr>true</PreserveSbr>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -131,6 +110,13 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="Quelle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LinkedList.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

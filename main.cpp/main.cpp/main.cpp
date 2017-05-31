@@ -16,6 +16,7 @@
 #include <iostream> 
 #include <stdlib.h>
 
+#include "LinkedList.hpp"
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"

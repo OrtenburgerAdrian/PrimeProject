@@ -6,13 +6,13 @@ using namespace std;
 
 
 
-// only for the 1st Node
+// only for the 1st Nodeo
 void LinkedList::initNode(struct LinkedList *last, unsigned long long n) {
 	last->data = n;
 	last->next = NULL;
 }
 
-// apending
+// apendingo
 LinkedList* LinkedList::addNode(struct LinkedList *last, unsigned long long n) {
 	LinkedList *newNode = new LinkedList;
 	newNode->data = n;
@@ -22,7 +22,7 @@ LinkedList* LinkedList::addNode(struct LinkedList *last, unsigned long long n) {
 
 	}
 	else {
-		// TODO ERROR
+		// TODO ERRORo
 	}
 
 

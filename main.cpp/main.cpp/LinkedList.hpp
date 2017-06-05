@@ -6,11 +6,11 @@ public:
 	unsigned long long data;
 	LinkedList* next;
 
-	//Adrian
+	//Adriano
 	static void  initNode(struct LinkedList *last, unsigned long long n);
-	//Adrian
+	//Adriano
 	static LinkedList* addNode(struct LinkedList *last, unsigned long long n);
-	//Adrian
+	//Adriano
 	static	void  display(struct LinkedList *head);
 	private:
 

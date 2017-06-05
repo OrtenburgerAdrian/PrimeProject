@@ -10,23 +10,23 @@
 #include "Worker.hpp"
 
 
-	void start() {
+void start() {
 
-	}
-	void worker() {
+}
+void worker() {
 
-	}
-	void setTestingInt() {
+}
+void setTestingInt() {
 
-	}
-	void stop() {
+}
+void stop() {
 
-	}
-	void getTestingInt() {
+}
+void getTestingInt() {
 
-	}
-	void isActive() {
+}
+void isActive() {
 
-	}
+}
 
 

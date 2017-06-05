@@ -20,12 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Communicator.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Worker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Communicator.hpp" />
+    <ClInclude Include="LinkedList.hpp" />
     <ClInclude Include="MerklistAdrian" />
     <ClInclude Include="Observer.hpp" />
     <ClInclude Include="resource.h" />

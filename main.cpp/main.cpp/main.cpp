@@ -22,7 +22,7 @@
 #include "Worker.hpp"
 
 int main(int argc, char *argv[]) {
-	
+
 
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 	}
 	while (true)
 	{
-    
+
 	}
 
 }

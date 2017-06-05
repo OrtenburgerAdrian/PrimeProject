@@ -11,12 +11,12 @@
 
 
 
-	 void Communicator::startListener() {
+void Communicator::startListener() {
 
-	}
-	void Communicator::run() {
+}
+void Communicator::run() {
 
-	}
+}
 
 
 

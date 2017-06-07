@@ -3,6 +3,7 @@
 #include <strings.h>
 #include <string.h>
 #include <unistd.h>
+#include <sstream>
 
 //specific import
 #include <stdio.h>
@@ -12,7 +13,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <ifaddrs.h>
-
+#include "tcpiptk.hpp"
 
 int listeningSocketfd;
 int connectedSocketfd;
@@ -22,7 +23,7 @@ void error(char *msg)
     perror(msg);
     exit(1);
 }
-void closeListeningSocket(void){
+void tcpiptk::closeListeningSocket(void){
 	printf("Closing listening Socket gracefully.\n");
 	if(shutdown(listeningSocketfd,SHUT_RDWR)<0){
 		error("shutdown listening socket");
@@ -31,7 +32,7 @@ void closeListeningSocket(void){
 		error("close listening socket");
 	}
 }
-void closeConnectedSocket(void){
+void tcpiptk::closeConnectedSocket(void){
 	printf("Closing connected Socket gracefully.\n");
 	if(shutdown(connectedSocketfd,SHUT_RDWR)<0){
 		error("shutdown connected socket");
@@ -40,7 +41,7 @@ void closeConnectedSocket(void){
 		error("close connected socket");
 	}
 }
-void closeEstablishedSocket(void){
+void tcpiptk::closeEstablishedSocket(void){
 	printf("Closing established Socket gracefully.\n");
 	if(shutdown(establishedSocketfd,SHUT_RDWR)<0){
 		error("shutdown established socket");
@@ -50,7 +51,7 @@ void closeEstablishedSocket(void){
 	}
 }
 
-int createSocket (int portno){
+int tcpiptk::createSocket (int portno){
      struct sockaddr_in serv_addr, cli_addr;
      int n;
 
@@ -70,7 +71,7 @@ int createSocket (int portno){
 	 atexit(closeListeningSocket);
 	 return listeningSocketfd;
 }
-int connectSocket (char* hostname, int portno){
+int tcpiptk::connectSocket (char* hostname, int portno){
     struct sockaddr_in serv_addr;
     struct hostent *server;
 
@@ -96,11 +97,11 @@ int connectSocket (char* hostname, int portno){
 	return connectedSocketfd;
 }
 
-char* getMessage(int sockfd){
+std::string tcpiptk::getMessage(int sockfd){
 	int n;
 	unsigned int clilen;
 	struct sockaddr_in cli_addr;
-    static char message[256];
+    char message[256];
 
 	listen(sockfd,5);
 	clilen = sizeof(cli_addr);
@@ -115,9 +116,10 @@ char* getMessage(int sockfd){
 		error("ERROR reading from socket");
 	}
 	atexit(closeEstablishedSocket);
-	return message;
+	std::string str = message;
+	return str;
 }
-int writeMessage(int sockfd, char *message){
+int tcpiptk::writeMessage(int sockfd, char *message){
     int n = write(sockfd,message,strlen(message));
     if (n < 0){
 		error("ERROR writing to socket");
@@ -125,7 +127,7 @@ int writeMessage(int sockfd, char *message){
 }
 
 /* Derivated from "man 3 getifaddrs" */
-char* getMyIP(){
+char* tcpiptk::getMyIP(){
 	struct ifaddrs *ifaddr, *ifa;
            int family, s, n;
            char host[NI_MAXHOST];

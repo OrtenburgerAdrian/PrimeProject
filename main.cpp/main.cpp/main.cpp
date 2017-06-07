@@ -16,13 +16,14 @@
 #include <iostream> 
 #include <stdlib.h>
 
+#include "IsItAPrime.hpp"
 #include "LinkedList.hpp"
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"
 
 int main(int argc, char *argv[]) {
-
+	
 
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;

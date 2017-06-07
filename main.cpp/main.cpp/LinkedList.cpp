@@ -6,28 +6,38 @@ using namespace std;
 
 
 
-// only for the 1st Nodeo
+// only for the 1st Node
 void LinkedList::initNode(struct LinkedList *last, unsigned long long n) {
 	last->data = n;
 	last->next = NULL;
 }
 
-// apendingo
+// apending
 LinkedList* LinkedList::addNode(struct LinkedList *last, unsigned long long n) {
 	LinkedList *newNode = new LinkedList;
 	newNode->data = n;
 	newNode->next = NULL;
 	if (last->next == NULL) {
 		last->next = newNode;
-
 	}
 	else {
-		// TODO ERRORo
+		// TODO ERROR
 	}
-
-
 	return newNode;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void LinkedList::display(struct LinkedList *head) {
 	LinkedList *list = head;

@@ -6,12 +6,15 @@ public:
 	unsigned long long data;
 	LinkedList* next;
 
-	//Adriano
+	//Adrian
 	static void  initNode(struct LinkedList *last, unsigned long long n);
-	//Adriano
+	//Adrian
 	static LinkedList* addNode(struct LinkedList *last, unsigned long long n);
-	//Adriano
+	//Adrian
 	static	void  display(struct LinkedList *head);
+
+	 
+
 	private:
 
 

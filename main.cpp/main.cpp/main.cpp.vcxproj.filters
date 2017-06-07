@@ -30,6 +30,9 @@
     <ClCompile Include="LinkedList.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="IsItAPrime.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Communicator.hpp">
@@ -48,6 +51,9 @@
       <Filter>Quelldateien</Filter>
     </ClInclude>
     <ClInclude Include="LinkedList.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IsItAPrime.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

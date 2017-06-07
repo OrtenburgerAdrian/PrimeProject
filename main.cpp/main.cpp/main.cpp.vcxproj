@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Communicator.cpp" />
+    <ClCompile Include="IsItAPrime.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Observer.cpp" />
@@ -27,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Communicator.hpp" />
+    <ClInclude Include="IsItAPrime.hpp" />
     <ClInclude Include="LinkedList.hpp" />
     <ClInclude Include="MerklistAdrian" />
     <ClInclude Include="Observer.hpp" />

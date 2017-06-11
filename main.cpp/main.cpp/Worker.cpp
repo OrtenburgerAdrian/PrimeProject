@@ -11,12 +11,9 @@
 #include <stdio.h>
 #include <time.h>
 #include <thread>
-#include <cstdlib>  
+#include <cstdlib>
 #include <algorithm>
-
-#include <dos.h>
-#include <windows.h>
-#include <iostream> 
+#include <iostream>
 #include <stdlib.h>
 
 #include "IsItAPrime.hpp"
@@ -26,6 +23,10 @@
 #include "Worker.hpp"
 #include "Log.hpp"
 
+#ifdef _WIN32
+    #include <dos.h>
+    #include <windows.h>
+#endif
 
 void Worker::thread_calculate(int threadNumber) {
 	static LinkedList *head = &primesList;
@@ -40,7 +41,7 @@ void Worker::thread_calculate(int threadNumber) {
 	}
 }
  void Worker::start() {
-	
+
 
 	switch (nuberOfWorker) {
 	case -1:
@@ -83,7 +84,7 @@ void Worker::thread_calculate(int threadNumber) {
 
 void Worker::setTestingInt(unsigned long long prime, int threadNumber) {
 	threadToCalculate[threadNumber] = prime;
-	
+
 
 
 
@@ -95,7 +96,7 @@ void Worker::stop(int threadNumbe) {
 }
 void Worker::TestingInt(int threadNumbe, unsigned long long prime) {
 	threadToCalculate[threadNumbe] = prime;
-		
+
 } unsigned long long Worker::TestingInt(int threadNumbe) {
 	return threadToCalculate[threadNumbe];
 }

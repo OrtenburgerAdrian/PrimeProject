@@ -11,20 +11,24 @@
 #include <stdio.h>
 #include <time.h>
 #include <thread>
-#include <cstdlib>  
+#include <cstdlib>
 #include <algorithm>
 #include <time.h>
-#include <dos.h>
-#include <windows.h>
-#include <iostream> 
+#include <iostream>
 #include <stdlib.h>
 #include <sstream>
+#include <cstring>
 
 #include "IsItAPrime.hpp"
 #include "LinkedList.hpp"
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"
+
+#ifdef _WIN32
+    #include <dos.h>
+    #include <windows.h>
+#endif
 
 static std::ofstream logDebugg;
 
@@ -52,8 +56,8 @@ void Log::logerror(std::string Nachricht){
 void Log::log(unsigned long long prime){
 	/**ich habe mich entschiedern die logdatein nicht, wenn sie eine bestimme größe erreichen zu wechseln,
 	sonder wenn ein bestimme anzahl an zahlen hinen geschrieben wurden, einen counter mitlaufen zu lassen ist performanter.  **/
-	static std::stringstream ss; //wird gebraucht um aus time einen String zu machen. 
-	static std::ofstream logPrime; //filedeskripteor 
+	static std::stringstream ss; //wird gebraucht um aus time einen String zu machen.
+	static std::ofstream logPrime; //filedeskripteor
 	static int maxCount = 100000; // soviele PrimZahen werden in ein und die selbe Logdatei geschrieben
 	static int count = 0;			//soviele PrimZahen wurden bereits in die Logdatei geschrieben
 	if (logPrime.is_open() && count < maxCount) {
@@ -87,7 +91,7 @@ void Log::log(std::string Nachricht){
 		std::cout << ss.str() << "	: " << Nachricht << std::endl;
 	}
 	else {
-				    
+
 		std::string dateiName = "./logDebugg" + ss.str() + ".txt";
 		logDebugg.open(dateiName.c_str(), std::ios::app);
 		logDebugg << ss.str() << "	: " << Nachricht << std::endl;

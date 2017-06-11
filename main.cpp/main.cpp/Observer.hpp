@@ -11,7 +11,6 @@
 
 class Observer
 {
-
 	//Benni:
 	static void addCommunicator();
 	//Benni:
@@ -26,9 +25,4 @@ class Observer
 public:
 	//Benni:
 	static void run();
-	
-	
-
-
-
 };

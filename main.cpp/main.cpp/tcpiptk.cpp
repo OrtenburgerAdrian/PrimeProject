@@ -23,32 +23,19 @@ void error(char *msg)
     perror(msg);
     exit(1);
 }
-void tcpiptk::closeListeningSocket(void){
-	printf("Closing listening Socket gracefully.\n");
-	if(shutdown(listeningSocketfd,SHUT_RDWR)<0){
-		error("shutdown listening socket");
-	}
+void tcpiptk::closeSocket(int socketfd){
 	if(close(listeningSocketfd)<0){
 		error("close listening socket");
 	}
 }
-void tcpiptk::closeConnectedSocket(void){
-	printf("Closing connected Socket gracefully.\n");
-	if(shutdown(connectedSocketfd,SHUT_RDWR)<0){
-		error("shutdown connected socket");
-	}
-	if(close(connectedSocketfd)<0){
-		error("close connected socket");
-	}
+void tcpiptk::shutdownSocket(int socketfd){
+    if(shutdown(socketfd,SHUT_RDWR)<0){
+    error("shutdown Socket");
+    }
 }
-void tcpiptk::closeEstablishedSocket(void){
-	printf("Closing established Socket gracefully.\n");
-	if(shutdown(establishedSocketfd,SHUT_RDWR)<0){
-		error("shutdown established socket");
-	}
-	if(close(establishedSocketfd)<0){
-		error("close established socket");
-	}
+void tcpiptk::closeAndShutdownSocket(int socketfd){
+    tcpiptk::shutdownSocket(socketfd);
+    tcpiptk::closeSocket(socketfd);
 }
 
 int tcpiptk::createSocket (int portno){
@@ -68,7 +55,6 @@ int tcpiptk::createSocket (int portno){
      if (bind(listeningSocketfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0){
 		error("ERROR on binding");
 	 }
-	 atexit(closeListeningSocket);
 	 return listeningSocketfd;
 }
 int tcpiptk::connectSocket (char* hostname, int portno){
@@ -93,33 +79,34 @@ int tcpiptk::connectSocket (char* hostname, int portno){
     if (connect(connectedSocketfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0){
         error("ERROR connecting");
 	}
-	atexit(closeConnectedSocket);
 	return connectedSocketfd;
 }
 
-std::string tcpiptk::getMessage(int sockfd){
+std::string tcpiptk::getMessage(int establishedSocketfd){
 	int n;
+    char message[256];
+	bzero(message,256);
+	n = read(establishedSocketfd,message,255);
+	if (n < 0){
+		error("ERROR reading from socket");
+	}
+	std::string str = message;
+	return str;
+}
+int tcpiptk::acceptConnection(int sockfd){
 	unsigned int clilen;
 	struct sockaddr_in cli_addr;
-    char message[256];
 
-	listen(sockfd,5);
+	listen(sockfd,100);
 	clilen = sizeof(cli_addr);
 	establishedSocketfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
 	if (establishedSocketfd < 0){
 		error("ERROR on accept");
 	}
 	printf("Got a connection *yeah*!\n");
-	bzero(message,256);
-	n = read(establishedSocketfd,message,255);
-	if (n < 0){
-		error("ERROR reading from socket");
-	}
-	atexit(closeEstablishedSocket);
-	std::string str = message;
-	return str;
+	return establishedSocketfd;
 }
-int tcpiptk::writeMessage(int sockfd, char *message){
+int tcpiptk::writeMessage(int sockfd, const char *message){
     int n = write(sockfd,message,strlen(message));
     if (n < 0){
 		error("ERROR writing to socket");

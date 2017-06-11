@@ -12,12 +12,9 @@
 #include <stdio.h>
 #include <time.h>
 #include <thread>
-#include <cstdlib>  
+#include <cstdlib>
 #include <algorithm>
-
-#include <dos.h>
-#include <windows.h>
-#include <iostream> 
+#include <iostream>
 #include <stdlib.h>
 
 #include "IsItAPrime.hpp"
@@ -27,6 +24,10 @@
 #include "Worker.hpp"
 #include "Log.hpp"
 
+#ifdef _WIN32
+    #include <dos.h>
+    #include <windows.h>
+#endif
 
 class Log
 {

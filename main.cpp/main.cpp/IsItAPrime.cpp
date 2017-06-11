@@ -11,9 +11,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#include <dos.h>
-#include <windows.h>
-#include <iostream> 
+#include <iostream>
 #include <stdlib.h>
 
 #include "LinkedList.hpp"
@@ -22,6 +20,11 @@
 #include "Worker.hpp"
 #include "IsItAPrime.hpp"
 #include "Log.hpp"
+
+#ifdef _WIN32
+    #include <dos.h>
+    #include <windows.h>
+#endif
 
  bool IsItAPrime::isItAPrime(unsigned long long prime, LinkedList *head) {
 	if (prime % 2 == 0) { return false; }
@@ -35,5 +38,5 @@
 		primOP = primOP->next;
 	}
 	return true;
-	
+
 };

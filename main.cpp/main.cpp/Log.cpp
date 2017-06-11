@@ -1,6 +1,6 @@
 #pragma once
 #include <stdio.h>
-#include <string>
+#include <string.h>
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
@@ -29,8 +29,7 @@
     #include <dos.h>
     #include <windows.h>
 #endif
-
-static std::ofstream logDebugg;
+static std::ofstream logDebug;
 
 void Log::logerror(std::string Nachricht){
 	static std::stringstream ss;
@@ -38,18 +37,19 @@ void Log::logerror(std::string Nachricht){
 	t = time(0); // Systemzeit in sec
 	ss << t;     //time wird zu einem String convertirt
 
+	char i [100];
 
-	if (logDebugg.is_open()) {
-		logDebugg << ss.str() << "	: "<< Nachricht << "	: " <<  std::strerror(errno) << std::endl;
-		std::cout << ss.str() << "	: " << Nachricht << "	: " << std::strerror(errno) << std::endl;
+	if (logDebug.is_open()) {
+		logDebug << ss.str() << "	: "<< Nachricht << "	: " << strerror_s(i,errno) << std::endl;
+		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror_s(i, errno) << std::endl;
 
 	}
 	else {
 
 		std::string dateiName = "./logDebugg" + ss.str() + ".txt";
-		logDebugg.open(dateiName.c_str(), std::ios::app);
-		logDebugg << ss.str() << "	: " << Nachricht << "	: " << std::strerror(errno) << std::endl;
-		std::cout << ss.str() << "	: " << Nachricht << "	: " << std::strerror(errno) << std::endl;
+		logDebug.open(dateiName.c_str(), std::ios::app);
+		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror_s(i, errno) << std::endl;
+		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror_s(i, errno) << std::endl;
 	}
 }
 
@@ -86,15 +86,15 @@ void Log::log(std::string Nachricht){
 	ss << t;     //time wird zu einem String convertirt
 
 
-	if (logDebugg.is_open()) {
-		logDebugg << ss.str() << "	: "<< Nachricht << std::endl;
+	if (logDebug.is_open()) {
+		logDebug << ss.str() << "	: "<< Nachricht << std::endl;
 		std::cout << ss.str() << "	: " << Nachricht << std::endl;
 	}
 	else {
 
 		std::string dateiName = "./logDebugg" + ss.str() + ".txt";
-		logDebugg.open(dateiName.c_str(), std::ios::app);
-		logDebugg << ss.str() << "	: " << Nachricht << std::endl;
+		logDebug.open(dateiName.c_str(), std::ios::app);
+		logDebug << ss.str() << "	: " << Nachricht << std::endl;
 		std::cout << ss.str() << "	: " << Nachricht << std::endl;
 	}
 }

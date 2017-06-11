@@ -13,7 +13,6 @@
 #include <thread>
 #include <cstdlib>
 #include <algorithm>
-#include <unistd.h>
 
 #include <iostream>
 #include <stdlib.h>
@@ -28,6 +27,8 @@
 #ifdef _WIN32
     #include <dos.h>
     #include <windows.h>
+#elif __linux__
+#include <unistd.h>
 #endif
 
 bool threadActive[16];
@@ -53,8 +54,6 @@ int main(int argc, char *argv[]) {
 				std::fill_n(threadIsPrime, nuberOfWorker, false);// screibt in jedes feld false rein
 				std::fill_n(threadNotDelete, nuberOfWorker, true);// screibt in jedes feld true rein
 				std::fill_n(threadToCalculate, nuberOfWorker, 0);// screibt in jedes feld 0 rein
-
-	Worker::start();
 
 
 	if (argc <= 1) {

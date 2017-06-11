@@ -9,7 +9,13 @@
 #include <stdio.h>
 #include <time.h>
 #include <sstream>
+
+
+#ifdef __linux__
 #include <unistd.h>
+#endif
+
+
 #include <vector>
 
 #include "LinkedList.hpp"
@@ -20,14 +26,8 @@
 #include "Log.hpp"
 
 void Observer::run() {
-    int initPort = 30000;
+  /*  int initPort = 30000;
     std::vector<int> communicators;
-
-    //Tests
-    communicators.push_back(5);
-    std::cout << communicators.size() << std::endl;
-    int numCPU = sysconf(_SC_NPROCESSORS_ONLN);
-    std::cout << numCPU << std::endl;
 
     //Servercode
     int incomingSocketfd = tcpiptk::acceptConnection(tcpiptk::createSocket(initPort)); //Öffnet Lobby, um Ports zu verteilen.
@@ -38,6 +38,7 @@ void Observer::run() {
     tcpiptk::closeAndShutdownSocket(incomingSocketfd); //Hier müsste der Port neu geöffnet werden und eine Schleife greifen. Aktuell schließe ich noch.
     communicators.push_back(tcpiptk::acceptConnection(tcpiptk::createSocket(newPort))); //Verbindet sich mit dem Client am neuen Port und schreibt die Nachricht in den Vector.
     std::cout << tcpiptk::getMessage(communicators.back()) << std::endl; //Empfängt Testnachricht und gibt diese aus.
+	*/
 }
 
 void Observer::addCommunicator() {

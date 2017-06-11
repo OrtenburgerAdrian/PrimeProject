@@ -20,10 +20,11 @@
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"
+#include "Log.hpp"
 
 class  IsItAPrime
 { public:
 	//Adrian
-	bool isItAPrime(unsigned long long prim, LinkedList *head);
+	static bool isItAPrime(unsigned long long prim, LinkedList *head);
 
 };

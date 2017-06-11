@@ -33,6 +33,9 @@
     <ClCompile Include="IsItAPrime.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Communicator.hpp">
@@ -54,6 +57,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IsItAPrime.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

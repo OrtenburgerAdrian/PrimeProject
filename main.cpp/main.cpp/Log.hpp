@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -10,30 +11,30 @@
 #include <time.h>
 #include <stdio.h>
 #include <time.h>
+#include <thread>
+#include <cstdlib>  
+#include <algorithm>
 
 #include <dos.h>
 #include <windows.h>
 #include <iostream> 
 #include <stdlib.h>
 
+#include "IsItAPrime.hpp"
 #include "LinkedList.hpp"
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"
-#include "IsItAPrime.hpp"
 #include "Log.hpp"
 
- bool IsItAPrime::isItAPrime(unsigned long long prime, LinkedList *head) {
-	if (prime % 2 == 0) { return false; }
-	unsigned long long divisor = 3;
-	LinkedList * primOP = head;
 
-	while (divisor * 2 < prime && primOP != NULL) {
-		if (prime % divisor == 0) { return false; }
+class Log
+{
+public:
+ static void logerror(std::string Nachricht);
+ static void log(unsigned long long prime);
+ static void log(std::string Nachricht);
+private:
 
-		divisor = primOP->data;
-		primOP = primOP->next;
-	}
-	return true;
-	
 };
+

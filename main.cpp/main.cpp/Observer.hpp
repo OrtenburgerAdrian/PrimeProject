@@ -26,8 +26,8 @@ class Observer
 public:
 	//Benni:
 	static void run();
-	//Adrian:
-	static int logPrime(unsigned long long prim);
+	
+	
 
 
 

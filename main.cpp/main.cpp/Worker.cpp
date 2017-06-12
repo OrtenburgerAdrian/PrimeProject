@@ -33,7 +33,7 @@ void Worker::thread_calculate(int threadNumber) {
 	while (threadNotDelete[threadNumber])
 	{
 		while (threadActive[threadNumber]) {
-			if (IsItAPrime::isItAPrime(threadToCalculate[threadNumber], head)) {
+			if (IsItAPrime::isItAPrime(threadToCalculate[threadNumber], head, threadNumber)) {
 				threadIsPrime[threadNumber] = true;
 			}
 			threadActive[threadNumber] = false;

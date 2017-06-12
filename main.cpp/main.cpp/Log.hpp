@@ -35,6 +35,7 @@ public:
  static void logerror(std::string Nachricht);
  static void log(unsigned long long prime);
  static void log(std::string Nachricht);
+ static void logtime();
 private:
 
 };

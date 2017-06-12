@@ -15,6 +15,7 @@ extern bool threadNotDelete[];
 extern unsigned long long threadToCalculate[];
 extern int nuberOfWorker;
 extern LinkedList primesList;
+extern LinkedList resultList;
 
 class Worker
 {

@@ -14,19 +14,8 @@ LinkedList primesList;
 
 
 
-
-
-
-
 	/*	PrimListLast = LinkedList::addNode(PrimListLast, 5);
 	PrimListLast = LinkedList::addNode(PrimListLast, 7);
-	PrimListLast = LinkedList::addNode(PrimListLast, 11);
-	PrimListLast = LinkedList::addNode(PrimListLast, 13);
-	PrimListLast = LinkedList::addNode(PrimListLast, 17);
-	PrimListLast = LinkedList::addNode(PrimListLast, 19);
-	PrimListLast = LinkedList::addNode(PrimListLast, 23);
-	PrimListLast = LinkedList::addNode(PrimListLast, 29);
-	PrimListLast = LinkedList::addNode(PrimListLast, 31);
 	PrimListLast = LinkedList::addNode(PrimListLast, 37);
 	//LinkedList::display(head);
 	unsigned long long prim = 3;
@@ -61,17 +50,19 @@ LinkedList primesList;
 
 
 
-
-
-
-
-
-
-
-
 	bool threadActive[16];
 bool threadNotDelete[16];
 bool threadIsPrime[16];
 unsigned long long threadToCalculate[16];
 int nuberOfWorker; 
 LinkedList primesList;
+
+
+
+
+
+
+
+#ifdef _WIN32
+#elif __linux__
+#endif

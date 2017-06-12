@@ -98,7 +98,9 @@ void Log::log(std::string Nachricht){
 		std::cout << ss.str() << "	: " << Nachricht << std::endl;
 	}
 }
+ void Log::logtime() {
 
+}
 
 
 

@@ -27,6 +27,6 @@
 class  IsItAPrime
 { public:
 	//Adrian
-	static bool isItAPrime(unsigned long long prim, LinkedList *head);
+	static bool isItAPrime(unsigned long long prim, LinkedList *head, int threadNumber);
 
 };

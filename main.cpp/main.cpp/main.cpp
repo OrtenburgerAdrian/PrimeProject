@@ -29,6 +29,7 @@
     #include <windows.h>
 #elif __linux__
 #include <unistd.h>
+
 #endif
 
 bool threadActive[16];
@@ -37,7 +38,7 @@ bool threadIsPrime[16];
 unsigned long long threadToCalculate[16];
 int nuberOfWorker;
 LinkedList primesList;
-
+LinkedList resultList;
 
 
 int main(int argc, char *argv[]) {
@@ -54,6 +55,10 @@ int main(int argc, char *argv[]) {
 				std::fill_n(threadIsPrime, nuberOfWorker, false);// screibt in jedes feld false rein
 				std::fill_n(threadNotDelete, nuberOfWorker, true);// screibt in jedes feld true rein
 				std::fill_n(threadToCalculate, nuberOfWorker, 0);// screibt in jedes feld 0 rein
+
+
+
+
 
 
 	if (argc <= 1) {
@@ -82,3 +87,20 @@ int main(int argc, char *argv[]) {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// die worker arbeiten so schnell sie konnen, und spiehcne ihre ergebinsse in einer liste ab. (evl ringliste), kein muss mehr warten, alles leuft auf max geschwindigkeit, und auf seinem eigenem tempo

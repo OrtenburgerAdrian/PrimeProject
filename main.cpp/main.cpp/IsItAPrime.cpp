@@ -21,22 +21,40 @@
 #include "IsItAPrime.hpp"
 #include "Log.hpp"
 
+
 #ifdef _WIN32
-    #include <dos.h>
-    #include <windows.h>
+#include <dos.h>
+#include <windows.h>
+#elif __linux__
+#include <unistd.h>
+
 #endif
 
- bool IsItAPrime::isItAPrime(unsigned long long prime, LinkedList *head) {
+bool IsItAPrime::isItAPrime(unsigned long long prime, LinkedList *head, int threadNumber) {
 	if (prime % 2 == 0) { return false; }
 	unsigned long long divisor = 3;
 	LinkedList * primOP = head;
 
-	while (divisor * 2 < prime && primOP != NULL) {
-		if (prime % divisor == 0) { return false; }
+further: while (divisor * 2 <= prime && primOP != NULL) {
+	if (prime % divisor == 0) { return false; }
 
-		divisor = primOP->data;
-		primOP = primOP->next;
-	}
-	return true;
+	divisor = primOP->data;
+	primOP = primOP->next;
+}
+		 if (primOP == NULL && threadActive[threadNumber] == true) {
+
+#ifdef _WIN32
+			 Sleep(50);
+#elif __linux__
+			 usleep(50);
+#endif
+
+			 goto further;
+
+		 }
+		 else { return false; }
+
+
+		 return true;
 
 };

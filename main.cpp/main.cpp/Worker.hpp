@@ -10,12 +10,13 @@
 #include "Worker.hpp"
 #include "Log.hpp"
 extern bool threadActive[];
-extern bool threadIsPrime[];
 extern bool threadNotDelete[];
 extern unsigned long long threadToCalculate[];
 extern int nuberOfWorker;
 extern LinkedList primesList;
 extern LinkedList resultList;
+extern LinkedList *head;
+extern LinkedList* PrimListLast;
 
 class Worker
 {

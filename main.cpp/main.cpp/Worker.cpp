@@ -24,23 +24,27 @@
 #include "Log.hpp"
 
 #ifdef _WIN32
-    #include <dos.h>
-    #include <windows.h>
+#include <dos.h>
+#include <windows.h>
 #endif
 
 void Worker::thread_calculate(int threadNumber) {
-	static LinkedList *head = &primesList;
 	while (threadNotDelete[threadNumber])
 	{
 		while (threadActive[threadNumber]) {
 			if (IsItAPrime::isItAPrime(threadToCalculate[threadNumber], head, threadNumber)) {
-				threadIsPrime[threadNumber] = true;
+				Communicator::sendMessage(threadToCalculate[threadNumber], true);
 			}
-			threadActive[threadNumber] = false;
+			else
+			{
+				Communicator::sendMessage(threadToCalculate[threadNumber], false);
+
+			}
 		}
 	}
+
 }
- void Worker::start() {
+void Worker::start() {
 
 
 	switch (nuberOfWorker) {

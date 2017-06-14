@@ -12,6 +12,7 @@ void LinkedList::initNode(struct LinkedList *last, unsigned long long n) {
 	last->next = NULL;
 }
 
+
 // apending
 LinkedList* LinkedList::addNode(struct LinkedList *last, unsigned long long n) {
 	LinkedList *newNode = new LinkedList;
@@ -26,25 +27,3 @@ LinkedList* LinkedList::addNode(struct LinkedList *last, unsigned long long n) {
 	return newNode;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-void LinkedList::display(struct LinkedList *head) {
-	LinkedList *list = head;
-	while (list) {
-		cout << list->data << " ";
-		list = list->next;
-	}
-	cout << endl;
-	cout << endl;
-}

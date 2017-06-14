@@ -26,21 +26,21 @@
 #include "Worker.hpp"
 
 #ifdef _WIN32
-    #include <dos.h>
-    #include <windows.h>
+#include <dos.h>
+#include <windows.h>
 #endif
 static std::ofstream logDebug;
 
-void Log::logerror(std::string Nachricht){
+void Log::logerror(std::string Nachricht) {
 	static std::stringstream ss;
 	static time_t t;
 	t = time(0); // Systemzeit in sec
 	ss << t;     //time wird zu einem String convertirt
 
-	char i [100];
+	char i[100];
 
 	if (logDebug.is_open()) {
-		logDebug << ss.str() << "	: "<< Nachricht << "	: " << strerror_s(i,errno) << std::endl;
+		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror_s(i, errno) << std::endl;
 		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror_s(i, errno) << std::endl;
 
 	}
@@ -53,7 +53,8 @@ void Log::logerror(std::string Nachricht){
 	}
 }
 
-void Log::log(unsigned long long prime){
+void Log::log(unsigned long long prime) {
+	Log::logtime();
 	/**ich habe mich entschiedern die logdatein nicht, wenn sie eine bestimme größe erreichen zu wechseln,
 	sonder wenn ein bestimme anzahl an zahlen hinen geschrieben wurden, einen counter mitlaufen zu lassen ist performanter.  **/
 	static std::stringstream ss; //wird gebraucht um aus time einen String zu machen.
@@ -77,7 +78,7 @@ void Log::log(unsigned long long prime){
 
 	}
 }
-void Log::log(std::string Nachricht){
+void Log::log(std::string Nachricht) {
 	struct tm *localtime(const time_t *timer);
 
 	static std::stringstream ss;
@@ -87,7 +88,7 @@ void Log::log(std::string Nachricht){
 
 
 	if (logDebug.is_open()) {
-		logDebug << ss.str() << "	: "<< Nachricht << std::endl;
+		logDebug << ss.str() << "	: " << Nachricht << std::endl;
 		std::cout << ss.str() << "	: " << Nachricht << std::endl;
 	}
 	else {
@@ -98,10 +99,30 @@ void Log::log(std::string Nachricht){
 		std::cout << ss.str() << "	: " << Nachricht << std::endl;
 	}
 }
- void Log::logtime() {
+void Log::logtime() {
 
+
+
+	
+	static std::ofstream logTime; //filedeskripteor
+	static int maxCount = 100000; // soviele PrimZahen werden in ein und die selbe Logdatei geschrieben
+	static unsigned long long count = 0;			//soviele PrimZahen wurden bereits in die Logdatei geschrieben
+	time_t t = time(0);
+	count++;
+	if (count % 1000 == 0 || count == 750 || count == 500 || count == 250 || count >= 249) {
+		if (logTime.is_open()) {
+			logTime << count << "		:	" << t << std::endl;
+
+		}
+		else {
+
+
+			std::string dateiName = "./logTime.txt";
+			logTime.open(dateiName.c_str(), std::ios::app);
+			logTime << count << "		:	" << t << std::endl;
+		}
+	}
 }
-
 
 
 

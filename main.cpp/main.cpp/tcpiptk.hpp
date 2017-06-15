@@ -8,6 +8,6 @@ public:
     static int connectSocket (char* hostname, int portno);
     static int acceptConnection(int sockfd);
     static std::string getMessage(int sockfd);
-    static int writeMessage(int sockfd, const char *message);
+    static int writeMessage(int sockfd, const void *message, size_t length);
     static char* getMyIP();
 };

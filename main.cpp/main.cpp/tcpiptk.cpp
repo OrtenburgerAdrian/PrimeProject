@@ -106,11 +106,12 @@ int tcpiptk::acceptConnection(int sockfd){
 	printf("Got a connection *yeah*!\n");
 	return establishedSocketfd;
 }
-int tcpiptk::writeMessage(int sockfd, const char *message){
-    int n = write(sockfd,message,strlen(message));
+int tcpiptk::writeMessage(int sockfd, const void *message, size_t length){
+    int n = write(sockfd,message,length);
     if (n < 0){
 		error("ERROR writing to socket");
 	}
+	return n;
 }
 
 /* Derivated from "man 3 getifaddrs" */

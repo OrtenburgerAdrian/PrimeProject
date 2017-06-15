@@ -12,10 +12,11 @@
 class Communicator
 {
 
-
 public:
 	//Benni:
 	static void startListener();
 
 	static void run();
+
+	static void sendMessage(unsigned long long maybePrime, bool isPrime);
 };

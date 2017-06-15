@@ -18,6 +18,10 @@
 #include <stdlib.h>
 #include <sstream>
 #include <cstring>
+#include <string.h>
+#include <locale>
+#include <errno.h>
+#include <cerrno>
 
 #include "IsItAPrime.hpp"
 #include "LinkedList.hpp"
@@ -39,17 +43,18 @@ void Log::logerror(std::string Nachricht) {
 
 	char i[100];
 
+
 	if (logDebug.is_open()) {
-		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror_s(i, errno) << std::endl;
-		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror_s(i, errno) << std::endl;
+        logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
+		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
 
 	}
 	else {
 
 		std::string dateiName = "./logDebugg" + ss.str() + ".txt";
 		logDebug.open(dateiName.c_str(), std::ios::app);
-		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror_s(i, errno) << std::endl;
-		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror_s(i, errno) << std::endl;
+		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl; //strerror_s(i, 100, errno)
+		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
 	}
 }
 
@@ -103,7 +108,7 @@ void Log::logtime() {
 
 
 
-	
+
 	static std::ofstream logTime; //filedeskripteor
 	static int maxCount = 100000; // soviele PrimZahen werden in ein und die selbe Logdatei geschrieben
 	static unsigned long long count = 0;			//soviele PrimZahen wurden bereits in die Logdatei geschrieben

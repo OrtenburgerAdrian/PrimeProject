@@ -20,8 +20,7 @@ class Observer
 	//Benni:
 	static void startListener();
 
-
-
+    static int read_from_client (void * msgbuffer, int filedes);
 public:
 	//Benni:
 	static void run();

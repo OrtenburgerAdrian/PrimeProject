@@ -10,6 +10,11 @@ void Worker::thread_calculate() {
 	isItAPrime = isItAPrime + 2;
 	isItAPrime2 = isItAPrime;
 	getCal.unlock();
+
+
+#ifdef __linux__
+
+
 	if (IsItAPrime::isItAPrime(isItAPrime2)) {
 		Communicator::sendMessage(isItAPrime2, true);
 	}
@@ -17,6 +22,7 @@ void Worker::thread_calculate() {
 	{
 		Communicator::sendMessage(isItAPrime2, false);
 	}
+#endif
 }
 void Worker::start() {
 	Threads::start("worker",nuberOfWorker);

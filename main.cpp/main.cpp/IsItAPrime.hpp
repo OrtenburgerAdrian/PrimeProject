@@ -21,8 +21,8 @@
 
 extern unsigned long long maxPrime;
 extern LinkedList primesList;
-extern LinkedList *head = &primesList;
-extern LinkedList* PrimListLast = head;
+extern LinkedList *head;
+extern LinkedList* PrimListLast;
 class  IsItAPrime
 { public:
 	//Adrian

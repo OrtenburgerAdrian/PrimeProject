@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 #endif
 
 	
-#ifdef __linux__
+
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;
 	}
@@ -63,15 +63,16 @@ int main(int argc, char *argv[]) {
 	else {
 		std::string arg1 = argv[1];
 		if (arg1 == "observer") {
-
+#ifdef __linux__
 			Observer::run();
-
+#endif
 			std::cout << " run observer.run()" << std::endl;
 		}
 		else if (arg1 == "communicator") {
-			Worker::run();
+			Worker::start();
+#ifdef __linux__
 			Communicator::run();
-
+#endif
 			std::cout << " run communicator.run();" << std::endl;
 		}
 		else if (arg1 == "multicore") {
@@ -85,11 +86,12 @@ int main(int argc, char *argv[]) {
 			SingelCore::run();
 
 			std::cout << " run singelcore.run();" << std::endl;
+		}
 		else {
 			std::cout << " Incorrect transfer parameters     " << std::endl;
 		}
 	}
-
+#ifdef __linux__
 		sleep(214748364);
 
 #elif _WIN64

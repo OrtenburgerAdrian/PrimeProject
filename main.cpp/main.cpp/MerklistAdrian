@@ -66,3 +66,10 @@ LinkedList primesList;
 #ifdef _WIN32
 #elif __linux__
 #endif
+
+
+
+DOTO:
+insertlist
+WorkerMulticore
+init-note

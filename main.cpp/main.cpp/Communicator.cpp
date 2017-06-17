@@ -6,8 +6,10 @@
 #include <cstdint>
 #include <cstring>
 #include <bitset>
-#include <unistd.h>
 
+#ifdef __linux__
+#include <unistd.h>
+#endif
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"
@@ -18,6 +20,7 @@ static int connectedSocketfd;
 void Communicator::startListener() {
 
 }
+#ifdef __linux__
 void Communicator::run() {
     int initPort = 30000;
     connectedSocketfd = tcpiptk::connectSocket("192.168.188.32", initPort); //Verbinde mit der "Lobby"
@@ -40,5 +43,5 @@ void Communicator::sendMessage(unsigned long long maybePrime, bool isPrime){
     tcpiptk::writeMessage(connectedSocketfd, msgbuffer, length);
 }
 
-
+#endif
 

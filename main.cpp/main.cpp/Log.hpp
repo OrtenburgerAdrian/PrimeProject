@@ -24,10 +24,9 @@
 #include "Worker.hpp"
 #include "Log.hpp"
 
-#ifdef _WIN32
-    #include <dos.h>
-    #include <windows.h>
-#endif
+
+
+extern unsigned long long maxPrime;
 
 class Log
 {
@@ -35,6 +34,7 @@ public:
  static void logerror(std::string Nachricht);
  static void log(unsigned long long prime);
  static void log(std::string Nachricht);
+ static void logprime(unsigned long long prime);
  static void logtime();
 private:
 

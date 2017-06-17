@@ -10,13 +10,14 @@
 #include <time.h>
 #include <sstream>
 #include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+
 #include <cstring>
 
 #ifdef __linux__
 #include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #endif
 
 #include "LinkedList.hpp"
@@ -26,6 +27,7 @@
 #include "tcpiptk.hpp"
 #include "Log.hpp"
 
+#ifdef __linux__
 #define PORT    30000
 #define MAXMSG  512
 
@@ -161,3 +163,4 @@ int Observer::read_from_client (void * msgbuffer,int filedes){
 }
 
 
+#endif

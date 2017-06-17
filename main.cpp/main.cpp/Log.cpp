@@ -29,23 +29,19 @@
 #include "Communicator.hpp"
 #include "Worker.hpp"
 
-#ifdef _WIN32
-#include <dos.h>
-#include <windows.h>
-#endif
 static std::ofstream logDebug;
 
 void Log::logerror(std::string Nachricht) {
-	static std::stringstream ss;
+/*	static std::stringstream ss;
 	static time_t t;
 	t = time(0); // Systemzeit in sec
 	ss << t;     //time wird zu einem String convertirt
 
-	char i[100];
+
 
 
 	if (logDebug.is_open()) {
-        logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
+		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
 		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
 
 	}
@@ -55,34 +51,14 @@ void Log::logerror(std::string Nachricht) {
 		logDebug.open(dateiName.c_str(), std::ios::app);
 		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl; //strerror_s(i, 100, errno)
 		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
-	}
+	}*/
 }
 
-void Log::log(unsigned long long prime) {
-	Log::logtime();
-	/**ich habe mich entschiedern die logdatein nicht, wenn sie eine bestimme größe erreichen zu wechseln,
-	sonder wenn ein bestimme anzahl an zahlen hinen geschrieben wurden, einen counter mitlaufen zu lassen ist performanter.  **/
-	static std::stringstream ss; //wird gebraucht um aus time einen String zu machen.
-	static std::ofstream logPrime; //filedeskripteor
-	static int maxCount = 100000; // soviele PrimZahen werden in ein und die selbe Logdatei geschrieben
-	static int count = 0;			//soviele PrimZahen wurden bereits in die Logdatei geschrieben
-	if (logPrime.is_open() && count < maxCount) {
-		logPrime << prime << std::endl;
-		count++;
+ void Log::log(unsigned long long prime) {
+	 Log::logprime(prime);
+	 Log::logtime();
 	}
-	else {
-		if (count >= maxCount) {//wenn der count >= maxCount ist muss ein ofs offen sein
-			logPrime.close();
-		}
-		time_t t = time(0); // Systemzeit in sec
-		ss << t;     //time wird zu einem String convertirt
-		std::string dateiName = "./logPrime" + ss.str() + ".txt";
-		logPrime.open(dateiName.c_str(), std::ios::app);
-		logPrime << prime << std::endl;
-		count = 1;
 
-	}
-}
 void Log::log(std::string Nachricht) {
 	struct tm *localtime(const time_t *timer);
 
@@ -104,28 +80,55 @@ void Log::log(std::string Nachricht) {
 		std::cout << ss.str() << "	: " << Nachricht << std::endl;
 	}
 }
+void Log::logprime(unsigned long long prime){
+	//ich habe mich entschiedern die logdatein nicht, wenn sie eine bestimme größe erreichen zu wechseln,
+	//sonder wenn ein bestimme anzahl an zahlen hinen geschrieben wurden, einen counter mitlaufen zu lassen ist performanter.  
+
+	std::stringstream ss; //wird gebraucht um aus time einen String zu machen.
+	static std::ofstream logPrime; //filedeskripteor
+	static int maxCount = 1000000; // soviele PrimZahen werden in ein und die selbe Logdatei geschrieben
+	static int count = 0;			//soviele PrimZahen wurden bereits in die Logdatei geschrieben
+	if (logPrime.is_open() && count < maxCount) {
+		logPrime << prime << std::endl;
+		count++;
+	}
+	else {
+		if (count >= maxCount) {//wenn der count >= maxCount ist muss ein ofs offen sein
+			logPrime.close();
+		}
+		time_t t = time(0); // Systemzeit in sec
+		ss << t;     //time wird zu einem String convertirt
+		std::string dateiName = "./logPrime" + ss.str() + ".txt";
+		logPrime.open(dateiName.c_str(), std::ios::app);
+		logPrime << prime << std::endl;
+		count = 1;
+	}
+
+}
+
+
+
+
 void Log::logtime() {
-
-
-
-
 	static std::ofstream logTime; //filedeskripteor
-	static int maxCount = 100000; // soviele PrimZahen werden in ein und die selbe Logdatei geschrieben
-	static unsigned long long count = 0;			//soviele PrimZahen wurden bereits in die Logdatei geschrieben
+	static unsigned long long count = 0;
+	static time_t st = time(0);
+	static time_t lastTime = time(0);
 	time_t t = time(0);
 	count++;
-	if (count % 1000 == 0 || count == 750 || count == 500 || count == 250 || count >= 249) {
+	if (t > lastTime) {
+		lastTime = t;
 		if (logTime.is_open()) {
-			logTime << count << "		:	" << t << std::endl;
-
+			logTime << count << "		:	" << t - st << std::endl;
 		}
 		else {
 
 
 			std::string dateiName = "./logTime.txt";
 			logTime.open(dateiName.c_str(), std::ios::app);
-			logTime << count << "		:	" << t << std::endl;
+			logTime << count << "		:	" << t - st << std::endl;
 		}
+		std::cout << count << "	:	" << ((t - st)/60)<< ":"<< ((t - st) % 60) << std::endl;
 	}
 }
 

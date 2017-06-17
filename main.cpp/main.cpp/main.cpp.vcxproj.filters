@@ -18,13 +18,7 @@
     <ClCompile Include="Worker.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Observer.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Communicator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="LinkedList.cpp">
@@ -38,16 +32,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Communicator.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Worker.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="MerklistAdrian">
@@ -60,6 +45,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Log.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SingelCore.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiCore.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Threads.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

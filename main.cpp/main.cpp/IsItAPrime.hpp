@@ -1,9 +1,9 @@
 #pragma once
-#include <stdio.h>
-#include <string>
-#include <iostream>
-#include <stdlib.h>
-#include <fstream>
+//#include <stdio.h>
+//#include <string>
+//#include <iostream>
+//#include <stdlib.h>
+//#include <fstream>
 #include <iostream>
 #include <string>
 #include <stdio.h>
@@ -19,14 +19,13 @@
 #include "Worker.hpp"
 #include "Log.hpp"
 
-#ifdef _WIN32
-    #include <dos.h>
-    #include <windows.h>
-#endif
-
+extern unsigned long long maxPrime;
+extern LinkedList primesList;
+extern LinkedList *head = &primesList;
+extern LinkedList* PrimListLast = head;
 class  IsItAPrime
 { public:
 	//Adrian
-	static bool isItAPrime(unsigned long long prim, LinkedList *head, int threadNumber);
+	static bool isItAPrime(unsigned long long prim);
 
 };

@@ -23,43 +23,37 @@
 #include "Communicator.hpp"
 #include "Worker.hpp"
 #include "Log.hpp"
+#include "SingelCore.hpp"
+#include "MultiCore.hpp"
 
-#ifdef _WIN32
-    #include <dos.h>
-    #include <windows.h>
+#if defined _WIN64
+#include <dos.h>
+#include <windows.h>
 #elif __linux__
 #include <unistd.h>
 
 #endif
 
-bool threadActive[16];
-bool threadNotDelete[16];
-unsigned long long threadToCalculate[16];
+
 int nuberOfWorker;
+unsigned long long maxPrime;
 LinkedList primesList;
-LinkedList resultList;
 LinkedList *head = &primesList;
 LinkedList* PrimListLast = head;
 
 int main(int argc, char *argv[]) {
 	//programm init
 
-#ifdef _WIN32
-                SYSTEM_INFO s_systeminfo;
-				GetNativeSystemInfo(&s_systeminfo);
-				int nuberOfWorker = s_systeminfo.dwNumberOfProcessors - 1; // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
+#if defined _WIN64
+	SYSTEM_INFO s_systeminfo;
+	GetNativeSystemInfo(&s_systeminfo);
+	int nuberOfWorker = s_systeminfo.dwNumberOfProcessors - 1; // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
 #elif __linux__
-				int nuberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
+	int nuberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
 #endif
-				std::fill_n(threadActive, nuberOfWorker, false);// screibt in jedes feld false rein , kein thread arbeitet, bis sein Feld auf true gesetzt ist.
-				std::fill_n(threadNotDelete, nuberOfWorker, true);// screibt in jedes feld true rein
-				std::fill_n(threadToCalculate, nuberOfWorker, 0);// screibt in jedes feld 0 rein
 
-
-
-
-
-
+	
+#ifdef __linux__
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;
 	}
@@ -69,21 +63,41 @@ int main(int argc, char *argv[]) {
 	else {
 		std::string arg1 = argv[1];
 		if (arg1 == "observer") {
+
 			Observer::run();
+
 			std::cout << " run observer.run()" << std::endl;
 		}
 		else if (arg1 == "communicator") {
+			Worker::run();
 			Communicator::run();
+
 			std::cout << " run communicator.run();" << std::endl;
 		}
+		else if (arg1 == "multicore") {
+
+			MultiCore::run();
+
+			std::cout << " run multicore.run();" << std::endl;
+		}
+		else if (arg1 == "singelcore") {
+
+			SingelCore::run();
+
+			std::cout << " run singelcore.run();" << std::endl;
 		else {
 			std::cout << " Incorrect transfer parameters     " << std::endl;
 		}
 	}
-	while (true)
-	{
 
-	}
+		sleep(214748364);
+
+#elif _WIN64
+		Sleep(214748364);
+#endif
+		while (true)
+		{
+		}
 
 }
 

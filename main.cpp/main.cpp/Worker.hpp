@@ -14,7 +14,7 @@
 #include "Communicator.hpp"
 #include "Worker.hpp"
 #include "Log.hpp"
-extern int nuberOfWorker;
+extern int numberOfWorker;
 extern LinkedList primesList;
 extern LinkedList *head;
 extern LinkedList* PrimListLast;

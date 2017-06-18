@@ -82,7 +82,7 @@ void Log::log(std::string Nachricht) {
 }
 void Log::logprime(unsigned long long prime){
 	//ich habe mich entschiedern die logdatein nicht, wenn sie eine bestimme größe erreichen zu wechseln,
-	//sonder wenn ein bestimme anzahl an zahlen hinen geschrieben wurden, einen counter mitlaufen zu lassen ist performanter.  
+	//sonder wenn ein bestimme anzahl an zahlen hinen geschrieben wurden, einen counter mitlaufen zu lassen ist performanter.
 
 	std::stringstream ss; //wird gebraucht um aus time einen String zu machen.
 	static std::ofstream logPrime; //filedeskripteor
@@ -122,9 +122,7 @@ void Log::logtime() {
 			logTime << count << "		:	" << t - st << std::endl;
 		}
 		else {
-
-
-			std::string dateiName = "./logTime.txt";
+            std::string dateiName = "./logTime.txt";
 			logTime.open(dateiName.c_str(), std::ios::app);
 			logTime << count << "		:	" << t - st << std::endl;
 		}

@@ -38,7 +38,7 @@
 #endif
 
 extern unsigned long long maxPrime;
-extern int nuberOfWorker;
+extern int numberOfWorker;
 extern LinkedList primesList;
 extern LinkedList *head;
 extern LinkedList* PrimListLast;
@@ -86,9 +86,9 @@ public:
 		PrimListLast = LinkedList::addNode(PrimListLast, 5);
 		PrimListLast = LinkedList::addNode(PrimListLast, 7);
 		maxPrime = 7;
-		nuberOfWorker++;
-		
-		switch (nuberOfWorker) {
+		numberOfWorker++;
+
+		switch (numberOfWorker) {
 		case 15:
 		{ static std::thread t14(threadprog); }
 		case 14:

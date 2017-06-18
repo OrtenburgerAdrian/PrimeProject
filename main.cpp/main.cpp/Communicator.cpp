@@ -6,10 +6,12 @@
 #include <cstdint>
 #include <cstring>
 #include <bitset>
+#include <thread>
 
 #ifdef __linux__
 #include <unistd.h>
 #endif
+
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #include "Worker.hpp"
@@ -17,31 +19,42 @@
 
 static int connectedSocketfd;
 
-void Communicator::startListener() {
-
-}
-#ifdef __linux__
+//#ifdef __linux__
 void Communicator::run() {
     int initPort = 30000;
-    connectedSocketfd = tcpiptk::connectSocket("192.168.188.32", initPort); //Verbinde mit der "Lobby"
-    /*std::string message = tcpiptk::getMessage(myfd); //Empfange Nachricht. Diese enthält den port der statischen Verbindung.
-    tcpiptk::closeAndShutdownSocket(myfd); //Schließt den Socket, den er nicht mehr braucht. (Verlässt die Lobby)
-    myfd = tcpiptk::connectSocket("192.168.188.32", atoi(message.c_str())); //Verbindet sich mit dem neuen Port.
-    tcpiptk::writeMessage(myfd, "Penis"); //Testnachricht gesendet.*/
-    for( int i = 0; i < 10; i++){
-        Communicator::sendMessage(static_cast<unsigned long long>(i) , true);
-        sleep(1);
+    std::string ip = "192.168.188.32";
+    //uncomment this to enable manual IP input
+    //std::cout << "Please enter a valid ServerIP (" + ip + " is default):\n>";
+    //getline(std::cin, ip);
+    connectedSocketfd = tcpiptk::connectSocket(ip.c_str(), initPort);
+
+    while(true){
+        bool linkedListInitialized;
+        void * message;
+        unsigned long long prime;
+        message = malloc(sizeof(unsigned long long));
+        tcpiptk::getMessage(connectedSocketfd,message,sizeof(unsigned long long));
+        std::memcpy(&prime, message, sizeof(unsigned long long));
+        //printf("Got a Message from Observer: %llu is definitely a prime.\n", prime);
+        if (linkedListInitialized == false){
+            LinkedList::initNode(head, prime);
+            linkedListInitialized = true;
+        }else{
+            PrimListLast = LinkedList::addNode(PrimListLast, prime);
+        }
+        if(prime > maxPrime) maxPrime = prime;
     }
 }
 
-void Communicator::sendMessage(unsigned long long maybePrime, bool isPrime){
-    printf("%llu: %i\n", maybePrime, isPrime);
+void Communicator::sendMessage(unsigned long long maybePrime, bool isLocalPrime){
     size_t length = sizeof(unsigned long long) + sizeof(bool);
-    void * msgbuffer = malloc(512);
+    void * msgbuffer = malloc(length);
     std::memcpy(msgbuffer, &maybePrime, sizeof(unsigned long long));
-    std::memcpy(msgbuffer + sizeof(unsigned long long), &isPrime, sizeof(bool));
+    std::memcpy(msgbuffer + sizeof(unsigned long long), &isLocalPrime, sizeof(bool));
+    //printf("I am telling the Observer, that %llu is %sa prime for me.\n", maybePrime, isLocalPrime ? "" : "not ");
     tcpiptk::writeMessage(connectedSocketfd, msgbuffer, length);
+    free(msgbuffer);
 }
+//#endif
 
-#endif
 

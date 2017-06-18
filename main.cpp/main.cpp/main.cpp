@@ -35,24 +35,23 @@
 #endif
 
 
-int nuberOfWorker;
+int numberOfWorker;
 unsigned long long maxPrime;
 LinkedList primesList;
 LinkedList *head = &primesList;
 LinkedList* PrimListLast = head;
 
 int main(int argc, char *argv[]) {
-	//programm init
 
 #if defined _WIN64
 	SYSTEM_INFO s_systeminfo;
 	GetNativeSystemInfo(&s_systeminfo);
-	int nuberOfWorker = s_systeminfo.dwNumberOfProcessors - 1; // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
+	numberOfWorker = s_systeminfo.dwNumberOfProcessors - 1; // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
 #elif __linux__
-	int nuberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
+	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
 #endif
-
-	
+    //numberOfWorker = 2; //Uncomment to manually set number of working threads.
+    maxPrime = 0;
 
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;
@@ -91,16 +90,6 @@ int main(int argc, char *argv[]) {
 			std::cout << " Incorrect transfer parameters     " << std::endl;
 		}
 	}
-#ifdef __linux__
-		sleep(214748364);
-
-#elif _WIN64
-		Sleep(214748364);
-#endif
-		while (true)
-		{
-		}
-
 }
 
 

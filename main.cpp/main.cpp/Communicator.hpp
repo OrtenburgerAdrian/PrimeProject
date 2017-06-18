@@ -9,14 +9,14 @@
 #include "Communicator.hpp"
 #include "Worker.hpp"
 
+extern unsigned long long maxPrime;
+extern LinkedList * head;
+extern LinkedList * PrimListLast;
+
 class Communicator
 {
-
 public:
-	//Benni:
-	static void startListener();
-
 	static void run();
 
-	static void sendMessage(unsigned long long maybePrime, bool isPrime);
+	static void sendMessage(unsigned long long maybePrime, bool isLocalPrime);
 };

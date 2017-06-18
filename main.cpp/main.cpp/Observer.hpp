@@ -9,6 +9,11 @@
 #include "Communicator.hpp"
 #include "Worker.hpp"
 
+extern unsigned long long maxPrime;
+extern LinkedList * head;
+extern LinkedList * PrimListLast;
+extern int numberOfWorker;
+
 class Observer
 {
 	//Benni:
@@ -20,7 +25,6 @@ class Observer
 	//Benni:
 	static void startListener();
 
-    static int read_from_client (void * msgbuffer, int filedes);
 public:
 	//Benni:
 	static void run();

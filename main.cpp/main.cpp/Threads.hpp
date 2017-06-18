@@ -32,7 +32,7 @@ class Threads
 public:
 	static void start(std::string initiator, int numOfWorker) {
 
-		switch (nuberOfWorker) {
+		switch (numberOfWorker) {
 		case 32:
 		{ static std::thread t32(Worker::thread_calculate); }
 		case 31:

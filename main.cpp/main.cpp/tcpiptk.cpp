@@ -57,7 +57,7 @@ int tcpiptk::createSocket (int portno){
 	 }
 	 return listeningSocketfd;
 }
-int tcpiptk::connectSocket (char* hostname, int portno){
+int tcpiptk::connectSocket (char const * hostname, int portno){
     struct sockaddr_in serv_addr;
     struct hostent *server;
 
@@ -82,28 +82,30 @@ int tcpiptk::connectSocket (char* hostname, int portno){
 	return connectedSocketfd;
 }
 
-std::string tcpiptk::getMessage(int establishedSocketfd){
-	int n;
-    char message[256];
-	bzero(message,256);
-	n = read(establishedSocketfd,message,255);
+int tcpiptk::getMessage(int establishedSocketfd, void * message, size_t length){
+	int n = read(establishedSocketfd,message,length);
 	if (n < 0){
+        printf("File Descriptor %i Error.\n", establishedSocketfd);
 		error("ERROR reading from socket");
 	}
-	std::string str = message;
-	return str;
+	return n;
 }
+
 int tcpiptk::acceptConnection(int sockfd){
 	unsigned int clilen;
 	struct sockaddr_in cli_addr;
 
-	listen(sockfd,100);
+	listen(sockfd,NULL);
 	clilen = sizeof(cli_addr);
 	establishedSocketfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
 	if (establishedSocketfd < 0){
 		error("ERROR on accept");
 	}
-	printf("Got a connection *yeah*!\n");
+    /*TODO: Proper Log.. */
+    fprintf (stderr, "Server: connect from host %s, port %hd with file descriptor %i.\n",
+    inet_ntoa (cli_addr.sin_addr),
+    ntohs (cli_addr.sin_port), establishedSocketfd);
+
 	return establishedSocketfd;
 }
 int tcpiptk::writeMessage(int sockfd, const void *message, size_t length){
@@ -117,39 +119,39 @@ int tcpiptk::writeMessage(int sockfd, const void *message, size_t length){
 /* Derivated from "man 3 getifaddrs" */
 char* tcpiptk::getMyIP(){
 	struct ifaddrs *ifaddr, *ifa;
-           int family, s, n;
-           char host[NI_MAXHOST];
+   int family, s, n;
+   char host[NI_MAXHOST];
 
-           if (getifaddrs(&ifaddr) == -1) {
-               perror("getifaddrs");
+   if (getifaddrs(&ifaddr) == -1) {
+       perror("getifaddrs");
+       exit(EXIT_FAILURE);
+   }
+
+   /* Walk through linked list, maintaining head pointer so we
+      can free list later */
+   for (ifa = ifaddr, n = 0; ifa != NULL; ifa = ifa->ifa_next, n++) {
+       if (ifa->ifa_addr == NULL)
+           continue;
+
+       family = ifa->ifa_addr->sa_family;
+
+       /* For an AF_INET* interface address, display the address */
+
+       if (family == AF_INET || family == AF_INET6) {
+           s = getnameinfo(ifa->ifa_addr,
+                   (family == AF_INET) ? sizeof(struct sockaddr_in) :
+                                         sizeof(struct sockaddr_in6),
+                   host, NI_MAXHOST,
+                   NULL, 0, NI_NUMERICHOST);
+           if (s != 0) {
+               printf("getnameinfo() failed: %s\n", gai_strerror(s));
                exit(EXIT_FAILURE);
            }
 
-           /* Walk through linked list, maintaining head pointer so we
-              can free list later */
-           for (ifa = ifaddr, n = 0; ifa != NULL; ifa = ifa->ifa_next, n++) {
-               if (ifa->ifa_addr == NULL)
-                   continue;
+           printf("%-8s: %s\n", ifa->ifa_name, host);
 
-               family = ifa->ifa_addr->sa_family;
+       }
+   }
 
-               /* For an AF_INET* interface address, display the address */
-
-               if (family == AF_INET || family == AF_INET6) {
-                   s = getnameinfo(ifa->ifa_addr,
-                           (family == AF_INET) ? sizeof(struct sockaddr_in) :
-                                                 sizeof(struct sockaddr_in6),
-                           host, NI_MAXHOST,
-                           NULL, 0, NI_NUMERICHOST);
-                   if (s != 0) {
-                       printf("getnameinfo() failed: %s\n", gai_strerror(s));
-                       exit(EXIT_FAILURE);
-                   }
-
-                   printf("%-8s: %s\n", ifa->ifa_name, host);
-
-               }
-           }
-
-           freeifaddrs(ifaddr);
+   freeifaddrs(ifaddr);
 }

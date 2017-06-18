@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="maincpp" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Communicator">
+				<Option output="debugPrimeProject" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters="communicator" />
+				<Compiler>
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add directory="/home/berdnues/Desktop/PrimeProject/main.cpp/main.cpp/" />
+				</Compiler>
+			</Target>
+			<Target title="Observer">
+				<Option output="debugPrimeProject" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters="observer" />
+				<Compiler>
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add directory="/home/berdnues/Desktop/PrimeProject/main.cpp/main.cpp/" />
+				</Compiler>
+			</Target>
+			<Target title="Final">
+				<Option output="optimizedPrimeProject" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters="observer" />
+				<Compiler>
+					<Add directory="/home/berdnues/Desktop/PrimeProject/main.cpp/main.cpp/" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wextra" />
+			<Add option="-Wall" />
+			<Add option="-pthread" />
+			<Add option="-g" />
+		</Compiler>
+		<Linker>
+			<Add option="-pthread" />
+		</Linker>
+		<Unit filename="Communicator.cpp" />
+		<Unit filename="Communicator.hpp" />
+		<Unit filename="IsItAPrime.cpp" />
+		<Unit filename="IsItAPrime.hpp" />
+		<Unit filename="LinkedList.cpp" />
+		<Unit filename="LinkedList.hpp" />
+		<Unit filename="Log.cpp" />
+		<Unit filename="Log.hpp" />
+		<Unit filename="MultiCore.hpp" />
+		<Unit filename="Observer.cpp" />
+		<Unit filename="Observer.hpp" />
+		<Unit filename="SingelCore.hpp" />
+		<Unit filename="Threads.hpp" />
+		<Unit filename="Worker.cpp" />
+		<Unit filename="Worker.hpp" />
+		<Unit filename="main.cpp" />
+		<Unit filename="tcpiptk.cpp" />
+		<Unit filename="tcpiptk.hpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

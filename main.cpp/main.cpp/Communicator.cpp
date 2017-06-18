@@ -24,8 +24,8 @@ void Communicator::run() {
     int initPort = 30000;
     std::string ip = "192.168.188.32";
     //uncomment this to enable manual IP input
-    //std::cout << "Please enter a valid ServerIP (" + ip + " is default):\n>";
-    //getline(std::cin, ip);
+    std::cout << "Please enter a valid ServerIP (" + ip + " is default):\n>";
+    getline(std::cin, ip);
     connectedSocketfd = tcpiptk::connectSocket(ip.c_str(), initPort);
 
     while(true){

@@ -77,13 +77,12 @@ int main(int argc, char *argv[]) {
 		else if (arg1 == "multicore") {
 
 			MultiCore::run();
-
 			std::cout << " run multicore.run();" << std::endl;
+			while(true){sleep(99);}
 		}
 		else if (arg1 == "singelcore") {
 
 			SingelCore::run();
-
 			std::cout << " run singelcore.run();" << std::endl;
 		}
 		else {

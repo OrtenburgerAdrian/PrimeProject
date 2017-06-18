@@ -128,8 +128,8 @@ void Observer::run() {
                             if(it->first == primesSecuredUpTo + 2){
                                 primesSecuredUpTo += 2;
                                 if(it->second){
-                                    Log::log(maybePrime);
-                                    //printf("I am telling a Client, that %llu is definitely a prime.\n", maybePrime);
+                                    Log::log(it->first);
+                                    //printf("I am telling a Client, that %llu is definitely a prime.\n", it->first);
                                     memcpy(msgbuffer,&(it->first),sizeof(unsigned long long));
                                     tcpiptk::writeMessage(clientList[nextCandidateInClientList],msgbuffer,sizeof(unsigned long long));
                                     nextCandidateInClientList = (nextCandidateInClientList + 1) % expectedClientCount;

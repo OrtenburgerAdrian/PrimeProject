@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 #endif
     //numberOfWorker = 2; //Uncomment to manually set number of working threads.
     maxPrime = 0;
-
+	
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;
 	}
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
 
 			MultiCore::run();
 			std::cout << " run multicore.run();" << std::endl;
-			while(true){sleep(99);}
+			while(true){sleep(99999);}
 		}
 		else if (arg1 == "singelcore") {
 

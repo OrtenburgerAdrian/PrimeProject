@@ -28,7 +28,7 @@ bool IsItAPrime::isItAPrime(unsigned long long prime) {
 	unsigned long long divisor = 2;
 	LinkedList * primOP = head;
 	while(maxPrime*2 < prime){}
-	while (divisor * 2 <= prime) {
+	while (divisor * divisor <= prime) {
 		if (prime % divisor == 0) { return false; }
 		divisor = primOP->data;
 		primOP = primOP->next;

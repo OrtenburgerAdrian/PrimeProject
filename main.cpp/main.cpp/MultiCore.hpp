@@ -90,8 +90,24 @@ public:
 		PrimListLast = LinkedList::addNode(PrimListLast, 17);
 		PrimListLast = LinkedList::addNode(PrimListLast, 23);
 		PrimListLast = LinkedList::addNode(PrimListLast, 29);
-		maxPrime = 29;
-		//numberOfWorker=2;
+		PrimListLast = LinkedList::addNode(PrimListLast, 31);
+		PrimListLast = LinkedList::addNode(PrimListLast, 37);
+		PrimListLast = LinkedList::addNode(PrimListLast, 41);
+		PrimListLast = LinkedList::addNode(PrimListLast, 43);
+		PrimListLast = LinkedList::addNode(PrimListLast, 47);
+		PrimListLast = LinkedList::addNode(PrimListLast, 53);
+		PrimListLast = LinkedList::addNode(PrimListLast, 59);
+		PrimListLast = LinkedList::addNode(PrimListLast, 61);
+		PrimListLast = LinkedList::addNode(PrimListLast, 67);
+		PrimListLast = LinkedList::addNode(PrimListLast, 71);
+		PrimListLast = LinkedList::addNode(PrimListLast, 73);
+		PrimListLast = LinkedList::addNode(PrimListLast, 79);
+		PrimListLast = LinkedList::addNode(PrimListLast, 83);
+		PrimListLast = LinkedList::addNode(PrimListLast, 89);
+		PrimListLast = LinkedList::addNode(PrimListLast, 97);
+		
+		maxPrime = 97;
+		numberOfWorker=15;
 
 		switch (numberOfWorker) {
 		case 15:

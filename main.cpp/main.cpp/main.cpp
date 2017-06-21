@@ -78,7 +78,9 @@ int main(int argc, char *argv[]) {
 
 			MultiCore::run();
 			std::cout << " run multicore.run();" << std::endl;
-			while(true){sleep(99999);}
+			while(true){//Sleep(99999);
+			
+			}
 		}
 		else if (arg1 == "singelcore") {
 

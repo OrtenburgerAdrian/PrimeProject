@@ -119,14 +119,14 @@ void Log::logtime() {
 	if (t > lastTime) {
 		lastTime = t;
 		if (logTime.is_open()) {
-			logTime << count << "		:	" << t - st << std::endl;
+			logTime << count<<":"<< maxPrime << "		:	" << t - st << std::endl;
 		}
 		else {
             std::string dateiName = "./logTime.txt";
 			logTime.open(dateiName.c_str(), std::ios::app);
-			logTime << count << "		:	" << t - st << std::endl;
+			logTime << count << ":" << maxPrime << "		:	" << t - st << std::endl;
 		}
-		std::cout << count << "	:	" << ((t - st)/60)<< ":"<< ((t - st) % 60) << std::endl;
+		std::cout << count << ":" << maxPrime << "		:	" << ((t - st)/60)<< ":"<< ((t - st) % 60) << std::endl;
 	}
 }
 

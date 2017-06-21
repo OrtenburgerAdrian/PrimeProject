@@ -54,7 +54,7 @@ public:
 
 
 	static void threadprog() {
-		static unsigned long long i = 3;
+		static unsigned long long i = 1;
 		unsigned long long i2;
 		while (true)
 		{
@@ -64,16 +64,16 @@ public:
 			Calculate.unlock();
 
 			if (IsItAPrime::isItAPrime(i2)) {
+				primeMutex.lock();
+				PrimListLast = LinkedList::addNode(PrimListLast, i2);
+				primeMutex.unlock();
 				setMaxPrime.lock();
 				if (maxPrime < i2) { maxPrime = i2; }
 				setMaxPrime.unlock();
 				timeMutex.lock();
-				Log::logtime();
 				Log::log(i2);
 				timeMutex.unlock();
-				primeMutex.lock();
-				PrimListLast = LinkedList::addNode(PrimListLast, i2);
-				primeMutex.unlock();
+				
 			}
 		}
 	}

@@ -52,9 +52,9 @@ int main(int argc, char *argv[]) {
 #endif
     //numberOfWorker = 2; //Uncomment to manually set number of working threads.
 	maxPrime = 0;
-	//MultiCore::run();
-	//int i;
-	//std::cin >> i;
+	MultiCore::run();
+	int i;
+	std::cin >> i;
 	
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;

@@ -107,7 +107,7 @@ public:
 		PrimListLast = LinkedList::addNode(PrimListLast, 97);
 		
 		maxPrime = 97;
-		//numberOfWorker=15;
+		numberOfWorker++;
 
 		switch (numberOfWorker) {
 		case 15:

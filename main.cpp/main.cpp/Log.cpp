@@ -33,7 +33,7 @@ static std::ofstream logDebug;
 
 
  void Log::log(unsigned long long prime) {
-	 Log::logprime(prime);
+	 //Log::logprime(prime);
 	 Log::logtime();
 	}
 
@@ -86,9 +86,3 @@ void Log::logtime() {
 		std::cout << count << ":" << maxPrime << "	:	" << ((t - st)/60)<< ":"<< ((t - st) % 60) << std::endl;
 	}
 }
-
-
-
-
-
-

@@ -42,7 +42,8 @@ int tcpiptk::createSocket (int portno){
      struct sockaddr_in serv_addr, cli_addr;
      int n;
 
-     //Öffnet den Socket
+     //Öffnet den SocketSOCK_SEQPACKET
+     //listeningSocketfd = socket(AF_INET, SOCK_STREAM, 0);
      listeningSocketfd = socket(AF_INET, SOCK_STREAM, 0);
      if (listeningSocketfd < 0) {
         error("ERROR opening socket");

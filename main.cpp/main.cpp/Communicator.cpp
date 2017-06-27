@@ -7,6 +7,7 @@
 #include <cstring>
 #include <bitset>
 #include <thread>
+#include <mutex>
 
 #ifdef __linux__
 #include <unistd.h>
@@ -18,14 +19,16 @@
 #include "tcpiptk.hpp"
 
 static int connectedSocketfd;
-
-//#ifdef __linux__
-void Communicator::run() {
-    int initPort = 30000;
-    std::string ip = "192.168.188.32";
-    //uncomment this to enable manual IP input
-    std::cout << "Please enter a valid ServerIP (" + ip + " is default):\n>";
+std::mutex memcpyMutex;
+void Communicator::run(){
+    std::string ip;
+    std::cout << "Please enter a valid ServerIP:\n>";
     getline(std::cin, ip);
+    Communicator::run(ip);
+}
+//#ifdef __linux__
+void Communicator::run(std::string ip) {
+    int initPort = 30000;
     connectedSocketfd = tcpiptk::connectSocket(ip.c_str(), initPort);
 
     while(true){
@@ -35,6 +38,11 @@ void Communicator::run() {
         message = malloc(sizeof(unsigned long long));
         tcpiptk::getMessage(connectedSocketfd,message,sizeof(unsigned long long));
         std::memcpy(&prime, message, sizeof(unsigned long long));
+        if(prime == 0){
+            printf("Connection to Server lost!");
+            close(connectedSocketfd);
+            return;
+        }
         //printf("Got a Message from Observer: %llu is definitely a prime.\n", prime);
         if (linkedListInitialized == false){
             LinkedList::initNode(head, prime);
@@ -47,13 +55,14 @@ void Communicator::run() {
 }
 
 void Communicator::sendMessage(unsigned long long maybePrime, bool isLocalPrime){
-    size_t length = sizeof(unsigned long long) + sizeof(bool);
-    void * msgbuffer = malloc(length);
+    memcpyMutex.lock();
+    void * msgbuffer = malloc(sizeof(unsigned long long) + sizeof(bool));
     std::memcpy(msgbuffer, &maybePrime, sizeof(unsigned long long));
     std::memcpy(msgbuffer + sizeof(unsigned long long), &isLocalPrime, sizeof(bool));
     //printf("I am telling the Observer, that %llu is %sa prime for me.\n", maybePrime, isLocalPrime ? "" : "not ");
-    tcpiptk::writeMessage(connectedSocketfd, msgbuffer, length);
+    tcpiptk::writeMessage(connectedSocketfd, msgbuffer, sizeof(unsigned long long) + sizeof(bool));
     free(msgbuffer);
+    memcpyMutex.unlock();
 }
 //#endif
 

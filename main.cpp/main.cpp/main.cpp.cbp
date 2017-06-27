@@ -35,7 +35,9 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option parameters="observer" />
+				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add directory="/home/berdnues/Desktop/PrimeProject/main.cpp/main.cpp/" />
 				</Compiler>
 			</Target>
@@ -71,6 +73,7 @@
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

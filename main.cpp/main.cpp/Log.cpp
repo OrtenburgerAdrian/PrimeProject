@@ -36,17 +36,11 @@ void Log::logerror(std::string Nachricht) {
 	static time_t t;
 	t = time(0); // Systemzeit in sec
 	ss << t;     //time wird zu einem String convertirt
-
-
-
-
 	if (logDebug.is_open()) {
 		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
 		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
-
 	}
 	else {
-
 		std::string dateiName = "./logDebugg" + ss.str() + ".txt";
 		logDebug.open(dateiName.c_str(), std::ios::app);
 		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl; //strerror_s(i, 100, errno)
@@ -55,7 +49,7 @@ void Log::logerror(std::string Nachricht) {
 }
 
  void Log::log(unsigned long long prime) {
-	 Log::logprime(prime);
+	 //Log::logprime(prime);
 	 Log::logtime();
 	}
 
@@ -119,19 +113,13 @@ void Log::logtime() {
 	if (t > lastTime) {
 		lastTime = t;
 		if (logTime.is_open()) {
-			logTime << count << "		:	" << t - st << std::endl;
+			logTime << count<<":"<< maxPrime << "		:	" << t - st << std::endl;
 		}
 		else {
             std::string dateiName = "./logTime.txt";
 			logTime.open(dateiName.c_str(), std::ios::app);
-			logTime << count << "		:	" << t - st << std::endl;
+			logTime << count << ":" << maxPrime << "		:	" << t - st << std::endl;
 		}
-		std::cout << count << "	:	" << ((t - st)/60)<< ":"<< ((t - st) % 60) << std::endl;
+		std::cout << count << ":" << maxPrime << "		:	" << ((t - st)/60)<< ":"<< ((t - st) % 60) << std::endl;
 	}
 }
-
-
-
-
-
-

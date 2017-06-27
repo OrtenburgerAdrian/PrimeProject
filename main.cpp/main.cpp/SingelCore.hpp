@@ -66,7 +66,7 @@ public:
 		while (true)
 		{
 			if (isItAPrime(i, head)) {
-				Log::logtime();
+				Log::log(i);
 				PrimListLast = LinkedList::addNode(PrimListLast, i);
 				i++;
 				i++;

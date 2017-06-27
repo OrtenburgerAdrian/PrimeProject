@@ -31,7 +31,13 @@
 #define PORT    30000
 #define MAXMSG  512
 
-void Observer::run() {
+void Observer::run(){
+    int expectedClientCount;
+    std::cout << "How many Client do we expect?:\n>";
+    std::cin >> expectedClientCount;
+    Observer::run(expectedClientCount);
+}
+void Observer::run(int expectedClientCount) {
     void * msgbuffer = malloc(sizeof(unsigned long long) + sizeof(bool));
     unsigned long long maybePrime;
     bool isLocalPrime;
@@ -53,12 +59,10 @@ void Observer::run() {
     }
 
     /* Waits until everyone is connected. */
-    int expectedClientCount;
     int clientCount = 0;
     int nextCandidateInClientList = 0;
-    std::cout << "How many Client do we expect?:\n>";
-    std::cin >> expectedClientCount;
-    int clientList[expectedClientCount] = {0};
+    int clientList[expectedClientCount];
+    memset(clientList, 0, sizeof(int) * expectedClientCount);
 
     /* Prints the assigned address for each known network interface. */
     tcpiptk::getMyIP();
@@ -97,10 +101,12 @@ void Observer::run() {
         }
     }
 
+    struct timeval tout;
     while (1){
         /* Block until input arrives on one or more active sockets. */
         read_fd_set = active_fd_set;
-        if (select (FD_SETSIZE, &read_fd_set, NULL, NULL, NULL) < 0){
+        int selectret = select (FD_SETSIZE, &read_fd_set, NULL, NULL, NULL);
+        if (selectret < 0){
             perror ("select");
             exit (EXIT_FAILURE);
         }
@@ -128,6 +134,7 @@ void Observer::run() {
                             if(it->first == primesSecuredUpTo + 2){
                                 primesSecuredUpTo += 2;
                                 if(it->second){
+                                    maxPrime = it->first;
                                     Log::log(it->first);
                                     //printf("I am telling a Client, that %llu is definitely a prime.\n", it->first);
                                     memcpy(msgbuffer,&(it->first),sizeof(unsigned long long));

@@ -28,4 +28,5 @@ class Observer
 public:
 	//Benni:
 	static void run();
+	static void run(int expectedClientCount);
 };

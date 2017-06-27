@@ -31,55 +31,12 @@
 
 static std::ofstream logDebug;
 
-void Log::logerror(std::string Nachricht) {
-/*	static std::stringstream ss;
-	static time_t t;
-	t = time(0); // Systemzeit in sec
-	ss << t;     //time wird zu einem String convertirt
-
-
-
-
-	if (logDebug.is_open()) {
-		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
-		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
-
-	}
-	else {
-
-		std::string dateiName = "./logDebugg" + ss.str() + ".txt";
-		logDebug.open(dateiName.c_str(), std::ios::app);
-		logDebug << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl; //strerror_s(i, 100, errno)
-		std::cout << ss.str() << "	: " << Nachricht << "	: " << strerror(errno) << std::endl;
-	}*/
-}
 
  void Log::log(unsigned long long prime) {
 	 Log::logprime(prime);
 	 Log::logtime();
 	}
 
-void Log::log(std::string Nachricht) {
-	struct tm *localtime(const time_t *timer);
-
-	static std::stringstream ss;
-	static time_t t;
-	t = time(0); // Systemzeit in sec
-	ss << t;     //time wird zu einem String convertirt
-
-
-	if (logDebug.is_open()) {
-		logDebug << ss.str() << "	: " << Nachricht << std::endl;
-		std::cout << ss.str() << "	: " << Nachricht << std::endl;
-	}
-	else {
-
-		std::string dateiName = "./logDebugg" + ss.str() + ".txt";
-		logDebug.open(dateiName.c_str(), std::ios::app);
-		logDebug << ss.str() << "	: " << Nachricht << std::endl;
-		std::cout << ss.str() << "	: " << Nachricht << std::endl;
-	}
-}
 void Log::logprime(unsigned long long prime){
 	//ich habe mich entschiedern die logdatein nicht, wenn sie eine bestimme größe erreichen zu wechseln,
 	//sonder wenn ein bestimme anzahl an zahlen hinen geschrieben wurden, einen counter mitlaufen zu lassen ist performanter.
@@ -119,14 +76,14 @@ void Log::logtime() {
 	if (t > lastTime) {
 		lastTime = t;
 		if (logTime.is_open()) {
-			logTime << count<<":"<< maxPrime << "		:	" << t - st << std::endl;
+			logTime << count<<":"<< maxPrime << "	:	" << t - st << std::endl;
 		}
 		else {
             std::string dateiName = "./logTime.txt";
 			logTime.open(dateiName.c_str(), std::ios::app);
-			logTime << count << ":" << maxPrime << "		:	" << t - st << std::endl;
+			logTime << count << ":" << maxPrime << "	:	" << t - st << std::endl;
 		}
-		std::cout << count << ":" << maxPrime << "		:	" << ((t - st)/60)<< ":"<< ((t - st) % 60) << std::endl;
+		std::cout << count << ":" << maxPrime << "	:	" << ((t - st)/60)<< ":"<< ((t - st) % 60) << std::endl;
 	}
 }
 

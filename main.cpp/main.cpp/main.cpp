@@ -56,6 +56,7 @@ int main(int argc, char *argv[]) {
 	int i;
 	std::cin >> i;
 	
+	
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;
 	}

@@ -2,7 +2,7 @@
 #include "Worker.hpp"
 #include "Threads.hpp"
 
-std::mutex getCal;
+static std::mutex getCal;
 void Worker::thread_calculate() {
 	static unsigned long long isItAPrime = 1;
 	unsigned long long isItAPrime2;

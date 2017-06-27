@@ -12,7 +12,6 @@
 #include "LinkedList.hpp"
 #include "Observer.hpp"
 #include "Communicator.hpp"
-#include "Worker.hpp"
 #include "Log.hpp"
 extern int numberOfWorker;
 extern LinkedList primesList;

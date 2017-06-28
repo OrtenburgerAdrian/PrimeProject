@@ -56,6 +56,7 @@ int tcpiptk::createSocket (int portno){
      if (bind(listeningSocketfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0){
 		error("ERROR on binding");
 	 }
+
 	 return listeningSocketfd;
 }
 int tcpiptk::connectSocket (char const * hostname, int portno){

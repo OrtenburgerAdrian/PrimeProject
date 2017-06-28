@@ -18,5 +18,5 @@ class Communicator
 public:
 	static void run();
     static void run(std::string ip);
-	static void sendMessage(unsigned long long maybePrime, bool isLocalPrime);
+	static void sendMessage(unsigned long long maybePrime, bool isLocalPrime, void * msgbuffer);
 };

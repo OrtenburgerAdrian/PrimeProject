@@ -19,7 +19,7 @@
 #include "tcpiptk.hpp"
 
 static int connectedSocketfd;
-std::mutex memcpyMutex;
+static std::mutex fdWriteMutex;
 void Communicator::run(){
     std::string ip;
     std::cout << "Please enter a valid ServerIP:\n>";
@@ -54,15 +54,13 @@ void Communicator::run(std::string ip) {
     }
 }
 
-void Communicator::sendMessage(unsigned long long maybePrime, bool isLocalPrime){
-    memcpyMutex.lock();
-    void * msgbuffer = malloc(sizeof(unsigned long long) + sizeof(bool));
+void Communicator::sendMessage(unsigned long long maybePrime, bool isLocalPrime, void * msgbuffer){
     std::memcpy(msgbuffer, &maybePrime, sizeof(unsigned long long));
     std::memcpy(msgbuffer + sizeof(unsigned long long), &isLocalPrime, sizeof(bool));
     //printf("I am telling the Observer, that %llu is %sa prime for me.\n", maybePrime, isLocalPrime ? "" : "not ");
+    fdWriteMutex.lock();
     tcpiptk::writeMessage(connectedSocketfd, msgbuffer, sizeof(unsigned long long) + sizeof(bool));
-    free(msgbuffer);
-    memcpyMutex.unlock();
+    fdWriteMutex.unlock();
 }
 //#endif
 

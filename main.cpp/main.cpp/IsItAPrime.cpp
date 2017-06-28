@@ -27,7 +27,7 @@
 bool IsItAPrime::isItAPrime(unsigned long long prime) {
 	unsigned long long divisor = 2;
 	LinkedList * primOP = head;
-	static const unsigned long long maxDifference= 150000;
+	static const unsigned long long maxDifference= 250000;
 	while((maxPrime + maxDifference*2) < prime){}
 	while(maxPrime*2 < prime){}
 	while (divisor * divisor <= prime ) {

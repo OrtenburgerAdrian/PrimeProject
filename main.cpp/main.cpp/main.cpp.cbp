@@ -60,6 +60,7 @@
 		<Unit filename="LinkedList.hpp" />
 		<Unit filename="Log.cpp" />
 		<Unit filename="Log.hpp" />
+		<Unit filename="MultiCore.cpp" />
 		<Unit filename="MultiCore.hpp" />
 		<Unit filename="Observer.cpp" />
 		<Unit filename="Observer.hpp" />

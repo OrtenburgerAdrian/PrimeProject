@@ -11,6 +11,9 @@
 #include <sstream>
 #include <cstring>
 #include <map>
+#include <semaphore.h>
+#include <thread>
+#include <mutex>
 
 #ifdef __linux__
 #include <unistd.h>
@@ -31,25 +34,38 @@
 #define PORT    30000
 #define MAXMSG  512
 
+static int rbuff_size;
+static int msg_size;
+static void* rbuff;
+static sem_t writeSem;
+static sem_t readSem;
+static std::mutex counterMutex;
+static std::mutex getMessageMutex;
+
+static int clientCount;
+static int nextCandidateInClientList;
+static std::vector<int> clientList;
+static fd_set active_fd_set;
+
+/**
+ *  Wir speichern die Anzahl der gemeldeten Clients UND wie viele davon true gemeldet haben.
+ *  Client meldet sich int + 1000 UND wenn true int + 1
+ *  Rückwärts können wir also auflösen...
+ *  Anzahl der zurückgemeldeten Clients: int clients = clientProcessingCounter[maybePrime] / 1000
+ *  Anzahl der positiven Rückmeldungen:  int bools = clientProcessingCounter[maybePrime] % 1000
+ */
+static std::map<unsigned long long, int> clientProcessingCounter; //Speichert im int, wie viele Clients sich zu der entsprechenden Zahl gemeldet haben und codiert den Bool mit!
+
 void Observer::run(){
     int expectedClientCount;
     std::cout << "How many Client do we expect?:\n>";
     std::cin >> expectedClientCount;
     Observer::run(expectedClientCount);
 }
+
 void Observer::run(int expectedClientCount) {
-    void * msgbuffer = malloc(sizeof(unsigned long long) + sizeof(bool));
-    unsigned long long maybePrime;
-    bool isLocalPrime;
-
-    std::map<unsigned long long, int> clientProcessingCounter; //Speichert im int, wie viele Clients sich zu der entsprechenden Zahl gemeldet haben.
-    std::map<unsigned long long, bool> preliminaryPrimes; //Speichert vorläufig im Boolean ob die gegebene Zahl eine Primzahl ist oder nicht.
-    std::map<unsigned long long, bool> securedPrimes; //Speichert im Boolean, ob die Zahl eine ist, oder nicht.
-    unsigned long long primesSecuredUpTo = 1;
-
+    void * msgbuffer = malloc(sizeof(unsigned long long));
     int sock;
-    fd_set active_fd_set, read_fd_set;
-    socklen_t sizeT;
 
     /* Create the socket and set it up to accept connections. */
     sock = tcpiptk::createSocket(PORT);
@@ -59,10 +75,8 @@ void Observer::run(int expectedClientCount) {
     }
 
     /* Waits until everyone is connected. */
-    int clientCount = 0;
-    int nextCandidateInClientList = 0;
-    int clientList[expectedClientCount];
-    memset(clientList, 0, sizeof(int) * expectedClientCount);
+    clientCount = 0;
+    nextCandidateInClientList = 0;
 
     /* Prints the assigned address for each known network interface. */
     tcpiptk::getMyIP();
@@ -78,10 +92,9 @@ void Observer::run(int expectedClientCount) {
             printf("Program Error: tcpiptk::acceptConnection() returned %i\n", newSocket);
         }
         FD_SET (newSocket, &active_fd_set);
-        clientList[clientCount] = newSocket;
+        clientList.push_back(newSocket);
         clientCount++;
     }while(clientCount < expectedClientCount);
-    //close(sock); //Da bin ich mir nicht sicher, ob das nötig ist.
 
     {//Initialisiert die Worker mit einigen Primzahlen.
         unsigned long long prePrime;
@@ -95,16 +108,32 @@ void Observer::run(int expectedClientCount) {
                     //Log::log(prePrime);
                     std::memcpy(msgbuffer, &prePrime, sizeof(unsigned long long));
                     tcpiptk::writeMessage(clientList[nextCandidateInClientList],msgbuffer,sizeof(unsigned long long));
-                    nextCandidateInClientList = (nextCandidateInClientList + 1) % expectedClientCount;
+                    nextCandidateInClientList = (nextCandidateInClientList + 1) % clientCount;
                 }
             }
         }
     }
+    //Initialisiere Ringbuffer
+    rbuff_size = 1000000; //...times the size of a message (usually 9 Byte)
+    msg_size = sizeof(unsigned long long) + sizeof(bool);
+    rbuff = malloc(msg_size * rbuff_size);
+    sem_init(&writeSem, 0, rbuff_size);
+    sem_init(&readSem, 0, 0);
 
-    struct timeval tout;
-    while (1){
+    std::thread listenerThread(Observer::run_listener);
+    Observer::run_teller();
+}
+
+void Observer::run_listener(){
+    void * msgbuffer = malloc(sizeof(unsigned long long) + sizeof(bool));
+    unsigned long long maybePrime;
+    bool isLocalPrime;
+
+    void * writePointer = rbuff;
+
+    while (true){
         /* Block until input arrives on one or more active sockets. */
-        read_fd_set = active_fd_set;
+        fd_set read_fd_set = active_fd_set;
         int selectret = select (FD_SETSIZE, &read_fd_set, NULL, NULL, NULL);
         if (selectret < 0){
             perror ("select");
@@ -120,48 +149,72 @@ void Observer::run(int expectedClientCount) {
                     FD_CLR (currentFileDescriptor, &active_fd_set);
                     return;
                 }else{
-                    std::memcpy(&maybePrime, msgbuffer, sizeof(unsigned long long));
-                    std::memcpy(&isLocalPrime, msgbuffer + sizeof(unsigned long long), sizeof(bool));
-                    //printf("Got a Solution: %llu is %sa prime for a  Client.\n", maybePrime, isLocalPrime ? "" : "not ");
-                    if(++clientProcessingCounter[maybePrime] == 1 || preliminaryPrimes[maybePrime]){
-                        preliminaryPrimes[maybePrime] = isLocalPrime;
+                    //Schreibe Nachricht in Ringbuffer
+                    sem_wait(&writeSem);
+                    std::memcpy(writePointer, msgbuffer, sizeof(unsigned long long));
+                    writePointer += sizeof(unsigned long long);
+                    std::memcpy(writePointer, msgbuffer + sizeof(unsigned long long), sizeof(bool));
+                    sem_post(&readSem);
+                    writePointer += sizeof(bool);
+                    if (writePointer > (rbuff + (msg_size * rbuff_size))){
+                        std::cout << "You fucked up, ay!" << std::endl;
                     }
-                    if(clientProcessingCounter[maybePrime] == clientCount){
-						securedPrimes[maybePrime] = preliminaryPrimes[maybePrime];
-						preliminaryPrimes.erase(maybePrime);
-						clientProcessingCounter.erase(maybePrime);
-                        for(auto it = securedPrimes.begin(); it != securedPrimes.end(); it = securedPrimes.erase(it)){
-                            if(it->first == primesSecuredUpTo + 2){
-                                primesSecuredUpTo += 2;
-                                if(it->second){
-                                    maxPrime = it->first;
-                                    Log::log(it->first);
-                                    //printf("I am telling a Client, that %llu is definitely a prime.\n", it->first);
-                                    memcpy(msgbuffer,&(it->first),sizeof(unsigned long long));
-                                    tcpiptk::writeMessage(clientList[nextCandidateInClientList],msgbuffer,sizeof(unsigned long long));
-                                    nextCandidateInClientList = (nextCandidateInClientList + 1) % expectedClientCount;
-                                }
-                            }else{
-                                break;
-                            }
-                        }
+                    if (writePointer == (rbuff + (msg_size * rbuff_size))){
+                        writePointer = rbuff;
                     }
                 }
             }
         }
     }
 }
+void Observer::run_teller(){
+    void * msgbuffer = malloc(sizeof(unsigned long long));
+    unsigned long long primesSecuredUpTo = 1;
 
-void Observer::addCommunicator() {
+    void * readPointer = rbuff;
+    unsigned long long ull_read;
+    bool bool_read;
+    unsigned long long nextCheck;
+    nextCheck = primesSecuredUpTo + 2;
+    int cpcCounter;
+    while(true){
+        int msgDelayMax = 400000;
+        int msgDelayCount = (maxPrime - 1) * 2;
+        msgDelayCount = msgDelayCount > msgDelayMax ? msgDelayMax : msgDelayCount;
+        for(int i = 0; i < msgDelayCount; i++){
+            sem_wait(&readSem);
+            memcpy(&ull_read, readPointer, sizeof(unsigned long long));
+            readPointer += sizeof(unsigned long long);
+            memcpy(&bool_read, readPointer, sizeof(bool));
+            sem_post(&writeSem);
+            readPointer += sizeof(bool);
+            //printf("Got a Solution: %llu is %sa prime for a  Client.\n", ull_read, bool_read ? "" : "not ");
+            if (readPointer > (rbuff + (msg_size * rbuff_size))){
+                std::cout << "You fucked up while reading, ay!" << std::endl;
+            }
+            if (readPointer == (rbuff + (msg_size * rbuff_size))){
+                readPointer = rbuff;
+            }
 
-}
-void Observer::deleteCommunicator() {
+            //Encodes the results like documented.
+            clientProcessingCounter[ull_read] += bool_read ? 1001 : 1000;
+        }
 
-}
-void Observer::startListener() {
-
-}
-void Observer::initCommunicator() {
-
+        //Goes through the Data and sends the packets in the right order (std::map is sorting for us)
+        cpcCounter = clientProcessingCounter[nextCheck];
+        while(static_cast<int>(cpcCounter / 1000) == clientCount){ //Haben sich alle Clienten zurückgemeldet?;
+            clientProcessingCounter.erase(nextCheck);
+            if((cpcCounter % 1000) == clientCount){ //Haben alle Clienten true gemeldet?
+                maxPrime = nextCheck;
+                Log::log(nextCheck);
+                memcpy(msgbuffer, &nextCheck, sizeof(unsigned long long));
+                tcpiptk::writeMessage(clientList[nextCandidateInClientList],msgbuffer,sizeof(unsigned long long));
+                nextCandidateInClientList = (nextCandidateInClientList + 1) % clientCount;
+            }
+            primesSecuredUpTo = nextCheck;
+            nextCheck = primesSecuredUpTo + 2;
+            cpcCounter = clientProcessingCounter[nextCheck];
+        }
+    }
 }
 //#endif

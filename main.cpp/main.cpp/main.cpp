@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 #endif
     //numberOfWorker = 2; //Uncomment to manually set number of working threads.
     maxPrime = 0;
-	SingelCore::run();
+	//SingelCore::run();
 
 
 #if defined __linux__

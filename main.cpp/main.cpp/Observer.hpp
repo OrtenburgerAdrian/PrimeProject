@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h>
+#include <semaphore.h>
 
 #include "LinkedList.hpp"
 #include "Observer.hpp"
@@ -16,14 +17,8 @@ extern int numberOfWorker;
 
 class Observer
 {
-	//Benni:
-	static void addCommunicator();
-	//Benni:
-	static void initCommunicator();
-	//Benni:
-	static void deleteCommunicator();
-	//Benni:
-	static void startListener();
+	static void run_listener();
+	static void run_teller();
 
 public:
 	//Benni:

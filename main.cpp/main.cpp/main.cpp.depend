@@ -633,7 +633,7 @@
 	"Worker.hpp"
 	"Log.hpp"
 
-1498070623 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Communicator.cpp
+1498601532 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Communicator.cpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -649,7 +649,21 @@
 	"Worker.hpp"
 	"tcpiptk.hpp"
 
-1498047121 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Observer.hpp
+1498654038 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Observer.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<semaphore.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/LinkedList.hpp
+	<iostream>
+
+1498656783 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Communicator.hpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -659,20 +673,7 @@
 	"Communicator.hpp"
 	"Worker.hpp"
 
-1497817028 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/LinkedList.hpp
-	<iostream>
-
-1498056046 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Communicator.hpp
-	<stdio.h>
-	<string>
-	<iostream>
-	<stdlib.h>
-	"LinkedList.hpp"
-	"Observer.hpp"
-	"Communicator.hpp"
-	"Worker.hpp"
-
-1497817028 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Worker.hpp
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Worker.hpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -686,10 +687,9 @@
 	"LinkedList.hpp"
 	"Observer.hpp"
 	"Communicator.hpp"
-	"Worker.hpp"
 	"Log.hpp"
 
-1498058385 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Log.hpp
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Log.hpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -713,7 +713,7 @@
 	"Worker.hpp"
 	"Log.hpp"
 
-1498050529 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/IsItAPrime.hpp
+1498645132 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/IsItAPrime.hpp
 	<iostream>
 	<string>
 	<stdio.h>
@@ -728,17 +728,17 @@
 	"Worker.hpp"
 	"Log.hpp"
 
-1497817028 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/tcpiptk.hpp
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/tcpiptk.hpp
 
-1498050529 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/IsItAPrime.cpp
+1498645132 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/IsItAPrime.cpp
 	"LinkedList.hpp"
 	"IsItAPrime.hpp"
 
-1497817028 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/LinkedList.cpp
+1498601532 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/LinkedList.cpp
 	<iostream>
 	"LinkedList.hpp"
 
-1498058385 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Log.cpp
+1498601532 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Log.cpp
 	<stdio.h>
 	<string.h>
 	<iostream>
@@ -768,7 +768,7 @@
 	"Communicator.hpp"
 	"Worker.hpp"
 
-1498056306 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/main.cpp
+1498656574 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/main.cpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -797,7 +797,7 @@
 	<windows.h>
 	<unistd.h>
 
-1498050529 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/SingelCore.hpp
+1498645132 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/SingelCore.hpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -830,7 +830,7 @@
 	<windows.h>
 	<unistd.h>
 
-1498050529 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/MultiCore.hpp
+1498645132 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/MultiCore.hpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -864,7 +864,7 @@
 	<windows.h>
 	<unistd.h>
 
-1498070645 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Observer.cpp
+1498656313 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Observer.cpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -877,6 +877,8 @@
 	<sstream>
 	<cstring>
 	<map>
+	<semaphore.h>
+	<thread>
 	<unistd.h>
 	<sys/socket.h>
 	<netinet/in.h>
@@ -889,7 +891,7 @@
 	"tcpiptk.hpp"
 	"Log.hpp"
 
-1498068803 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/tcpiptk.cpp
+1498640750 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/tcpiptk.cpp
 	<stdlib.h>
 	<strings.h>
 	<string.h>
@@ -904,11 +906,11 @@
 	<ifaddrs.h>
 	"tcpiptk.hpp"
 
-1497817028 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Worker.cpp
+1498601532 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Worker.cpp
 	"Worker.hpp"
 	"Threads.hpp"
 
-1497817028 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Threads.hpp
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/Threads.hpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -937,4 +939,339 @@
 	"Communicator.hpp"
 	"Worker.hpp"
 	"Log.hpp"
+	"MultiCore.hpp"
+
+1498645132 source:/vol/vol_home_student/mx4-4/berdnues/lx/PrimeProject-master/main.cpp/main.cpp/MultiCore.cpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<stdio.h>
+	<time.h>
+	<thread>
+	<cstdlib>
+	<algorithm>
+	<iostream>
+	<chrono>
+	<thread>
+	<mutex>
+	<map>
+	<string>
+	<iostream>
+	<stdlib.h>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"Log.hpp"
+	"SingelCore.hpp"
+	"MultiCore.hpp"
+	"Threads.hpp"
+	<dos.h>
+	<windows.h>
+	<unistd.h>
+
+1498657933 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Communicator.cpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<cstdint>
+	<cstring>
+	<bitset>
+	<thread>
+	<mutex>
+	<unistd.h>
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"tcpiptk.hpp"
+
+1498654038 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Observer.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<semaphore.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/LinkedList.hpp
+	<iostream>
+
+1498656783 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Communicator.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Worker.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<iostream>
+	<chrono>
+	<thread>
+	<mutex>
+	<map>
+	<string>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Log.hpp"
+
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Log.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<stdio.h>
+	<time.h>
+	<thread>
+	<cstdlib>
+	<algorithm>
+	<iostream>
+	<stdlib.h>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"Log.hpp"
+
+1498645132 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/IsItAPrime.hpp
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<stdio.h>
+	<time.h>
+	<iostream>
+	<stdlib.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"Log.hpp"
+
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/tcpiptk.hpp
+
+1498660089 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/IsItAPrime.cpp
+	"LinkedList.hpp"
+	"IsItAPrime.hpp"
+
+1498601532 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/LinkedList.cpp
+	<iostream>
+	"LinkedList.hpp"
+
+1498660931 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Log.cpp
+	<stdio.h>
+	<string.h>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<stdio.h>
+	<time.h>
+	<thread>
+	<cstdlib>
+	<algorithm>
+	<time.h>
+	<iostream>
+	<stdlib.h>
+	<sstream>
+	<cstring>
+	<string.h>
+	<locale>
+	<errno.h>
+	<cerrno>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+
+1498656574 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/main.cpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<stdio.h>
+	<time.h>
+	<thread>
+	<cstdlib>
+	<algorithm>
+	<iostream>
+	<stdlib.h>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"Log.hpp"
+	"SingelCore.hpp"
+	"MultiCore.hpp"
+	<dos.h>
+	<windows.h>
+	<unistd.h>
+
+1498645132 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/SingelCore.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<stdio.h>
+	<time.h>
+	<thread>
+	<cstdlib>
+	<algorithm>
+	<iostream>
+	<chrono>
+	<thread>
+	<mutex>
+	<map>
+	<string>
+	<iostream>
+	<stdlib.h>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"Log.hpp"
+	<dos.h>
+	<windows.h>
+	<unistd.h>
+
+1498645132 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/MultiCore.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<stdio.h>
+	<time.h>
+	<thread>
+	<cstdlib>
+	<algorithm>
+	<iostream>
+	<chrono>
+	<thread>
+	<mutex>
+	<map>
+	<string>
+	<iostream>
+	<stdlib.h>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"Log.hpp"
+	"SingelCore.hpp"
+	<dos.h>
+	<windows.h>
+	<unistd.h>
+
+1498645132 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/MultiCore.cpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<stdio.h>
+	<time.h>
+	<thread>
+	<cstdlib>
+	<algorithm>
+	<iostream>
+	<chrono>
+	<thread>
+	<mutex>
+	<map>
+	<string>
+	<iostream>
+	<stdlib.h>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"Log.hpp"
+	"SingelCore.hpp"
+	"MultiCore.hpp"
+	"Threads.hpp"
+	<dos.h>
+	<windows.h>
+	<unistd.h>
+
+1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Threads.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<stdio.h>
+	<time.h>
+	<thread>
+	<cstdlib>
+	<algorithm>
+	<iostream>
+	<stdlib.h>
+	<iostream>
+	<chrono>
+	<thread>
+	<mutex>
+	<map>
+	<string>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"Log.hpp"
+	"MultiCore.hpp"
 

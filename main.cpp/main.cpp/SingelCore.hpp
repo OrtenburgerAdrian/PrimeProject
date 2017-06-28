@@ -46,28 +46,15 @@ class SingelCore
 {
 public:
 
-	bool static isItAPrime(unsigned long long prime, LinkedList *head ) {
-		if (prime % 2 == 0) { return false; }
-		unsigned long long divisor = 3;
-		LinkedList * primOP = head;
-
-		while (divisor * 2 <= prime && primOP != NULL) {
-			if (prime % divisor == 0) { return false; }
-
-			divisor = primOP->data;
-			primOP = primOP->next;
-		}
-		return true;
-	}
-
 	static void run() {
 		static unsigned long long i = 3;
 		LinkedList::initNode(head, 3);
 		while (true)
 		{
-			if (isItAPrime(i, head)) {
+			if (IsItAPrime::isItAPrime(i)){
 				Log::log(i);
 				PrimListLast = LinkedList::addNode(PrimListLast, i);
+				maxPrime = i;
 				i++;
 				i++;
 			}

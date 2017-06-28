@@ -42,7 +42,7 @@
 
 
 
-	static void threadprog() {
+	 void MultiCore::threadprog() {
 		static unsigned long long i = 1;
 		unsigned long long i2;
 		while (true)
@@ -69,7 +69,7 @@
 
 
 
-	static void run() {
+	 void MultiCore::run() {
 		std::cout << head << std::endl;
 		LinkedList::initNode(head, 3);
 		maxPrime = 3;

@@ -52,7 +52,10 @@ int main(int argc, char *argv[]) {
 #endif
     //numberOfWorker = 2; //Uncomment to manually set number of working threads.
     maxPrime = 0;
+	SingelCore::run();
 
+
+#if defined __linux__
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;
 	}
@@ -87,6 +90,6 @@ int main(int argc, char *argv[]) {
         std::cout << " Incorrect transfer parameters     " << std::endl;
     }
     return 0;
-//#if defined __linux__
-//#endif
+
+#endif
 }

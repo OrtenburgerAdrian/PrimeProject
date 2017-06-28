@@ -48,6 +48,7 @@ public:
 
 	static void run() {
 		static unsigned long long i = 3;
+		maxPrime = 3;
 		LinkedList::initNode(head, 3);
 		while (true)
 		{

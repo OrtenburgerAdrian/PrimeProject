@@ -70,6 +70,3 @@ LinkedList primesList;
 
 
 DOTO:
-insertlist
-WorkerMulticore
-init-note

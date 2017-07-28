@@ -33,7 +33,7 @@ static std::ofstream logDebug;
 
 
  void Log::log(unsigned long long prime) {
-	 //Log::logprime(prime);
+	 Log::logprime(prime);
 	 Log::logtime();
 	}
 

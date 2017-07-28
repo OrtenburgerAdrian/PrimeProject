@@ -29,7 +29,6 @@
 #include "Worker.hpp"
 #include "Log.hpp"
 #include "SingelCore.hpp"
-#include "MultiCore.hpp"
 #include "Threads.hpp"
 #ifdef _WIN64
 #include <dos.h>
@@ -37,11 +36,7 @@
 #elif __linux__
 #include <unistd.h>
 #endif
-
-
-
-
-
+#include "MultiCore.hpp"
 	 void MultiCore::threadprog() {
 		static unsigned long long i = 1;
 		unsigned long long i2;

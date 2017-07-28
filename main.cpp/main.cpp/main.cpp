@@ -46,15 +46,19 @@ int main(int argc, char *argv[]) {
 #if defined _WIN64
 	SYSTEM_INFO s_systeminfo;
 	GetNativeSystemInfo(&s_systeminfo);
-	numberOfWorker = s_systeminfo.dwNumberOfProcessors - 1; // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
+	numberOfWorker = s_systeminfo.dwNumberOfProcessors; // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
 #elif __linux__
 	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
 #endif
-    //numberOfWorker = 2; //Uncomment to manually set number of working threads.
+   // numberOfWorker = 8; //Uncomment to manually set number of working threads.
     maxPrime = 0;
-	//SingelCore::run();
-
-
+	SingelCore::run();
+	//MultiCore::run();
+	//static std::mutex Calculate;
+	//int x, y, z;
+	//std::cin >> x >> y >> z;
+	int x, y, z;
+	std::cin >> x >> y >> z;
 #if defined __linux__
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;

@@ -47,15 +47,6 @@ static int nextCandidateInClientList;
 static std::vector<int> clientList;
 static fd_set active_fd_set;
 
-/**
- *  Wir speichern die Anzahl der gemeldeten Clients UND wie viele davon true gemeldet haben.
- *  Client meldet sich int + 1000 UND wenn true int + 1
- *  Rückwärts können wir also auflösen...
- *  Anzahl der zurückgemeldeten Clients: int clients = clientProcessingCounter[maybePrime] / 1000
- *  Anzahl der positiven Rückmeldungen:  int bools = clientProcessingCounter[maybePrime] % 1000
- */
-static std::map<unsigned long long, int> clientProcessingCounter; //Speichert im int, wie viele Clients sich zu der entsprechenden Zahl gemeldet haben und codiert den Bool mit!
-
 void Observer::run(){
     int expectedClientCount;
     std::cout << "How many Client do we expect?:\n>";
@@ -114,8 +105,8 @@ void Observer::run(int expectedClientCount) {
         }
     }
     //Initialisiere Ringbuffer
-    rbuff_size = 1000000; //...times the size of a message (usually 9 Byte)
-    msg_size = sizeof(unsigned long long) + sizeof(bool);
+    rbuff_size = 1000000; //...times the size of a message (usually 8 Byte)
+    msg_size = sizeof(unsigned long long);
     rbuff = malloc(msg_size * rbuff_size);
     sem_init(&writeSem, 0, rbuff_size);
     sem_init(&readSem, 0, 0);
@@ -125,9 +116,9 @@ void Observer::run(int expectedClientCount) {
 }
 
 void Observer::run_listener(){
-    void * msgbuffer = malloc(sizeof(unsigned long long) + sizeof(bool));
-    unsigned long long maybePrime;
-    bool isLocalPrime;
+    void * msgbuffer = malloc(sizeof(unsigned long long));
+    //unsigned long long maybePrime;
+    //bool isLocalPrime;
 
     void * writePointer = rbuff;
 
@@ -143,7 +134,7 @@ void Observer::run_listener(){
         for (const int &currentFileDescriptor : clientList){
             if (FD_ISSET (currentFileDescriptor, &read_fd_set)){
                 /* Data arriving on an already-connected socket. */
-                if (tcpiptk::getMessage(currentFileDescriptor, msgbuffer, sizeof(unsigned long long) + sizeof(bool)) == 0){
+                if (tcpiptk::getMessage(currentFileDescriptor, msgbuffer, sizeof(unsigned long long)) == 0){
                     fprintf (stderr, "Server: connection lost.\n");
                     close (currentFileDescriptor);
                     FD_CLR (currentFileDescriptor, &active_fd_set);
@@ -151,11 +142,11 @@ void Observer::run_listener(){
                 }else{
                     //Schreibe Nachricht in Ringbuffer
                     sem_wait(&writeSem);
-                    std::memcpy(writePointer, msgbuffer, sizeof(unsigned long long));
-                    writePointer += sizeof(unsigned long long);
-                    std::memcpy(writePointer, msgbuffer + sizeof(unsigned long long), sizeof(bool));
+                        std::memcpy(writePointer, msgbuffer, sizeof(unsigned long long));
                     sem_post(&readSem);
-                    writePointer += sizeof(bool);
+
+                    writePointer += sizeof(unsigned long long);
+
                     if (writePointer > (rbuff + (msg_size * rbuff_size))){
                         std::cout << "You fucked up, ay!" << std::endl;
                     }
@@ -169,25 +160,47 @@ void Observer::run_listener(){
 }
 void Observer::run_teller(){
     void * msgbuffer = malloc(sizeof(unsigned long long));
-    unsigned long long primesSecuredUpTo = 1;
 
     void * readPointer = rbuff;
     unsigned long long ull_read;
     bool bool_read;
-    unsigned long long nextCheck;
-    nextCheck = primesSecuredUpTo + 2;
+    unsigned long long nextCheck = 3;
     int cpcCounter;
+
+    /**
+     *  Wir speichern die Anzahl der gemeldeten Clients UND wie viele davon true gemeldet haben.
+     *  Client meldet sich int + 1000 UND wenn true int + 1
+     *  Rückwärts können wir also auflösen...
+     *  Anzahl der zurückgemeldeten Clients: int clients = clientProcessingCounter[maybePrime] / 1000
+     *  Anzahl der positiven Rückmeldungen:  int bools = clientProcessingCounter[maybePrime] % 1000
+     */
+    //static std::map<unsigned long long, int> clientProcessingCounter; //Speichert im int, wie viele Clients sich zu der entsprechenden Zahl gemeldet haben und codiert den Bool mit!
+    int lazyRingBufferSize = 250000;
+    int lazyRingBuffer[lazyRingBufferSize] = {0}; //wird quasi als Ringbuffer benutzt.
+    int lazyRingBufferBaseIndex = 0;
+
+    /**
+        Innerhalb dieser Schleife gibt es zwei Teile, die im Wechsel durchlaufen:
+            1. Die Vorverarbeitung der gespeicherten Daten aus dem echten Ringbuffer, die vom TCP/IP-Empfänger geschrieben wird.
+            2. Das Interpretieren der vorverarbeiteten Zahlen und versenden der Primzahlen.
+    **/
     while(true){
-        int msgDelayMax = 400000;
-        int msgDelayCount = (maxPrime - 1) * 2;
-        msgDelayCount = msgDelayCount > msgDelayMax ? msgDelayMax : msgDelayCount;
-        for(int i = 0; i < msgDelayCount; i++){
+        //int msgDelayMax = 400000;
+        //int msgDelayCount = (maxPrime - 1) * 2;
+        //msgDelayCount = msgDelayCount > msgDelayMax ? msgDelayMax : msgDelayCount; //msgDelayCount beschränkt die Anzahl der Nachrichten die in einer Iteration gelesen werden. Anfangs ist das Notwendig.
+        //for(int i = 0; i < msgDelayCount; i++){
+        int readSemValue;
+        do{
             sem_wait(&readSem);
-            memcpy(&ull_read, readPointer, sizeof(unsigned long long));
-            readPointer += sizeof(unsigned long long);
-            memcpy(&bool_read, readPointer, sizeof(bool));
+                memcpy(&ull_read, readPointer, sizeof(unsigned long long));
             sem_post(&writeSem);
-            readPointer += sizeof(bool);
+
+            readPointer += sizeof(unsigned long long);
+
+            bool_read = (ull_read % 2) == 1 ? true : false; //Decodierd den Boolean aus der Zahl: Wenn die Zahl ungerade ist, dann war der boolean beim Encodieren 0 (also true);
+            ull_read -= bool_read ? 0 : 1; //Zieht den boolean von unserer Zahl ab, falls dieser eincodierd wurde. (Ansonsten passiert nichts, weil bool_read 0 ist.)
+
+
             //printf("Got a Solution: %llu is %sa prime for a  Client.\n", ull_read, bool_read ? "" : "not ");
             if (readPointer > (rbuff + (msg_size * rbuff_size))){
                 std::cout << "You fucked up while reading, ay!" << std::endl;
@@ -197,23 +210,39 @@ void Observer::run_teller(){
             }
 
             //Encodes the results like documented.
-            clientProcessingCounter[ull_read] += bool_read ? 1001 : 1000;
-        }
+            //clientProcessingCounter[ull_read] += bool_read ? 1001 : 1000;
+            int index = lazyRingBufferBaseIndex + ((ull_read - nextCheck) / 2); //Funktioniert, weil beide Zahlen ungerade sind.
+
+            if (index >= (lazyRingBufferSize + lazyRingBufferBaseIndex)){ //Wenn der Index zu groß wird, haben wir verkackt. Probieren wir es erstmal ohne Semaphor...
+                fprintf (stderr, "lazyBufferOverflow, idiot!");
+                return;
+            }
+
+            index = index % lazyRingBufferSize; //beachtet die "echte" Grenze des Buffers.
+            lazyRingBuffer[index] += bool_read ? 1001 : 1000;
+
+            sem_getvalue(&readSem, &readSemValue);
+        }while(readSemValue > 0);
+
+
 
         //Goes through the Data and sends the packets in the right order (std::map is sorting for us)
-        cpcCounter = clientProcessingCounter[nextCheck];
+        //cpcCounter = clientProcessingCounter[nextCheck];
+        cpcCounter = lazyRingBuffer[lazyRingBufferBaseIndex];
         while(static_cast<int>(cpcCounter / 1000) == clientCount){ //Haben sich alle Clienten zurückgemeldet?;
-            clientProcessingCounter.erase(nextCheck);
+            //clientProcessingCounter.erase(nextCheck);
+            lazyRingBuffer[lazyRingBufferBaseIndex] = 0;
             if((cpcCounter % 1000) == clientCount){ //Haben alle Clienten true gemeldet?
                 maxPrime = nextCheck;
-                Log::log(nextCheck);
-                memcpy(msgbuffer, &nextCheck, sizeof(unsigned long long));
-                tcpiptk::writeMessage(clientList[nextCandidateInClientList],msgbuffer,sizeof(unsigned long long));
+                Log::log(maxPrime);
+                //memcpy(msgbuffer, &nextCheck, sizeof(unsigned long long));
+                tcpiptk::writeMessage(clientList[nextCandidateInClientList],&nextCheck,sizeof(unsigned long long));
                 nextCandidateInClientList = (nextCandidateInClientList + 1) % clientCount;
             }
-            primesSecuredUpTo = nextCheck;
-            nextCheck = primesSecuredUpTo + 2;
-            cpcCounter = clientProcessingCounter[nextCheck];
+            nextCheck += 2;
+            lazyRingBufferBaseIndex = ++lazyRingBufferBaseIndex % lazyRingBufferSize;
+            cpcCounter = lazyRingBuffer[lazyRingBufferBaseIndex];
+            //cpcCounter = clientProcessingCounter[nextCheck];
         }
     }
 }

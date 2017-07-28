@@ -33,12 +33,12 @@ static std::ofstream logDebug;
 
 
  void Log::log(unsigned long long prime) {
-	 Log::logprime(prime);
+	 //Log::logprime(prime);
 	 Log::logtime();
 	}
 
 void Log::logprime(unsigned long long prime){
-	//ich habe mich entschiedern die logdatein nicht, wenn sie eine bestimme größe erreichen zu wechseln,
+	//ich habe mich entschiedern die logdatein nicht, wenn sie eine bestimme grÃ¶ÃŸe erreichen zu wechseln,
 	//sonder wenn ein bestimme anzahl an zahlen hinen geschrieben wurden, einen counter mitlaufen zu lassen ist performanter.
 
 	std::stringstream ss; //wird gebraucht um aus time einen String zu machen.

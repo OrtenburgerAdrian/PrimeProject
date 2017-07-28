@@ -50,15 +50,11 @@ int main(int argc, char *argv[]) {
 #elif __linux__
 	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
 #endif
-   // numberOfWorker = 8; //Uncomment to manually set number of working threads.
-    maxPrime = 0;
-	SingelCore::run();
-	//MultiCore::run();
-	//static std::mutex Calculate;
-	//int x, y, z;
-	//std::cin >> x >> y >> z;
-	int x, y, z;
-	std::cin >> x >> y >> z;
+    numberOfWorker = 1; //Uncomment to manually set number of working threads.
+    maxPrime = 1;
+	//SingelCore::run();
+
+
 #if defined __linux__
 	if (argc <= 1) {
 		std::cout << " Inadequate transfer parameters" << std::endl;

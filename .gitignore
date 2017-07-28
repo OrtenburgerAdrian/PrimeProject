@@ -262,3 +262,5 @@ __pycache__/
 *.o
 main.cpp/main.cpp/main
 cache
+logPrime*.txt
+main.cpp/main.cpp/logTime.txt

@@ -6,7 +6,7 @@ static std::mutex memcpyMutex;
 static std::mutex getCal;
 void Worker::thread_calculate() {
     memcpyMutex.lock();
-    void * msgbuffer = malloc(sizeof(unsigned long long) + sizeof(bool));
+    void * msgbuffer = malloc(sizeof(unsigned long long));
     memcpyMutex.unlock();
 	static unsigned long long isItAPrime = 1;
 	unsigned long long isItAPrime2;

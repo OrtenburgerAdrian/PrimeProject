@@ -59,9 +59,6 @@
     <ClInclude Include="Threads.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="PrimeArray.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PrimeBreaker.rc">

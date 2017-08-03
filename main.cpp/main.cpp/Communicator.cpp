@@ -55,11 +55,12 @@ void Communicator::run(std::string ip) {
 }
 
 void Communicator::sendMessage(unsigned long long maybePrime, bool isLocalPrime, void * msgbuffer){
-    std::memcpy(msgbuffer, &maybePrime, sizeof(unsigned long long));
-    std::memcpy(msgbuffer + sizeof(unsigned long long), &isLocalPrime, sizeof(bool));
     //printf("I am telling the Observer, that %llu is %sa prime for me.\n", maybePrime, isLocalPrime ? "" : "not ");
+
+    maybePrime += isLocalPrime ? 0 : 1; //Addiert den Boolean auf die fragliche Primzahl. Da maybePrime immer ungerade ist, geht das.
+    //std::memcpy(msgbuffer, &maybePrime, sizeof(unsigned long long));
     fdWriteMutex.lock();
-    tcpiptk::writeMessage(connectedSocketfd, msgbuffer, sizeof(unsigned long long) + sizeof(bool));
+    tcpiptk::writeMessage(connectedSocketfd, &maybePrime, sizeof(unsigned long long));
     fdWriteMutex.unlock();
 }
 //#endif

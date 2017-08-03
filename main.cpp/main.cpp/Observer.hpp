@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h>
-//#include <semaphore.h>
+#include <semaphore.h>
 
 #include "LinkedList.hpp"
 #include "Observer.hpp"

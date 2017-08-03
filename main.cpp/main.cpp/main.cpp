@@ -1,28 +1,9 @@
 #pragma once
-#include <stdio.h>
-#include <string>
-#include <iostream>
-#include <stdlib.h>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <stdio.h>
-#include <time.h>
-#include <stdio.h>
-#include <time.h>
-#include <thread>
-#include <cstdlib>
-#include <algorithm>
 
-#include <iostream>
-#include <stdlib.h>
-
-#include "IsItAPrime.hpp"
 #include "LinkedList.hpp"
 #include "Observer.hpp"
 #include "Communicator.hpp"
-#include "Worker.hpp"
-#include "Log.hpp"
+
 #include "SingelCore.hpp"
 #include "MultiCore.hpp"
 
@@ -53,10 +34,7 @@ int main(int argc, char *argv[]) {
    // numberOfWorker = 8; //Uncomment to manually set number of working threads.
     maxPrime = 0;
 	SingelCore::run();
-	//MultiCore::run();
-	//static std::mutex Calculate;
-	//int x, y, z;
-	//std::cin >> x >> y >> z;
+
 	int x, y, z;
 	std::cin >> x >> y >> z;
 #if defined __linux__

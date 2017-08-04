@@ -1,17 +1,13 @@
 #pragma once
-#include <iostream>
-
+//für diese .hpp gibt es keine .cpp
 struct PrimeArray {
-public:
 	unsigned long long primeArray[1000000];
 
 	//Adrian
+	/*Ein neues Array für die LinkedList*/
 	static PrimeArray* initPrimeArray() {
 		PrimeArray *primeArray = new PrimeArray;
 		return  primeArray;
-
 	}
-	
-
 };
 

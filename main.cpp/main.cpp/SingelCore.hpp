@@ -29,47 +29,38 @@
 #include "Worker.hpp"
 #include "Log.hpp"
 
-#ifdef _WIN64
-#include <dos.h>
-#include <windows.h>
-#elif __linux__
-#include <unistd.h>
-#endif
 
+//soviele Worker-Threads werden gestartet, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
+extern int nuberOfWorker;			//def. in main.cpp
 
-extern int nuberOfWorker;
-extern LinkedList primesList;
-extern LinkedList *head;
-extern LinkedList *PrimListLast;
+/*Adresse der ersten Note*/
+extern LinkedList *head;			//def. in main.cpp
 
+/*Adresse der letzten Note*/
+extern LinkedList *PrimListLast;	//def. in main.cpp
+
+//Für diese .hpp gibt es keine .cpp Datei.
 class SingelCore
 {
 public:
 
+//Adrian
+/*Singelcore-Rahmen-Funktion, sehr ähnlich zur MultiCore-Funktion, nur nicht Thread sicher*/
 	static void run() {
 		static unsigned long long i = 3;
 		maxPrime = 3;
 		LinkedList::initNode(head, 3);
 		while (true)
 		{
-			if (IsItAPrime::isItAPrime(i)){
-				Log::log(i);
-				PrimListLast = LinkedList::addNode(PrimListLast, i);
+			if (IsItAPrime::isItAPrime(i)){								//prüfung auf Primzahl
+				PrimListLast = LinkedList::addNode(PrimListLast, i);	//speichern der Primzahl
 				maxPrime = i;
-				i++;
-				i++;
+				Log::log(i);
+				i= i+2;
 			}
 			else {
-				i++;
-				i++;
+				i= i+2;
 			}
 		}
-
-
 	}
-
-
-private:
-
 };
-

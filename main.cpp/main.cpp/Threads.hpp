@@ -28,12 +28,15 @@
 #include "Worker.hpp"
 #include "Log.hpp"
 #include "MultiCore.hpp"
+//für diese .hpp gibt es keine .cpp
 class Threads
 {
 public:
+
 	static void start(std::string initiator, int numOfWorker) {
 		if (initiator == "worker")
 		{
+
 			switch (numberOfWorker) {
 			case 32:
 			{ static std::thread t32(Worker::thread_calculate); }
@@ -172,7 +175,5 @@ public:
 			}
 		}
 	}
-
 private:
-
 };

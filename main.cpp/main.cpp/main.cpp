@@ -1,39 +1,36 @@
 #pragma once
 
 #include "LinkedList.hpp"
-#include "Observer.hpp"
-#include "Communicator.hpp"
+
 
 #include "SingelCore.hpp"
 #include "MultiCore.hpp"
 
-#if defined _WIN64
-#include <dos.h>
-#include <windows.h>
-#elif __linux__
-#include <unistd.h>
 
+#if defined __linux__
+#include <unistd.h>
+#include "Observer.hpp"
+#include "Communicator.hpp"
 #endif
 
 
-int numberOfWorker;
-unsigned long long maxPrime;
-LinkedList primesList;
-LinkedList *head = &primesList;
-LinkedList* PrimListLast = head;
+int numberOfWorker;				//soviele Worker-Threads werden gestartet, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
+unsigned long long maxPrime;	//die größte bis jetzt gespeicherte Primzahl, ist für jeden Client-PC unterschiedlich
+LinkedList primesList;			//repräsentirt die erste Note
+LinkedList *head = &primesList; //Adresse der ersten Note
+LinkedList* PrimListLast = head;//Adresse der letzten Note
 
 int main(int argc, char *argv[]) {
-
+	nuberOfWorker = 0;
 #if defined _WIN64
-	SYSTEM_INFO s_systeminfo;
-	GetNativeSystemInfo(&s_systeminfo);
-	numberOfWorker = s_systeminfo.dwNumberOfProcessors; // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
+	numberOfWorker = 8;
+
 #elif __linux__
-	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // -1, damit der Comunicator im besten fall einen eigenen Core bekommen kann.
+	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // liest die Anzahl der Cores aus, -1 damit der Comunicator-Thread im besten fall einen eigenen Core bekommen kann.
 #endif
-    numberOfWorker = 1; //Uncomment to manually set number of working threads.
-    maxPrime = 1;
-	//SingelCore::run();
+    ///numberOfWorker = 1; //Uncomment to manually set number of working threads.
+    maxPrime = 1; 
+	
 
 
 #if defined __linux__
@@ -71,6 +68,9 @@ int main(int argc, char *argv[]) {
         std::cout << " Incorrect transfer parameters     " << std::endl;
     }
     return 0;
+#elif _WIN64
+
+	SingelCore::run(); // um auch auf Windows arbeiten zukönnen, leider geht unsere Netzwerkmomunikation nur mit Linux
 
 #endif
 }

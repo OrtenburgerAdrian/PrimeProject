@@ -32,6 +32,7 @@
     <ClInclude Include="Log.hpp" />
     <ClInclude Include="MerklistAdrian" />
     <ClInclude Include="MultiCore.hpp" />
+    <ClInclude Include="PrimeArray.hpp" />
     <ClInclude Include="SingelCore.hpp" />
     <ClInclude Include="Threads.hpp" />
     <ClInclude Include="Worker.hpp" />

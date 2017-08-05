@@ -1,19 +1,7 @@
-//#ifdef __linux__
 #pragma once
-#include <stdio.h>
-#include <string>
-#include <iostream>
-#include <stdlib.h>
-#include <iostream>
-#include <chrono>
-#include <thread>
 #include <mutex>
-#include <map>
-#include <string>
 #include "LinkedList.hpp"
-#include "Observer.hpp"
-#include "Communicator.hpp"
-#include "Log.hpp"
+
 
 //soviele Worker-Threads werden gestartet, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
 extern int numberOfWorker;			//def. in main.cpp
@@ -30,5 +18,5 @@ public:
 	static void start();
 	static void thread_calculate();
 };
-//#endif
+
 

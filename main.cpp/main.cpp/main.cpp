@@ -1,11 +1,7 @@
 #pragma once
-
 #include "LinkedList.hpp"
-
-
 #include "SingelCore.hpp"
 #include "MultiCore.hpp"
-
 
 #if defined __linux__
 #include <unistd.h>
@@ -20,7 +16,9 @@ LinkedList primesList;			//repräsentirt die erste Note
 LinkedList *head = &primesList; //Adresse der ersten Note
 LinkedList* PrimListLast = head;//Adresse der letzten Note
 
+
 int main(int argc, char *argv[]) {
+
 #if defined _WIN64
 	numberOfWorker = 8;
 	#elif __linux__

@@ -1,42 +1,5 @@
 #pragma once
 #include "Log.hpp"
-
-
-
-#include <stdio.h>
-#include <string.h>
-#include <iostream>
-#include <stdlib.h>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <stdio.h>
-#include <time.h>
-#include <stdio.h>
-#include <time.h>
-#include <thread>
-#include <cstdlib>
-#include <algorithm>
-#include <time.h>
-#include <iostream>
-#include <stdlib.h>
-#include <sstream>
-#include <cstring>
-#include <string.h>
-#include <locale>
-#include <errno.h>
-#include <cerrno>
-
-#include "IsItAPrime.hpp"
-#include "LinkedList.hpp"
-#include "Observer.hpp"
-#include "Communicator.hpp"
-#include "Worker.hpp"
-
-
-
-
-
 /*Um zuentscheiden, welche Logfunktionen gebraucht werden, */
  void Log::log(unsigned long long prime) {
 	 ///Log::logprime(prime); 

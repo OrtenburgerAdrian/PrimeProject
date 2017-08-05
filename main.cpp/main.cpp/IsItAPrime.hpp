@@ -1,23 +1,6 @@
 #pragma once
-//#include <stdio.h>
-//#include <string>
-//#include <iostream>
-//#include <stdlib.h>
-//#include <fstream>
-#include <iostream>
-#include <string>
-#include <stdio.h>
-#include <time.h>
-#include <stdio.h>
-#include <time.h>
-#include <iostream>
-#include <stdlib.h>
-
 #include "LinkedList.hpp"
-#include "Observer.hpp"
-#include "Communicator.hpp"
-#include "Worker.hpp"
-#include "Log.hpp"
+
 
 /*Die bis jetz größte gepeicherte Primzahl, ist für jeden Client-PC eine andere, da jeder PC nur seine größte Zahl kennt.*/
 extern unsigned long long maxPrime;	//def. in main.cpp

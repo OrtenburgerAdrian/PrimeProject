@@ -1,34 +1,7 @@
 #pragma once
-#include <stdio.h>
-#include <string>
-#include <iostream>
-#include <stdlib.h>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <stdio.h>
-#include <time.h>
-#include <stdio.h>
-#include <time.h>
-#include <thread>
-#include <cstdlib>
-#include <algorithm>
-#include <iostream>
-#include <stdlib.h>
-#include <iostream>
-#include <chrono>
-#include <thread>
-#include <mutex>
-#include <map>
-#include <string>
-#include "IsItAPrime.hpp"
-#include "LinkedList.hpp"
-#include "Observer.hpp"
-#include "Communicator.hpp"
 #include "Worker.hpp"
-#include "Log.hpp"
 #include "MultiCore.hpp"
-//für diese .hpp gibt es keine .cpp
+
 class Threads
 {
 public:

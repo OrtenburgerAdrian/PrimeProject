@@ -1,5 +1,4 @@
-#pragma once
-//für diese .hpp gibt es keine .cpp
+//für diese .hpp gibt es keine .cpp Datei
 struct PrimeArray {
 	unsigned long long primeArray[1000000];
 

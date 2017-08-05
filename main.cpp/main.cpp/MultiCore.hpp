@@ -1,15 +1,4 @@
 #pragma once
-#include "IsItAPrime.hpp"
-#include "LinkedList.hpp"
-#include "Log.hpp"
-#include "Threads.hpp"
-
-
-
-
-
-
-
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -41,9 +30,12 @@
 #include "Log.hpp"
 #include "SingelCore.hpp"
 
-
-
-
+#ifdef _WIN64
+#include <dos.h>
+#include <windows.h>
+#elif __linux__
+#include <unistd.h>
+#endif
 
 
 
@@ -51,7 +43,7 @@
 
 /*Die bis jetz größte gepeicherte Primzahl, ist für jeden Client-PC eine andere, da jeder PC nur seine größte Zahl kennt.*/
 extern unsigned long long maxPrime;		//def. in main.cpp
-
+extern LinkedList primesList;
 //soviele Worker-Threads werden gestartet, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
 extern int numberOfWorker;				//def. in main.cpp
 

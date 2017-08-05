@@ -1,10 +1,4 @@
 #pragma once
-#include "MultiCore.hpp"
-
-
-
-
-
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -42,7 +36,6 @@
 #elif __linux__
 #include <unistd.h>
 #endif
-#include "MultiCore.hpp"
 
 
 

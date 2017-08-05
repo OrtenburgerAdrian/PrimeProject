@@ -1,3 +1,4 @@
+//Adrian
 #pragma once
 #include <iostream>
 #include <fstream>
@@ -11,25 +12,25 @@ class Log
 {
 public:
 	/*
-	Kann logprime und logtime miteinander verbinden, logprime wird nur gebraucht, um prüfen zukönnen, ob alle Primzahlen auch richtig sind.
-	
-	@prime : zu loggende Primzahl (logprime) bzw. die Information, dass eine neue Primzahl gefunden wurde (logtime). 
+	Kann logprime und logtime miteinander verbinden, logprime wird nur gebraucht, um pruefen zukoennen, ob alle Primzahlen auch richtig sind.
+
+	@ prime : Zuloggende Primzahl (logprime) bzw. die Information, dass eine neue Primzahl gefunden wurde (logtime).
 	*/
- static void log(unsigned long long prime);
+	static void log(unsigned long long prime);
 
-/*
-Logt die übergeben Zahl in .txt Datein, 1.000.000 Zahlen pro Datei, damit die Datei nicht zugroß wird. 
-Der Name dieser Datein setzt sich aus "logPrim" + PC-Standard-Time in sec + ".txt"
+	/*
+	Logt die uebergeben Zahl in .txt Datein, 1.000.000 Zahlen pro Datei, damit die Datei nicht zugrosz wird.
+	Der Name dieser Datein setzt sich aus "logPrim" + PC-Standard-Time in Sekunden + ".txt"
 
-@prime : zu loggende Primzahl
-*/
- static void logprime(unsigned long long prime);
+	@ prime : Zuloggende Primzahl.
+	*/
+	static void logprime(unsigned long long prime);
 
- /*
- Logt wie heufig diese Funktion aufgerufen wird, die Zahl wird dann einmal pro Sekunde in der Datei logTime.txt gesichert 
- zusammen mit der "maxPrime" Variable und den vergangenen Sekunden seit dem Start des Programmes. 
- Zusätslich werden diese Informationen auch in einer Konsole ausgegeben.
- */
- static void logtime();
+	/*
+	Logt wie haeufig diese Funktion aufgerufen wird, die Zahl wird dann einmal pro Sekunde in der Datei logTime.txt gesichert
+	zusammen mit der "maxPrime" Variable und den vergangenen Sekunden seit dem Start des Programmes.
+	Zusaetslich werden diese Informationen auch in einer Konsole ausgegeben.
+	*/
+	static void logtime();
 };
 

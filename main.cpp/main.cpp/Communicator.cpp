@@ -48,7 +48,7 @@ void Communicator::run(std::string ip) {
             LinkedList::initNode(head, prime);
             linkedListInitialized = true;
         }else{
-            PrimListLast = LinkedList::addNode(PrimListLast, prime);
+            PrimeListLast = LinkedList::addNode(PrimeListLast, prime);
         }
         if(prime > maxPrime) maxPrime = prime;
     }

@@ -1,3 +1,5 @@
+//Adrian
+//Fuer diese .hpp gibt es keine .cpp Datei.
 #pragma once
 #include "Worker.hpp"
 #include "MultiCore.hpp"
@@ -5,11 +7,17 @@
 class Threads
 {
 public:
+	/*
+	Startet die uebergebene Anzahl an Worker-Threads, und laesst diese die richtige Ramen-Funktion ausfuehren.
 
+	@ numOfWorker : Die Anzahl der Threads welche gestartet werden sollen; wenn numOfWorker=0, dann wird trozdem einer gestartet (max. 32 Threads).
+	@ initiator : Ein String, welcher bestimmt, welche Ramen-Funktion von den Threads ausgefuert werden soll ("worker"/"multiCore").
+	*/
+
+	//Es war spät als ich das gemacht habe, ich weisz, dass hier ein Vektor schoener wäre.
 	static void start(std::string initiator, int numOfWorker) {
 		if (initiator == "worker")
 		{
-
 			switch (numberOfWorker) {
 			case 32:
 			{ static std::thread t32(Worker::thread_calculate); }
@@ -78,7 +86,7 @@ public:
 			{ static std::thread t1(Worker::thread_calculate); }
 			}
 		}
-		else if(initiator == "multiCore"){
+		else if (initiator == "multiCore") {
 			switch (numberOfWorker) {
 			case 32:
 			{ static std::thread t32(MultiCore::threadprog); }
@@ -148,5 +156,4 @@ public:
 			}
 		}
 	}
-private:
 };

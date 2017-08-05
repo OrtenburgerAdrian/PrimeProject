@@ -11,7 +11,7 @@
 
 extern unsigned long long maxPrime;
 extern LinkedList * head;
-extern LinkedList * PrimListLast;
+extern LinkedList * PrimeListLast;
 
 class Communicator
 {

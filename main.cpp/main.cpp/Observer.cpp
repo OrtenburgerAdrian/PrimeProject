@@ -150,7 +150,7 @@ void Observer::run_listener(){
                 bool_read = (ull_read % 2) == 1 ? true : false; //Dekodiert den Boolean aus der Zahl: Wenn die Zahl ungerade ist, dann war der boolean beim Encodieren 0 (also true);
                 ull_read -= bool_read ? 0 : 1; //Zieht den boolean von unserer Zahl ab, falls dieser eincodierd wurde. (Ansonsten passiert nichts, weil bool_read 0 ist.)
 
-                printf("Got a Solution: %llu is %sa prime for a  Client.\n", ull_read, bool_read ? "" : "not "); //Nützlich für Tests.
+                //printf("Got a Solution: %llu is %sa prime for a  Client.\n", ull_read, bool_read ? "" : "not "); //Nützlich für Tests.
 
                 mutex_randomAccessRingBuffer.lock();
                 {
@@ -184,7 +184,7 @@ void Observer::run_teller(){
                 maxPrime = nextNumberToCheck;
                 Log::log(maxPrime);
 
-                printf("I am telling a Client that %llu is definitely a prime number.\n", nextNumberToCheck); //Nützlich für Tests.
+                //printf("I am telling a Client that %llu is definitely a prime number.\n", nextNumberToCheck); //Nützlich für Tests.
 
                 tcpiptk::writeMessage(clientList[nextCandidateInClientList],&nextNumberToCheck,sizeof(unsigned long long));
                 nextCandidateInClientList = (nextCandidateInClientList + 1) % clientCount;

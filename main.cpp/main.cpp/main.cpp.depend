@@ -1769,3 +1769,123 @@
 	"Communicator.hpp"
 	<unistd.h>
 
+1503587983 source:/home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/Communicator.cpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<cstdint>
+	<cstring>
+	<bitset>
+	<thread>
+	<mutex>
+	<unistd.h>
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"tcpiptk.hpp"
+
+1503587985 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/Observer.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<semaphore.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+
+1503587983 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/LinkedList.hpp
+	"PrimeArray.hpp"
+	<iostream>
+
+1503587985 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/PrimeArray.hpp
+
+1503587983 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/Communicator.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+
+1503587985 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/Worker.hpp
+	<mutex>
+	"LinkedList.hpp"
+
+1503587985 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/tcpiptk.hpp
+
+1503587983 source:/home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/LinkedList.cpp
+	"LinkedList.hpp"
+
+1503587983 source:/home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/Log.cpp
+	"Log.hpp"
+
+1503587983 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/Log.hpp
+	<iostream>
+	<fstream>
+	<time.h>
+	<sstream>
+
+1503588041 source:/home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/IsItAPrime.cpp
+	"IsItAPrime.hpp"
+
+1503587983 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/IsItAPrime.hpp
+	"LinkedList.hpp"
+
+1503587985 source:/home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/main.cpp
+	"LinkedList.hpp"
+	"SingelCore.hpp"
+	"MultiCore.hpp"
+	<unistd.h>
+	"Observer.hpp"
+	"Communicator.hpp"
+
+1503587985 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/SingelCore.hpp
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Log.hpp"
+
+1503587985 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/MultiCore.hpp
+	<mutex>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Log.hpp"
+
+1503587985 source:/home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/MultiCore.cpp
+	<mutex>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Log.hpp"
+	"Threads.hpp"
+	"MultiCore.hpp"
+
+1503587985 /home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/Threads.hpp
+	"Worker.hpp"
+	"MultiCore.hpp"
+	<thread>
+
+1503587985 source:/home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/tcpiptk.cpp
+	<stdlib.h>
+	<strings.h>
+	<string.h>
+	<unistd.h>
+	<sstream>
+	<stdio.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+	<arpa/inet.h>
+	<ifaddrs.h>
+	"tcpiptk.hpp"
+
+1503587985 source:/home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/Worker.cpp
+	"Worker.hpp"
+	"Threads.hpp"
+	"Communicator.hpp"
+	<unistd.h>
+

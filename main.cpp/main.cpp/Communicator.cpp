@@ -47,7 +47,7 @@ void Communicator::run(std::string ip) {
             close(connectedSocketfd);
             return;
         }
-        printf("Got a Message from Observer: %llu is definitely a prime.\n", prime); //Nützlich für Tests.
+        //printf("Got a Message from Observer: %llu is definitely a prime.\n", prime); //Nützlich für Tests.
         if (linkedListInitialized == false){ //Initialisiert die LinkedList...
             LinkedList::initNode(head, prime);
             linkedListInitialized = true;
@@ -61,7 +61,7 @@ void Communicator::run(std::string ip) {
 
 //Diese Funktion wird von den Threads genutzt, um dem Observer mitzuteilen, ob eine Zahl für den Prozess eine Primzahl ist.
 void Communicator::sendMessage(unsigned long long maybePrime, bool isLocalPrime){
-    printf("I am telling the Observer, that %llu is %sa prime for me.\n", maybePrime, isLocalPrime ? "" : "not "); //Nützlich für Tests.
+    //printf("I am telling the Observer, that %llu is %sa prime for me.\n", maybePrime, isLocalPrime ? "" : "not "); //Nützlich für Tests.
 
     //Um das Netzwerk und den Observer zu entlasten, kodieren wir den Boolean in die Zahl. Das geht nur, weil maybePrime immer ungerade ist.
     maybePrime += isLocalPrime ? 0 : 1; //Addiert den Boolean auf die fragliche Primzahl.

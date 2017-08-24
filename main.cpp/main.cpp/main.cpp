@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 #elif __linux__
 	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // liest die Anzahl der CPU-Core's aus, -1 damit der Comunicator-Thread im besten fall einen eigenen Core bekommen kann.
 #endif
-	numberOfWorker = 1; //Uncomment to manually set number of working threads.
+	//numberOfWorker = 1; //Uncomment to manually set number of working threads.
 
 
 #if defined __linux__

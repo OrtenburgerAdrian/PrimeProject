@@ -4,23 +4,23 @@
 
 using namespace std;
 
-/*Eigendlich war geplant, fuer jede Primzahl eine eigene Note in der LinkList zu machen. In der Praksis hat sich allerdings herausgestellt,
-dass jede Note einen gigantischen Overhad hat (14gb Ram => ca. 480.000.000 64Bit-Primzahlen). Jetzt mit dem Array kommen wir auf ca. 1.900.000.000 64Bit-Primzahlen.
+/*Eigentlich war geplant, fuer jede Primzahl eine eigene Node in der LinkList zu erzeugen. In der Praxis hat sich allerdings herausgestellt,
+dass jede Node einen gigantischen Overhad hat (14gb Ram => ca. 480.000.000 64Bit-Primzahlen). Jetzt kommen wir mit dem Array auf ca. 1.900.000.000 64Bit-Primzahlen.
 
-Weiter Optimiren koennte man in dem man die erten Primzahlen, welche den 32Bit-Zahlenbereich noch nicht ueberschritten haben, als unsigned int und nicht als unsigned long long speichert.
-Außerdem muesste die Variable "primeArrayFuellstand" nicht in jeder Note einzelnd gespeichert sein. Einmal für das komplette Programm wuerde reichen.*/
+Weiter Optimieren koennte man in dem man die ersten Primzahlen, welche den 32Bit-Zahlenbereich noch nicht ueberschritten haben, als unsigned int und nicht als unsigned long long speichert.
+Außerdem muesste die Variable "primeArrayFuellstand" nicht in jeder Node einzelnd gespeichert sein. Einmal für das komplette Programm wuerde reichen.*/
 
-/*Initialisiert die erste Note und Speichert die ertste Primzahl. Die Note muss vorher deklarirt sein.*/
+/*Initialisiert die erste Node und Speichert die ertste Primzahl. Die Node muss vorher deklariert sein.*/
 void LinkedList::initNode(struct LinkedList *last, unsigned long long n) {
 	last->data = PrimeArray::initPrimeArray();
 	(*last).data->primeArray[0] = n;
 	last->primeArrayFuellstand = 0;
-	last->next = NULL; //Bei der letzten Note immer NULL, ansonsten die Weitersprung-Adresse zur naechste Note.
+	last->next = NULL; //Bei der letzten Node immer NULL, ansonsten die Weitersprung-Adresse zur naechste Node.
 }
 
-/*Speichert die Primzahl in der letzten Note, bzw. erschafft eine neue Note, wenn die letzte voll ist und speichtet die Primzahl dort.*/
+/*Speichert die Primzahl entweder in der letzten Node, oder in einer neuen Node, wenn die letzte voll ist.*/
 LinkedList* LinkedList::addNode(struct LinkedList *last, unsigned long long n) {
-	if (last->primeArrayFuellstand > 999999) { //Prueft ob das Array in der letzten Note schon voll ist.
+	if (last->primeArrayFuellstand > 999999) { //Prueft, ob das Array in der letzten Node schon voll ist.
 		LinkedList *newNode = new LinkedList;
 		newNode->data = PrimeArray::initPrimeArray();
 		newNode->data->primeArray[0] = n;
@@ -29,12 +29,12 @@ LinkedList* LinkedList::addNode(struct LinkedList *last, unsigned long long n) {
 		if (last->next == NULL) {
 			last->next = newNode;
 		}
-		return newNode; //Gibt die Adresse der neuen letzten Note zurueck.
+		return newNode; //Gibt die Adresse der neuen letzten Node zurueck.
 	}
 	else
 	{
 		(*last).data->primeArray[last->primeArrayFuellstand] = n;
 		last->primeArrayFuellstand++;
-		return last; //Gibt die Adresse der letzten Note zurueck.
+		return last; //Gibt die Adresse der letzten Node zurueck.
 	}
 }

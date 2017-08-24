@@ -1,3 +1,4 @@
+//Benjamin
 #pragma once
 #include <stdio.h>
 #include <string>
@@ -25,7 +26,6 @@ class Observer
 	static void run_teller();
 
 public:
-	//Benni:
 	static void run();
 	static void run(int expectedClientCount);
 #endif

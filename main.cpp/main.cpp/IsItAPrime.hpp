@@ -2,18 +2,18 @@
 #pragma once
 #include "LinkedList.hpp"
 
-/*Die bis jetz groeßte gepeicherte Primzahl; diese ist für jeden Client-PC eine andere, da jeder PC nur seine groeßte Zahl kennt.*/
+/*Die bis jetzt groeßte gepeicherte Primzahl des ausführenden Prozesses.*/
 extern unsigned long long maxPrime;	//def. in main.cpp
 
-/*Die Adresse der ersten Note.*/
+/*Die Adresse der ersten Node.*/
 extern LinkedList *head;			//def. in main.cpp
 
 class  IsItAPrime
 {
 public:
 	/*
-	Diese Funktion gibt "true" zurueck, wenn die zupruefende Zahl modulo jeder zahl in der Linklist welche nicht groeszer ist
-	als die Wurzel aus der zupruefende Zahl, nicht 0 ergibt, andernfals "false".
+	Diese Funktion gibt "true" zurueck, wenn für die zu pruefende Zahl kein ganzzahliger Teiler in der Menge der bekannten Primzahlen gefunden wurde.
+	Hier ist wieder anzumerken, dass der Prozess nur eine Teilmenge der Primzahlen kennt, wenn das Programm als Client im Multi-Computing-Prozess läuft.
 
 	@ prime : Auf prim zupruefende Zahl.
 	@ return : True, wenn es keinen Teiler gab, andernfals false.

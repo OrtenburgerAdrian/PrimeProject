@@ -1,18 +1,17 @@
 //Adrian
 //Fuer diese .hpp gibt es keine .cpp Datei.
 #pragma once
-#include <mutex> //WIESO	???
 #include "IsItAPrime.hpp"
 #include "LinkedList.hpp"
 #include "Log.hpp"
 
-//Soviele Worker-Threads werden gestartet; wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
+//Anzahl der zu startenden Worker-Threads; wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
 extern int nuberOfWorker;			//def. in main.cpp
 
-/*Adresse der ersten Note.*/
+/*Adresse der ersten Node.*/
 extern LinkedList *head;			//def. in main.cpp
 
-/*Adresse der letzten Note.*/
+/*Adresse der letzten Node.*/
 extern LinkedList *PrimeListLast;	//def. in main.cpp
 
 class SingelCore

@@ -9,11 +9,11 @@
 
 /*Diese Funktion ist die Rahmen-Funktion, um local auf einen PC mit mehren Threads, Primzahlen zuberechen*/
 void MultiCore::threadprog() {
-	static unsigned long long i = 1; //Ein Counter welcher für alle Threads gilt, dieser wird gebrauch damit die threts wissen welche Zahlen sie als naechstes pruefen muessen. 
+	static unsigned long long i = 1; //Ein Counter welcher für alle Threads gilt, dieser wird gebraucht1 damit die Threads wissen welche Zahlen sie als naechstes pruefen muessen.
 	unsigned long long i2;
 	while (true)
 	{
-		/*Thread-Sichere Incrementirung des Counters*/
+		/*Thread-Sichere Inkrementierung des Counters*/
 		Calculate.lock();
 		i = i + 2;
 		i2 = i;
@@ -26,7 +26,7 @@ void MultiCore::threadprog() {
 			PrimeListLast = LinkedList::addNode(PrimeListLast, i2);
 			primeMutex.unlock();
 
-			/*Saetzen der neuen hoechsten Primzahl*/
+			/*Setzen der neuen hoechsten Primzahl*/
 			setMaxPrime.lock();
 			if (maxPrime < i2) { maxPrime = i2; }
 			setMaxPrime.unlock();
@@ -41,8 +41,8 @@ void MultiCore::threadprog() {
 
 /*Startet die Worker-Threads und laesst diese die Funktion "MultiCore::threadprog()" ausfuehren.*/
 void MultiCore::run() {
-	LinkedList::initNode(head, 3); // Eine Priemzahl ist ausreichend um das Programm zustarten. 
-	maxPrime = 3; //Da nun die hoechste Primzahl welche gespeichert wure 3 (Zeile 44) ist muss diese auch gesaetz werden.
-	numberOfWorker++; // Da die numberOfWorker bei ihrer Initialisierung -1 gerechnet wurden, was hier nicht von vorteil ist, da keine PC-Leisztung für einen weiteren Thread gespart werden sollte. 
+	LinkedList::initNode(head, 3); // Eine Primzahl ist ausreichend um das Programm zu starten.
+	maxPrime = 3; //Da nun die erste Primzahl in der LinkedList 3 ist, muss diese auch gesetzt werden.
+	numberOfWorker++; // Da die numberOfWorker bei ihrer Initialisierung -1 gerechnet wurden, was hier nicht von vorteil ist, da keine PC-Leistung für einen weiteren Thread gespart werden sollte.
 	Threads::start("multiCore", numberOfWorker);
 }

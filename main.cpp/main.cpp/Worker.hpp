@@ -3,13 +3,13 @@
 #include <mutex>
 #include "LinkedList.hpp"
 
-//Soviele Worker-Threads werden gestartet, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
+//Anzah der benoetigten Worker-Threads, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
 extern int numberOfWorker;			//def. in main.cpp
 
-/*Adresse der ersten Note.*/
+/*Adresse der ersten Node.*/
 extern LinkedList *head;			//def. in main.cpp
 
-/*Adresse der letzten Note.*/
+/*Adresse der letzten Node.*/
 extern LinkedList* PrimeListLast;	//def. in main.cpp
 
 class Worker

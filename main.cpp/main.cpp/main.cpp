@@ -11,11 +11,11 @@
 #endif
 
 
-int numberOfWorker = 0;						//Soviele Worker-Threads werden gestartet, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
+int numberOfWorker = 0;						//Anzah der benoetigten Worker-Threads, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
 unsigned long long maxPrime = 1;			//Die groeszte bis jetzt gespeicherte Primzahl, ist für jeden Client-PC unterschiedlich.
-LinkedList primesList;						//Repraesentirt die erste Note.
-LinkedList *head = &primesList;				//Adresse der ersten Note.
-LinkedList* PrimeListLast = &primesList;	//Adresse der letzten Note.
+LinkedList primesList;						//Repraesentiert die erste Node.
+LinkedList *head = &primesList;				//Adresse der ersten Node.
+LinkedList* PrimeListLast = &primesList;	//Adresse der letzten Node.
 
 
 int main(int argc, char *argv[]) {
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 #elif __linux__
 	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // liest die Anzahl der CPU-Core's aus, -1 damit der Comunicator-Thread im besten fall einen eigenen Core bekommen kann.
 #endif
-	///numberOfWorker = 1; //Uncomment to manually set number of working threads.
+	numberOfWorker = 1; //Uncomment to manually set number of working threads.
 
 
 #if defined __linux__

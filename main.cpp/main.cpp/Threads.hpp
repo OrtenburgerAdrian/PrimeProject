@@ -3,6 +3,7 @@
 #pragma once
 #include "Worker.hpp"
 #include "MultiCore.hpp"
+#include <thread>
 
 class Threads
 {
@@ -14,7 +15,7 @@ public:
 	@ initiator : Ein String, welcher bestimmt, welche Ramen-Funktion von den Threads ausgefuert werden soll ("worker"/"multiCore").
 	*/
 
-	//Es war spät als ich das gemacht habe, ich weisz, dass hier ein Vektor schoener wäre.
+	//Es war spaet als ich das gemacht habe, ich weisz, dass hier ein Vektor schoener waere.
 	static void start(std::string initiator, int numOfWorker) {
 		if (initiator == "worker")
 		{

@@ -14,7 +14,7 @@ Außerdem muesste die Variable "primeArrayFuellstand" nicht in jeder Node einzeln
 void LinkedList::initNode(struct LinkedList *last, unsigned long long n) {
 	last->data = PrimeArray::initPrimeArray();
 	(*last).data->primeArray[0] = n;
-	last->primeArrayFuellstand = 0;
+	last->primeArrayFuellstand = 1;
 	last->next = NULL; //Bei der letzten Node immer NULL, ansonsten die Weitersprung-Adresse zur naechste Node.
 }
 

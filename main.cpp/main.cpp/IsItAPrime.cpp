@@ -22,8 +22,9 @@ bool IsItAPrime::isItAPrime(unsigned long long prime) {
 	while (divisor * divisor <= prime) {
 		if (prime % divisor == 0) { return false; } // Wenn true, dann ist "prime" definitv keine Primzahl.
 
-		i++;
-		if (i > 999999){ //In diesem Fall muss zur nächsten Node gewechselt werden.
+		
+		if (i >= 999999){ //In diesem Fall muss zur nächsten Node gewechselt werden.
+			
             int x = primOP->primeArrayFuellstand;
             int y = primOP->data->primeArray[0];
             unsigned long long z = maxPrime;
@@ -32,7 +33,8 @@ bool IsItAPrime::isItAPrime(unsigned long long prime) {
 			divisor = primOP->data->primeArray[i];
 		}
 		else {
-			divisor = primOP->data->primeArray[i - 1]; //i-1, da i schon inkrementiert wurde.
+			divisor = primOP->data->primeArray[i]; //i-1, da i schon inkrementiert wurde.
+			i++;
 		}
 	}
 	return true;

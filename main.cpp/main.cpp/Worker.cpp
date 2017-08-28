@@ -4,7 +4,6 @@
 #include "Threads.hpp"
 #include "Communicator.hpp"
 
-#include <unistd.h>
 
 static std::mutex getCal;
 
@@ -18,9 +17,6 @@ void Worker::thread_calculate() {
 		isItAPrime2 = isItAPrime;
 		getCal.unlock();
 
-		if (isItAPrime2 % 10 == 1){
-            usleep(1);
-		}
 
 #ifdef __linux__
 		Communicator::sendMessage(isItAPrime2, IsItAPrime::isItAPrime(isItAPrime2)); //Auf Primzahl pruefen und senden der Zahl, mit der Information, ob der Worker glaubt, dass es eine Primzahl ist oder nicht.

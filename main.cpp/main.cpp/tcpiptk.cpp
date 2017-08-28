@@ -25,7 +25,7 @@ void error(char *msg)
     exit(1);
 }
 void tcpiptk::closeSocket(int socketfd){
-	if(close(socketfd)<0){
+	if(close(listeningSocketfd)<0){
 		error("close listening socket");
 	}
 }
@@ -40,7 +40,8 @@ void tcpiptk::closeAndShutdownSocket(int socketfd){
 }
 
 int tcpiptk::createSocket (int portno){
-     struct sockaddr_in serv_addr;
+     struct sockaddr_in serv_addr, cli_addr;
+     int n;
 
      //Öffnet den SocketSOCK_SEQPACKET
      //listeningSocketfd = socket(AF_INET, SOCK_STREAM, 0);

@@ -16,7 +16,7 @@ public:
 	*/
 
 	//Es war spaet als ich das gemacht habe, ich weisz, dass hier ein Vektor schoener waere.
-	static void start(std::string initiator, int numberOfWorker) {
+	static void start(std::string initiator, int numOfWorker) {
 		if (initiator == "worker")
 		{
 			switch (numberOfWorker) {

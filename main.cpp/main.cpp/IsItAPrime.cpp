@@ -25,6 +25,9 @@ bool IsItAPrime::isItAPrime(unsigned long long prime) {
 
 		if (i > 999999){ //In diesem Fall muss zur nächsten Node gewechselt werden.
 
+            int x = primOP->primeArrayFuellstand;
+            int y = primOP->data->primeArray[0];
+            unsigned long long z = maxPrime;
 			primOP = primOP->next;
 			i = 0;
 			divisor = primOP->data->primeArray[i];

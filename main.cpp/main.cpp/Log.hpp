@@ -7,6 +7,7 @@
 
 
 extern unsigned long long maxPrime; //def. in main.cpp
+extern bool moreLog;				//def. in main.cpp
 
 class Log
 {

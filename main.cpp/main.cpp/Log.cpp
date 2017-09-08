@@ -3,7 +3,7 @@
 #include "Log.hpp"
 /*Um zuentscheiden, welche Logfunktionen gebraucht werden*/
 void Log::log(unsigned long long prime) {
-	//Log::logprime(prime); //Eigentlich nur wichtig, um pruefen zukoennen, dass alle Primzahlen richtig sind.
+	if (moreLog == true) { Log::logprime(prime); } //Eigentlich nur wichtig, um pruefen zukoennen, dass alle Primzahlen richtig sind.
 	Log::logtime();
 }
 

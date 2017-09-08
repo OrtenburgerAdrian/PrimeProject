@@ -1,4 +1,6 @@
 //Adrian
+
+#if defined __linux__
 #pragma once
 #include <mutex>
 #include "IsItAPrime.hpp"
@@ -46,3 +48,4 @@ void MultiCore::run() {
 	numberOfWorker++; // Da die numberOfWorker bei ihrer Initialisierung -1 gerechnet wurden, was hier nicht von vorteil ist, da keine PC-Leistung für einen weiteren Thread gespart werden sollte.
 	Threads::start("multiCore", numberOfWorker);
 }
+#endif

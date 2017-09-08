@@ -1,5 +1,4 @@
-//Adrian und Bennjamin
-//verbose 1-argument, weiter lreuchen
+//Adrian
 #pragma once
 #include "LinkedList.hpp"
 #include "SingelCore.hpp"
@@ -10,7 +9,7 @@
 #include "Observer.hpp"
 #include "Communicator.hpp"
 #endif
-
+//Globale Variablen
 int numberOfWorker = 0;						//Anzah der benoetigten Worker-Threads, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
 unsigned long long maxPrime = 1;			//Die groeszte bis jetzt gespeicherte Primzahl, ist für jeden Client-PC unterschiedlich.
 LinkedList primesList;						//Repraesentiert die erste Node.
@@ -19,46 +18,36 @@ LinkedList* PrimeListLast = &primesList;	//Adresse der letzten Node.
 bool moreLog = false;						//Um alle gefundenen Primzahlen mitzuschreiben, braucht viel CPU-Time und Speicherplatz. 
 
 int main(int argc, char *argv[]) {
+#if defined __linux__
+	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // liest die Anzahl der CPU-Core's aus, -1 damit die Comunicator-Threads im besten fall einen eigenen Core bekommen können.
+#endif
 
 	std::string arg1 = "";
 	int i = 1;
-	std::string arg1 = argv[i];
-	if (arg1 == "verbose") { moreLog = true; i++; } //Wenn "verbose" als parameter uebergeben wird, wird moreLog auf 
-
-#if defined __linux__
-	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // liest die Anzahl der CPU-Core's aus, -1 damit der Comunicator-Thread im besten fall einen eigenen Core bekommen kann.
-#endif
-														  //numberOfWorker = 1; //Uncomment to manually set number of working threads.
-
-#if defined __linux__
-	if (argc <= 1 || arg1 == "verbose" && argc <= 2) {
-		std::cout << " Inadequate transfer parameters" << std::endl;
-	}
-	else if (argc > 3 || arg1 == "verbose" && argc > 4) {
-		std::cout << " Too many transfer parameters" << std::endl;
-	}
-
-
-	std::string arg1 = argv[i];
-	if (arg1 == "multicore") {
-		MultiCore::run();
+	if (*argv[i] == 'v') { moreLog = true; i++; } //Wenn "v" als parameter uebergeben wird, wird jede erarbeitete Primzahl mitgeschrieben 
+	
+	switch (*argv[i])
+	{
+	case 'm': //m = multicore
 		std::cout << " run multicore.run();" << std::endl;
-		int zahl;
-		while (true) { std::cin >> zahl; }
-	}
-	else if (arg1 == "singlecore") {
-		SingelCore::run();
+		MultiCore::run();
+		char zahl;
+		while (true) { std::cin >> zahl; } //pausirt den Thread (Betriebssystem unabhaengig), nur die Worker-Threads werden gebraucht
+		break;
+	case 's': //s = singlecore
 		std::cout << " run singelcore.run();" << std::endl;
-	}
-	else if (arg1 == "observer") {
+		SingelCore::run();
+		break;
+#if defined __linux__
+	case 'o': //o = observer
 		if (argc == 3) {
 			Observer::run(atoi(argv[i + 1]));
 		}
 		else {
 			Observer::run();
 		}
-	}
-	else if (arg1 == "communicator") {
+		break;
+	case 'c': //c = communicator
 		Worker::start();
 		if (argc == 3) {
 			Communicator::run(argv[i + 1]);
@@ -66,14 +55,18 @@ int main(int argc, char *argv[]) {
 		else {
 			Communicator::run();
 		}
-	}
-	else {
+		break;
+	case 'p': //p = peer-mode 
+		PeerWorker::start();
+		PeerCommunicator::run();
+		break;
+#endif
+	default: 
 		std::cout << "Incorrect transfer parameters" << std::endl;
+		break;
 	}
-	return 0;
-#elif _WIN64
 
+#if defined _WIN64
 	SingelCore::run(); //Um auch auf Windows arbeiten zukönnen, leider geht unsere Netzwerkmomunikation nur mit Linux.
-
 #endif
 }

@@ -1,4 +1,5 @@
 //Adrian
+#if defined __linux__
 #pragma once
 #include "Worker.hpp"
 #include "Threads.hpp"
@@ -31,3 +32,5 @@ void Worker::thread_calculate() {
 void Worker::start() {
 	Threads::start("worker", numberOfWorker);
 }
+
+#endif

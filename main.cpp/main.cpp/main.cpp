@@ -3,11 +3,15 @@
 #include "LinkedList.hpp"
 #include "SingelCore.hpp"
 #include "MultiCore.hpp"
+#include "PeerWorker.hpp"
+#include "WorkList.hpp"
+
 
 #if defined __linux__
 #include <unistd.h>
 #include "Observer.hpp"
 #include "Communicator.hpp"
+#include "PeerCommunicator.hpp"
 #endif
 //Globale Variablen
 int numberOfWorker = 0;						//Anzah der benoetigten Worker-Threads, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
@@ -16,6 +20,7 @@ LinkedList primesList;						//Repraesentiert die erste Node.
 LinkedList *head = &primesList;				//Adresse der ersten Node.
 LinkedList* PrimeListLast = &primesList;	//Adresse der letzten Node.
 bool moreLog = false;						//Um alle gefundenen Primzahlen mitzuschreiben, braucht viel CPU-Time und Speicherplatz. 
+WorkList* wl;
 
 int main(int argc, char *argv[]) {
 #if defined __linux__
@@ -57,8 +62,9 @@ int main(int argc, char *argv[]) {
 		}
 		break;
 	case 'p': //p = peer-mode 
+		wl = new WorkList(250000);
 		PeerWorker::start();
-		PeerCommunicator::run(atoi(argv[i + 1]));
+		PeerCommunicator::run(argv[i + 1]);
 		break;
 #endif
 	default: 

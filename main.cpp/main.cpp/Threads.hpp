@@ -156,5 +156,74 @@ public:
 			{ static std::thread t1(MultiCore::threadprog); }
 			}
 		}
+		else if (initiator == "peerWorker") {
+			switch (numberOfWorker) {
+			case 32:
+			{ static std::thread t32(PeerWorker::threadprog); }
+			case 31:
+			{ static std::thread t31(PeerWorker::threadprog); }
+			case 30:
+			{ static std::thread t30(PeerWorker::threadprog); }
+			case 29:
+			{ static std::thread t29(PeerWorker::threadprog); }
+			case 28:
+			{ static std::thread t28(PeerWorker::threadprog); }
+			case 27:
+			{ static std::thread t27(PeerWorker::threadprog); }
+			case 26:
+			{ static std::thread t26(PeerWorker::threadprog); }
+			case 25:
+			{ static std::thread t25(PeerWorker::threadprog); }
+			case 24:
+			{ static std::thread t24(PeerWorker::threadprog); }
+			case 23:
+			{ static std::thread t23(PeerWorker::threadprog); }
+			case 22:
+			{ static std::thread t22(PeerWorker::threadprog); }
+			case 21:
+			{ static std::thread t21(PeerWorker::threadprog); }
+			case 20:
+			{ static std::thread t20(PeerWorker::threadprog); }
+			case 19:
+			{ static std::thread t19(PeerWorker::threadprog); }
+			case 18:
+			{ static std::thread t18(PeerWorker::threadprog); }
+			case 17:
+			{ static std::thread t17(PeerWorker::threadprog); }
+			case 16:
+			{ static std::thread t16(PeerWorker::threadprog); }
+			case 15:
+			{ static std::thread t15(PeerWorker::threadprog); }
+			case 14:
+			{ static std::thread t14(PeerWorker::threadprog); }
+			case 13:
+			{ static std::thread t13(PeerWorker::threadprog); }
+			case 12:
+			{ static std::thread t12(PeerWorker::threadprog); }
+			case 11:
+			{ static std::thread t11(PeerWorker::threadprog); }
+			case 10:
+			{ static std::thread t10(PeerWorker::threadprog); }
+			case 9:
+			{ static std::thread t9(PeerWorker::threadprog); }
+			case 8:
+			{ static std::thread t8(PeerWorker::threadprog); }
+			case 7:
+			{ static std::thread t7(PeerWorker::threadprog); }
+			case 6:
+			{ static std::thread t6(PeerWorker::threadprog); }
+			case 5:
+			{ static std::thread t5(PeerWorker::threadprog); }
+			case 4:
+			{ static std::thread t4(PeerWorker::threadprog); }
+			case 3:
+			{ static std::thread t3(PeerWorker::threadprog); }
+			case 2:
+			{ static std::thread t2(PeerWorker::threadprog); }
+			case 1:
+			case 0:
+			{ static std::thread t1(PeerWorker::threadprog); }
+			}
+		}
 	}
 };

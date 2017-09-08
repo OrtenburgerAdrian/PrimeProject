@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
 		break;
 	case 'p': //p = peer-mode 
 		PeerWorker::start();
-		PeerCommunicator::run();
+		PeerCommunicator::run(atoi(argv[i + 1]));
 		break;
 #endif
 	default: 

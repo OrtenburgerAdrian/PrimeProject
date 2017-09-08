@@ -118,6 +118,32 @@ int tcpiptk::writeMessage(int sockfd, const void *message, size_t length){
 	return n;
 }
 
+//Derivated from http://beej.us/guide/bgnet/output/html/multipage/getpeernameman.html
+std::string tcpiptk::getPeerName(int sockfd){
+    socklen_t len;
+    struct sockaddr_storage addr;
+    char ipstr[INET6_ADDRSTRLEN];
+    int port;
+
+    len = sizeof addr;
+    getpeername(sockfd, (struct sockaddr*)&addr, &len);
+
+    // deal with both IPv4 and IPv6:
+    if (addr.ss_family == AF_INET) {
+        struct sockaddr_in *sockfd = (struct sockaddr_in *)&addr;
+        port = ntohs(sockfd->sin_port);
+        inet_ntop(AF_INET, &sockfd->sin_addr, ipstr, sizeof ipstr);
+    } else { // AF_INET6
+        struct sockaddr_in6 *sockfd = (struct sockaddr_in6 *)&addr;
+        port = ntohs(sockfd->sin6_port);
+        inet_ntop(AF_INET6, &sockfd->sin6_addr, ipstr, sizeof ipstr);
+    }
+
+    printf("Peer IP address: %s\n", ipstr);
+    std::string returnString(ipstr);
+    return returnString;
+}
+
 /* Derivated from "man 3 getifaddrs" */
 char* tcpiptk::getMyIP(){
 	struct ifaddrs *ifaddr, *ifa;

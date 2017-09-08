@@ -1,5 +1,4 @@
 //Adrian
-#pragma once
 #include "LinkedList.hpp"
 #include "SingelCore.hpp"
 #include "MultiCore.hpp"
@@ -13,14 +12,15 @@
 #include "Communicator.hpp"
 #include "PeerCommunicator.hpp"
 #endif
+
 //Globale Variablen
 int numberOfWorker = 0;						//Anzah der benoetigten Worker-Threads, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
 unsigned long long maxPrime = 1;			//Die groeszte bis jetzt gespeicherte Primzahl, ist für jeden Client-PC unterschiedlich.
 LinkedList primesList;						//Repraesentiert die erste Node.
 LinkedList *head = &primesList;				//Adresse der ersten Node.
 LinkedList* PrimeListLast = &primesList;	//Adresse der letzten Node.
-bool moreLog = false;						//Um alle gefundenen Primzahlen mitzuschreiben, braucht viel CPU-Time und Speicherplatz. 
-WorkList* wl;
+bool moreLog = false;						//Um alle gefundenen Primzahlen mitzuschreiben, braucht viel CPU-Time und Speicherplatz.
+WorkList* wl;                               //Sonderangefertigte Liste, um im Peer-Modus zu arbeiten.
 
 int main(int argc, char *argv[]) {
 #if defined __linux__
@@ -29,8 +29,8 @@ int main(int argc, char *argv[]) {
 
 	std::string arg1 = "";
 	int i = 1;
-	if (*argv[i] == 'v') { moreLog = true; i++; } //Wenn "v" als parameter uebergeben wird, wird jede erarbeitete Primzahl mitgeschrieben 
-	
+	if (*argv[i] == 'v') { moreLog = true; i++; } //Wenn "v" als parameter uebergeben wird, wird jede erarbeitete Primzahl mitgeschrieben
+
 	switch (*argv[i])
 	{
 	case 'm': //m = multicore
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
 		std::cout << " run singelcore.run();" << std::endl;
 		SingelCore::run();
 		break;
-#if defined __linux__
+
 	case 'o': //o = observer
 		if (argc == 3) {
 			Observer::run(atoi(argv[i + 1]));
@@ -61,13 +61,13 @@ int main(int argc, char *argv[]) {
 			Communicator::run();
 		}
 		break;
-	case 'p': //p = peer-mode 
+	case 'p': //p = peer-mode
 		wl = new WorkList(250000);
-		PeerWorker::start();
-		PeerCommunicator::run(argv[i + 1]);
+		PeerWorker::run();
+		PeerCommunicator::run(atoi(argv[i + 1]));
 		break;
-#endif
-	default: 
+
+	default:
 		std::cout << "Incorrect transfer parameters" << std::endl;
 		break;
 	}

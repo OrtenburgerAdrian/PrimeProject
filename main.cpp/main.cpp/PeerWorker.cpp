@@ -2,15 +2,15 @@
 #include "Threads.hpp"
 
 
-void PeerWorker::run() {
+void PeerWorker::threadprog() {
 	unsigned long long test;
 	while (true)
 	{
-	test = (*wl).getNextTest; 
+	test = (*wl).getNextTest();
 	(*wl).setResult(test, IsItAPrime::isItAPrime(test));
 	}
 }
 
-void PeerWorker::threadprog() {
+void PeerWorker::run() {
 	Threads::start("peerWorker", numberOfWorker);
 }

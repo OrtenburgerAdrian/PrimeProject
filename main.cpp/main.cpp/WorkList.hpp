@@ -1,8 +1,9 @@
 #pragma once
-#if defined __linux__
 #include <semaphore.h>
-#endif
 #include <mutex>
+#include <vector>
+#include <atomic>
+#include <time.h>
 
 struct WorkListElement{
         bool blockTCPRead;
@@ -24,10 +25,10 @@ struct WorkListElement{
         };
 
         bool getResult(){
-            //blockTCPRead should always be FALSE if this function is called.
-            if(!blockTCPRead){
-                return (blockWorker);
+            while(blockTCPRead){
+                nanosleep((const struct timespec[]){{0, 10L}}, NULL);
             }
+            return (blockWorker);
         }
 
         bool isReadyToSend(){
@@ -39,31 +40,63 @@ struct WorkListElement{
         bool isNotPrime(){
             return !blockTCPRead && !blockWorker;
         };
+
+        //Dasselbe nochmal mit Mutex'n
+        /*
+        std::mutex blockTCPRead;
+        bool blockWorker;
+
+        void setIsChecking(){
+            blockTCPRead.lock();
+            blockWorker = true;
+        };
+
+        void writeFromMessage(bool b){
+            if (b){
+                blockTCPRead.lock();
+            }else{
+                blockTCPRead.unlock();
+            }
+            blockWorker = false;
+        }
+
+        void setResult(bool isNonPrime){
+            blockWorker = !isNonPrime;
+            blockTCPRead.unlock();
+        };
+
+        bool getResult(){
+            //blockTCPRead should always be FALSE if this function is called.
+            blockTCPRead.lock();
+            return (blockWorker);
+            blockTCPRead.unlock();
+        }
+        */
 };
 
 class WorkList{
     public:
         WorkList(int lengthOfList);
-        unsigned long long iTCPReadNumber;
+        std::atomic<unsigned long long> iTCPReadNumber;
         int listLength;
         int iThreadMax;
-        int iTCPWrite;
-        int iTCPRead;
+        int iTCPWrite; //Schreibkopf
+        //int iTCPRead; //Lesekopf
 
-#if defined __linux__
         sem_t semWrite;
         sem_t semRead;
-#endif
+
         std::mutex mutexReplaceThread;
 
         void TCPWrite(char byte);
         char TCPRead();
+        std::vector<unsigned long long> getSecuredPrimes();
 
         unsigned long long getNextTest();
         void setResult(unsigned long long number, bool isNonPrime);
 
     private:
-        WorkListElement data[];
+        WorkListElement* data;
 
         unsigned long long indexToNumber(int index);
         int numberToIndex(unsigned long long number);

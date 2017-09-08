@@ -4,6 +4,7 @@
 #include "Worker.hpp"
 #include "MultiCore.hpp"
 #include <thread>
+#include "PeerWorker.hpp"
 
 class Threads
 {

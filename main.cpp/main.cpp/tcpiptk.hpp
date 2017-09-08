@@ -1,6 +1,7 @@
 //Benjamin
 class tcpiptk{
 public:
+    static std::string getPeerName(int sockfd);
     static void closeSocket(int socketfd);
     static void shutdownSocket(int socketfd);
     static void closeAndShutdownSocket(int socketfd);

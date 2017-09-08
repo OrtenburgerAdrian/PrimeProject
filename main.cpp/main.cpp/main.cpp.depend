@@ -977,7 +977,7 @@
 	<windows.h>
 	<unistd.h>
 
-1498657933 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Communicator.cpp
+1504868400 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Communicator.cpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -993,7 +993,7 @@
 	"Worker.hpp"
 	"tcpiptk.hpp"
 
-1498654038 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Observer.hpp
+1504868400 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Observer.hpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -1004,10 +1004,11 @@
 	"Communicator.hpp"
 	"Worker.hpp"
 
-1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/LinkedList.hpp
+1504868400 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/LinkedList.hpp
+	"PrimeArray.hpp"
 	<iostream>
 
-1498656783 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Communicator.hpp
+1504868400 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Communicator.hpp
 	<stdio.h>
 	<string>
 	<iostream>
@@ -1017,263 +1018,65 @@
 	"Communicator.hpp"
 	"Worker.hpp"
 
-1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Worker.hpp
-	<stdio.h>
-	<string>
-	<iostream>
-	<stdlib.h>
-	<iostream>
-	<chrono>
-	<thread>
+1504868400 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Worker.hpp
 	<mutex>
-	<map>
-	<string>
 	"LinkedList.hpp"
-	"Observer.hpp"
-	"Communicator.hpp"
-	"Log.hpp"
 
-1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Log.hpp
-	<stdio.h>
-	<string>
+1504868400 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Log.hpp
 	<iostream>
-	<stdlib.h>
 	<fstream>
-	<iostream>
-	<string>
-	<stdio.h>
 	<time.h>
-	<stdio.h>
-	<time.h>
-	<thread>
-	<cstdlib>
-	<algorithm>
-	<iostream>
-	<stdlib.h>
-	"IsItAPrime.hpp"
-	"LinkedList.hpp"
-	"Observer.hpp"
-	"Communicator.hpp"
-	"Worker.hpp"
-	"Log.hpp"
-
-1498645132 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/IsItAPrime.hpp
-	<iostream>
-	<string>
-	<stdio.h>
-	<time.h>
-	<stdio.h>
-	<time.h>
-	<iostream>
-	<stdlib.h>
-	"LinkedList.hpp"
-	"Observer.hpp"
-	"Communicator.hpp"
-	"Worker.hpp"
-	"Log.hpp"
-
-1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/tcpiptk.hpp
-
-1498660089 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/IsItAPrime.cpp
-	"LinkedList.hpp"
-	"IsItAPrime.hpp"
-
-1498601532 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/LinkedList.cpp
-	<iostream>
-	"LinkedList.hpp"
-
-1498660931 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Log.cpp
-	<stdio.h>
-	<string.h>
-	<iostream>
-	<stdlib.h>
-	<fstream>
-	<iostream>
-	<string>
-	<stdio.h>
-	<time.h>
-	<stdio.h>
-	<time.h>
-	<thread>
-	<cstdlib>
-	<algorithm>
-	<time.h>
-	<iostream>
-	<stdlib.h>
 	<sstream>
-	<cstring>
-	<string.h>
-	<locale>
-	<errno.h>
-	<cerrno>
-	"IsItAPrime.hpp"
-	"LinkedList.hpp"
-	"Observer.hpp"
-	"Communicator.hpp"
-	"Worker.hpp"
 
-1498656574 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/main.cpp
-	<stdio.h>
-	<string>
-	<iostream>
-	<stdlib.h>
-	<fstream>
-	<iostream>
-	<string>
-	<stdio.h>
-	<time.h>
-	<stdio.h>
-	<time.h>
-	<thread>
-	<cstdlib>
-	<algorithm>
-	<iostream>
-	<stdlib.h>
-	"IsItAPrime.hpp"
+1504868400 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/IsItAPrime.hpp
 	"LinkedList.hpp"
-	"Observer.hpp"
-	"Communicator.hpp"
-	"Worker.hpp"
+
+1504884640 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/tcpiptk.hpp
+
+1504868400 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/IsItAPrime.cpp
+	"IsItAPrime.hpp"
+
+1504868400 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/LinkedList.cpp
+	"LinkedList.hpp"
+
+1504868400 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Log.cpp
 	"Log.hpp"
+
+1504884046 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/main.cpp
+	"LinkedList.hpp"
 	"SingelCore.hpp"
 	"MultiCore.hpp"
-	<dos.h>
-	<windows.h>
+	"PeerWorker.hpp"
+	"WorkList.hpp"
 	<unistd.h>
-
-1498645132 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/SingelCore.hpp
-	<stdio.h>
-	<string>
-	<iostream>
-	<stdlib.h>
-	<fstream>
-	<iostream>
-	<string>
-	<stdio.h>
-	<time.h>
-	<stdio.h>
-	<time.h>
-	<thread>
-	<cstdlib>
-	<algorithm>
-	<iostream>
-	<chrono>
-	<thread>
-	<mutex>
-	<map>
-	<string>
-	<iostream>
-	<stdlib.h>
-	"IsItAPrime.hpp"
-	"LinkedList.hpp"
 	"Observer.hpp"
 	"Communicator.hpp"
-	"Worker.hpp"
-	"Log.hpp"
-	<dos.h>
-	<windows.h>
-	<unistd.h>
+	"PeerCommunicator.hpp"
 
-1498645132 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/MultiCore.hpp
-	<stdio.h>
-	<string>
-	<iostream>
-	<stdlib.h>
-	<fstream>
-	<iostream>
-	<string>
-	<stdio.h>
-	<time.h>
-	<stdio.h>
-	<time.h>
-	<thread>
-	<cstdlib>
-	<algorithm>
-	<iostream>
-	<chrono>
-	<thread>
-	<mutex>
-	<map>
-	<string>
-	<iostream>
-	<stdlib.h>
+1504868400 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/SingelCore.hpp
 	"IsItAPrime.hpp"
 	"LinkedList.hpp"
-	"Observer.hpp"
-	"Communicator.hpp"
-	"Worker.hpp"
 	"Log.hpp"
-	"SingelCore.hpp"
-	<dos.h>
-	<windows.h>
-	<unistd.h>
 
-1498645132 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/MultiCore.cpp
-	<stdio.h>
-	<string>
-	<iostream>
-	<stdlib.h>
-	<fstream>
-	<iostream>
-	<string>
-	<stdio.h>
-	<time.h>
-	<stdio.h>
-	<time.h>
-	<thread>
-	<cstdlib>
-	<algorithm>
-	<iostream>
-	<chrono>
-	<thread>
+1504868400 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/MultiCore.hpp
 	<mutex>
-	<map>
-	<string>
-	<iostream>
-	<stdlib.h>
 	"IsItAPrime.hpp"
 	"LinkedList.hpp"
-	"Observer.hpp"
-	"Communicator.hpp"
-	"Worker.hpp"
 	"Log.hpp"
-	"SingelCore.hpp"
-	"MultiCore.hpp"
+
+1504868400 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/MultiCore.cpp
+	<mutex>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Log.hpp"
 	"Threads.hpp"
-	<dos.h>
-	<windows.h>
-	<unistd.h>
-
-1498601532 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Threads.hpp
-	<stdio.h>
-	<string>
-	<iostream>
-	<stdlib.h>
-	<fstream>
-	<iostream>
-	<string>
-	<stdio.h>
-	<time.h>
-	<stdio.h>
-	<time.h>
-	<thread>
-	<cstdlib>
-	<algorithm>
-	<iostream>
-	<stdlib.h>
-	<iostream>
-	<chrono>
-	<thread>
-	<mutex>
-	<map>
-	<string>
-	"IsItAPrime.hpp"
-	"LinkedList.hpp"
-	"Observer.hpp"
-	"Communicator.hpp"
-	"Worker.hpp"
-	"Log.hpp"
 	"MultiCore.hpp"
+
+1504878959 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Threads.hpp
+	"Worker.hpp"
+	"MultiCore.hpp"
+	<thread>
+	"PeerWorker.hpp"
 
 1501271593 source:/home/berdnues/Desktop/PrimeProject3/main.cpp/main.cpp/main.cpp
 	<stdio.h>
@@ -1884,6 +1687,99 @@
 	"tcpiptk.hpp"
 
 1503587985 source:/home/berdnues/Desktop/PrimeProject6/main.cpp/main.cpp/Worker.cpp
+	"Worker.hpp"
+	"Threads.hpp"
+	"Communicator.hpp"
+	<unistd.h>
+
+1504897633 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/WorkList.cpp
+	"WorkList.hpp"
+
+1504897548 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/WorkList.hpp
+	<semaphore.h>
+	<mutex>
+	<vector>
+	<atomic>
+	<time.h>
+
+1504868400 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/PrimeArray.hpp
+
+1504885098 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/PeerCommunicator.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"WorkList.hpp"
+	"tcpiptk.hpp"
+
+1504868400 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Observer.cpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<sstream>
+	<cstring>
+	<map>
+	<semaphore.h>
+	<thread>
+	<mutex>
+	<vector>
+	<unistd.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<sys/types.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"tcpiptk.hpp"
+	"Log.hpp"
+
+1504878939 /vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/PeerWorker.hpp
+	<iostream>
+	<fstream>
+	<time.h>
+	<sstream>
+	"WorkList.hpp"
+
+1504904230 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/PeerCommunicator.cpp
+	"PeerCommunicator.hpp"
+	"Log.hpp"
+	"vector"
+	"thread"
+	<unistd.h>
+	<sys/socket.h>
+
+1504897699 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/PeerWorker.cpp
+	"PeerWorker.hpp"
+	"Threads.hpp"
+
+1504884730 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/tcpiptk.cpp
+	<stdlib.h>
+	<strings.h>
+	<string.h>
+	<unistd.h>
+	<sstream>
+	<stdio.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+	<arpa/inet.h>
+	<ifaddrs.h>
+	"tcpiptk.hpp"
+
+1504868400 source:/vol/vol_home_student/mx4-4/berdnues/lx/Arbeitsfläche/main.cpp/Worker.cpp
 	"Worker.hpp"
 	"Threads.hpp"
 	"Communicator.hpp"

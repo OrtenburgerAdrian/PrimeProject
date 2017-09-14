@@ -6,8 +6,10 @@ void PeerWorker::threadprog() {
 	unsigned long long test;
 	while (true)
 	{
+
 	test = (*wl).getNextTest();
-	(*wl).setResult(test, IsItAPrime::isItAPrime(test));
+    std::cout <<  "I am testing the number: " << test << std::endl;
+	(*wl).setResult(test, !IsItAPrime::isItAPrime(test));
 	}
 }
 

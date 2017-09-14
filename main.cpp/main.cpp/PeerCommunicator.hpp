@@ -28,5 +28,6 @@ class PeerCommunicator
         static std::string ask(std::string question);
         static void runReceiver(int mode);
         static void runTransmitter(int mode);
-        static void runPrimeReceiver(int mode);
+        static void runPrimeReceiver();
+        static void byteAsString (char b);
 };

@@ -7,7 +7,7 @@
 #include <sys/socket.h>
 
 #define PORT 30000
-#define PRIMESPERPEER 3
+#define PRIMESPERPEER 5
 
 static int previousPeerSocketfd;
 static int nextPeerSocketfd;
@@ -88,7 +88,7 @@ void PeerCommunicator::runReceiver(int mode){
                 return; // :(
             }
             m = m ^ 0xff; //Invertiert das byte, sodass eine leere Nachricht ungültig ist.
-            //byteAsString(m);
+            //printByteAsString(m);
             wl->TCPWrite(m);
         }
     }
@@ -119,18 +119,35 @@ void PeerCommunicator::runTransmitter(int mode){
             connectionCount++;
         }while(connectionCount < (peerCounter));
 
-
+        //Initialisiert die Worker mit einigen Primzahlen.
+        int numberOfStartPrimes = peerCounter * PRIMESPERPEER;
+        unsigned long long primArr[numberOfStartPrimes];
+        int si = 0;
+        int x = 2;
+        while(si < numberOfStartPrimes){
+            for (int y=2; y<x; y++){
+                if (x % y == 0){
+                    break;
+                }else if (x == y+1){
+                    primArr[si] = static_cast<unsigned long long>(x);
+                    printf("StartingPrime: %llu \n", primArr[si]);
+                    si++;
+                }
+            }
+            x++;
+        }
         //Verteilt erste Primzahlen rückwärts
-        unsigned long long primArr[] = {3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
-        if (peerCounter * PRIMESPERPEER > 24){
+        //unsigned long long primArr[] = {3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+        if (peerCounter * PRIMESPERPEER > (sizeof(primArr)/sizeof(*primArr))){
             printf("Zu viele Peers!");
             return; // :((
         }
+
         int i = 0;
         unsigned long long pr;
         do{
             pr = primArr[i];
-            printf("Sending a Message to %i: %llu is a prime.\n", primeSendList[nextPeerForPrime], pr); //Nützlich für Tests.
+            //printf("Sending a Message to %i: %llu is a prime.\n", primeSendList[nextPeerForPrime], pr); //Nützlich für Tests.
             tcpiptk::writeMessage(primeSendList[nextPeerForPrime], &pr, sizeof(pr));
             i++;
             nextPeerForPrime--;
@@ -146,7 +163,7 @@ void PeerCommunicator::runTransmitter(int mode){
             for(std::vector<unsigned long long>::iterator it = returnPrimes.begin(); it != returnPrimes.end(); ++it) {
                 currentPrime = *it;
                 Log::log(currentPrime); //Logging!
-                printf("Sending a Message to %i: %llu is a prime.\n", primeSendList[nextPeerForPrime], currentPrime); //Nützlich für Tests.
+                //printf("Sending a Message to %i: %llu is a prime.\n", primeSendList[nextPeerForPrime], currentPrime); //Nützlich für Tests.
                 tcpiptk::writeMessage(primeSendList[nextPeerForPrime], &currentPrime, sizeof(currentPrime));
                 //if (currentPrime >= 150){ return;}
                 nextPeerForPrime--;
@@ -158,7 +175,7 @@ void PeerCommunicator::runTransmitter(int mode){
     }else{
         while(true){
             m = wl->TCPRead();
-            byteAsString(m);
+            //printByteAsString(m);
             m = m ^ 0xff; //Invertiert das byte, sodass eine leere Nachricht ungültig ist.
             //printf("Sending a binary Message to %i: %i.\n", nextPeerSocketfd, (int)m); //Nützlich für Tests.
             tcpiptk::writeMessage(nextPeerSocketfd, &m, sizeof(m));
@@ -180,7 +197,7 @@ void PeerCommunicator::runPrimeReceiver(){
             close(listeningfd);
             return;
         }
-        printf("Got a Message: %llu is a prime.\n", receivedPrime); //Nützlich für Tests.
+        //printf("Got a Message: %llu is a prime.\n", receivedPrime); //Nützlich für Tests.
         if (linkedListInitialized == false){ //Initialisiert die LinkedList...
             LinkedList::initNode(head, receivedPrime);
             linkedListInitialized = true;
@@ -192,7 +209,7 @@ void PeerCommunicator::runPrimeReceiver(){
     }
 }
 
-void PeerCommunicator::byteAsString (char b){
+void PeerCommunicator::printByteAsString (char b){
     int i;
     for (i = 0; i < 8; i++) {
       printf("%d", !!((b << i) & 0x80));

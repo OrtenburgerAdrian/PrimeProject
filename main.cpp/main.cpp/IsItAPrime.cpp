@@ -13,8 +13,9 @@ bool IsItAPrime::isItAPrime(unsigned long long prime) {
 	while ((maxPrime + maxDifference * 2) < prime) {}
 
 	/*Eine weitere Sperre, so koennen keine Zahlen geprueft werden, welche groeszer als das doppelte der bis jetzt groeszten gespeicherten Primzahl sind, dies ist beim Start des Programmes wichtig,
-	am Anfang ist der Rechenaufwand um eine Zahl zupruefen praktisch gleich Null, wesshalb der Server-PC nur so mit Nachrichten beschossen werden wuerde. Um dem entgegen zuwirken ist diese Sperre.*/
-	//while (maxPrime * 2 < prime) {}
+	am Anfang ist der Rechenaufwand um eine Zahl zupruefen praktisch gleich Null, wesshalb der Server-PC nur so mit Nachrichten beschossen werden wuerde. Um dem entgegen zuwirken ist diese Sperre.
+	Zusätzlich vehindert die Sperre, dass die Worker-Threads auf das PrimeArray zugreifen, bevor es initialisiert ist.*/
+	while (maxPrime * 2 < prime) {}
 
 	/*Die Beiden Sperren sorgen auch dafuer, dass der Algoritmuss nicht ans Ende der Linkedlist kommen kann.*/
 

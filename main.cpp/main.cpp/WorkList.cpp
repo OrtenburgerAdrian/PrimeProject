@@ -1,3 +1,4 @@
+//Benjamin
 #include "WorkList.hpp"
 
 WorkList::WorkList(int lengthOfList){

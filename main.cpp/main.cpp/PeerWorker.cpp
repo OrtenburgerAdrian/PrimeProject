@@ -1,3 +1,4 @@
+//Adrian
 #include "PeerWorker.hpp"
 #include "Threads.hpp"
 
@@ -8,7 +9,7 @@ void PeerWorker::threadprog() {
 	{
 
 	test = (*wl).getNextTest();
-    std::cout <<  "I am testing the number: " << test << std::endl;
+    //std::cout <<  "I am testing the number: " << test << std::endl;
 	(*wl).setResult(test, !IsItAPrime::isItAPrime(test));
 	}
 }

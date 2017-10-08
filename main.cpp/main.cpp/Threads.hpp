@@ -16,7 +16,7 @@ public:
 	@ initiator : Ein String, welcher bestimmt, welche Ramen-Funktion von den Threads ausgefuert werden soll ("worker"/"multiCore").
 	*/
 
-	//Es war spaet als ich das gemacht habe, ich weisz, dass hier ein Vektor schoener waere.
+	
 	static void start(std::string initiator, int numberOfWorker) {
 		if (initiator == "worker")
 		{

@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 #if defined __linux__
 	numberOfWorker = sysconf(_SC_NPROCESSORS_ONLN) - 1;   // liest die Anzahl der CPU-Core's aus, -1 damit die Comunicator-Threads im besten fall einen eigenen Core bekommen können.
 #endif
-    numberOfWorker = 1;
+    //numberOfWorker = 1;
 
 	std::string arg1 = "";
 	int i = 1;

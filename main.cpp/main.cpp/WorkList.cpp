@@ -21,8 +21,8 @@ void WorkList::TCPWrite(char byte){
         sem_wait(&semWrite); //use Write-Token
             b = byte & 0x01; //get the first bit
             byte = byte >> 1; //bitshift
-            int number = indexToNumber(iTCPWrite);
-            printf("I received the result for %llu ; it's %sa prime for the previous peer.\n", number, b ? "" : "not "); //Nützlich für Tests.
+            unsigned long long number = indexToNumber(iTCPWrite);
+            //printf("I received the result for %llu ; it's %sa prime for the previous peer.\n", number, b ? "" : "not "); //Nützlich für Tests.
             data[iTCPWrite].writeFromMessage(b); //write
             iTCPWrite = (iTCPWrite+1) % listLength; //increment WritePointer
         sem_post(&semRead); //give Read-Token
@@ -67,7 +67,7 @@ std::vector<unsigned long long> WorkList::getSecuredPrimes(){
 }
 
 void WorkList::setResult(unsigned long long number, bool isNonPrime){
-    printf("I found the result for %llu ; it's %sa prime for me.\n", number, isNonPrime ? "not " : ""); //Nützlich für Tests.
+    //printf("I found the result for %llu ; it's %sa prime for me.\n", number, isNonPrime ? "not " : ""); //Nützlich für Tests.
     int index = numberToIndex(number);
     data[index].setResult(isNonPrime);
 }

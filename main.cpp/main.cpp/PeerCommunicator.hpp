@@ -29,5 +29,5 @@ class PeerCommunicator
         static void runReceiver(int mode);
         static void runTransmitter(int mode);
         static void runPrimeReceiver();
-        static void byteAsString (char b);
+        static void printByteAsString (char b);
 };

@@ -8,7 +8,7 @@
 #include <sys/socket.h>
 
 #define PORT 30000
-#define PRIMESPERPEER 5
+#define PRIMESPERPEER 5 //Jeder Peer benötigt mehrere Primzahlen, um dauerhaft Handlungsfähig zu werden. Grund dafür ist, dass 8 Ergebnisse auf einmal versendet werden.
 
 static int previousPeerSocketfd;
 static int nextPeerSocketfd;
@@ -53,7 +53,7 @@ void PeerCommunicator::run(int mode){ //Modes: 0=FirstPeer; 1=MiddlePeer(s); 2=L
         tcpiptk::writeMessage(nextPeerSocketfd, &peerCounter, sizeof(int));
     break;
     case 2:
-        // Der letzte Communicator muss sich mit dem Ersten UND vorhergehenden Communicator verbinden.
+        // Der letzte Communicator muss sich mit dem Ersten UND vorhergehenden Communicator verbinden, um einen Vollständigkeit der Reihe zu signalisieren.
         tcpiptk::closeSocket(incomingSocket);
         previousPeerIP = PeerCommunicator::ask("Please enter the IP of the previous peer");
         previousPeerSocketfd = tcpiptk::connectSocket(previousPeerIP.c_str(), PORT);
@@ -67,13 +67,19 @@ void PeerCommunicator::run(int mode){ //Modes: 0=FirstPeer; 1=MiddlePeer(s); 2=L
     break;
     }
 
+    //Spawnt den Thread, welcher Primzahlen annimt und in der LinkedList speichert. Hier wird dann noch einmal nach der IP des letzten Peers gefragt.
     std::thread transmitter(PeerCommunicator::runPrimeReceiver);
+    //Spawnt den Thread, der vom Vorgänger Ergebnisse annimt.
     std::thread receiver(PeerCommunicator::runReceiver, mode);
+    //Gibt Ergebnisse weiter.
     runTransmitter(mode);
 }
 
+//Nimmt Ergebnisse vom Vorgänger an und schreibt sie in die WorkList.
 void PeerCommunicator::runReceiver(int mode){
     char m = 0;
+
+    //Der erste Peer bekommt einen Dummy, der jede Zahl als zu prüfen markiert.
     if(mode == 0){
         m--;
         while(true){
@@ -88,16 +94,16 @@ void PeerCommunicator::runReceiver(int mode){
                 close(previousPeerSocketfd);
                 return; // :(
             }
-            m = m ^ 0xff; //Invertiert das byte, sodass eine leere Nachricht ungültig ist.
-            //printByteAsString(m);
+            m = m ^ 0xff; //Invertiert das Byte zurück.
             wl->TCPWrite(m);
         }
     }
 }
-void PeerCommunicator::runTransmitter(int mode){
-    char m; //Dingens... Uebergangsparameter für 8 bit. wobei jeder bit anzeigt, ob die Zahl prim ist oder nicht.
 
-    if(mode == 2){ // Der Transmitter unterscheidet nur noch den EndPeer vom Rest.
+void PeerCommunicator::runTransmitter(int mode){
+    char m; //Uebergangsparameter für 8 bit. wobei jeder bit anzeigt, ob die Zahl prim ist oder nicht.
+
+    if(mode == 2){ // Der Transmitter unterscheidet nur noch den EndPeer vom Rest. ALLES innherhalb dieses Blocks gilt nur für den LETZTEN Peer!
         static std::vector<int> primeSendList; //Enthält Sockets zu allen Peers, sich selbst eingeschlossen. (Aufsteigend vom ersten zum letzten)
         static int nextPeerForPrime; //Der Index zum naechsten glücklichen Peer, der eine Primzahl bekommen darf.
         int incomingSocket = tcpiptk::createSocket(PORT);
@@ -107,7 +113,8 @@ void PeerCommunicator::runTransmitter(int mode){
 
         /* Waits until everyone is connected. */
         int connectionCount = 0;
-        nextPeerForPrime = peerCounter-1; //Wir vergeben Primzahlen dann rueckwaerts, damit der erste Peer die hoechste Primzahl hat...
+        //Wir vergeben Primzahlen dann rueckwaerts, damit der erste Peer die hoechste Primzahl hat, wenn man vom letzten Peer zum ersten die Zahlen eingegeben hat.
+        nextPeerForPrime = peerCounter-1;
         do{
             /* Connection request on original socket. */
             int newSocket;
@@ -115,7 +122,6 @@ void PeerCommunicator::runTransmitter(int mode){
             if (newSocket > 1023){
                 printf("Program Error: tcpiptk::acceptConnection() returned %i\n", newSocket);
             }
-            //FD_SET (newSocket, &active_fd_set);
             primeSendList.push_back(newSocket);
             connectionCount++;
         }while(connectionCount < (peerCounter));
@@ -138,7 +144,6 @@ void PeerCommunicator::runTransmitter(int mode){
             x++;
         }
         //Verteilt erste Primzahlen rückwärts
-        //unsigned long long primArr[] = {3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
         if (peerCounter * PRIMESPERPEER > (sizeof(primArr)/sizeof(*primArr))){
             printf("Zu viele Peers!");
             return; // :((
@@ -156,11 +161,11 @@ void PeerCommunicator::runTransmitter(int mode){
         }while(i < peerCounter * PRIMESPERPEER);
         nextPeerForPrime = peerCounter - 1; //Setzt den PeerIndex nochmal zurück.
 
-        //Transmitterschleife des letzten Peers: Sendet fertige Primzahlen reihum an seine Peers.
+        //Eigenliche Transmitterschleife des letzten Peers: Sendet fertige Primzahlen reihum an seine Peers.
         std::vector<unsigned long long> returnPrimes;
         unsigned long long currentPrime;
         while(true){
-            returnPrimes = wl->getSecuredPrimes();
+            returnPrimes = wl->getSecuredPrimes(); //Erhält Primzahlen innerhalb der nächsten 8 Ergebnisse, die Größe des Vectors ist also unbekannt.
             for(std::vector<unsigned long long>::iterator it = returnPrimes.begin(); it != returnPrimes.end(); ++it) {
                 currentPrime = *it;
                 Log::log(currentPrime); //Logging!
@@ -173,11 +178,10 @@ void PeerCommunicator::runTransmitter(int mode){
                 }
             }
         }
-    }else{
+    }else{ //Der Job ist wesentlich einfacher, wenn man nicht der letzte Peer ist. Das liegt auch daran, dass die WorkList viel der Arbeit abnimmt.
         while(true){
             m = wl->TCPRead();
-            //printByteAsString(m);
-            m = m ^ 0xff; //Invertiert das byte, sodass eine leere Nachricht ungültig ist.
+            m = m ^ 0xff; //Invertiert das Byte, sodass eine leere Nachricht ungültig ist.
             //printf("Sending a binary Message to %i: %i.\n", nextPeerSocketfd, (int)m); //Nützlich für Tests.
             tcpiptk::writeMessage(nextPeerSocketfd, &m, sizeof(m));
         }
@@ -185,12 +189,14 @@ void PeerCommunicator::runTransmitter(int mode){
 }
 
 void PeerCommunicator::runPrimeReceiver(){
-    //Initialisierung ist noch nicht abgeschlossen...
+    //Initialisierung ist noch nicht abgeschlossen... Um Nachrichten zu empfangen, muss noch eine Verbindung mit dem letzten Peer erfolgen.
     unsigned long long receivedPrime = 0;
     std::string lastPeerIP = ask("Please enter the IP of the last peer");
     int listeningfd = tcpiptk::connectSocket(lastPeerIP.c_str(), PORT);
 
-    bool linkedListInitialized = false; //Der Umgang mit Adrians LinkedList ist zwar sonderbar, funktioniert aber.
+    bool linkedListInitialized = false; //Der Umgang mit Adrians LinkedList ist zwar sonderbar, funktioniert aber gut.
+
+    //Beginn Empfängerschleife
     while(true){
         tcpiptk::getMessage(listeningfd,&receivedPrime,sizeof(unsigned long long)); //Empfängt die Nachricht.
         if(receivedPrime == 0){ //Wenn 0 empfangen wird, wurde der Socket vom letzten Peer geschlossen.
@@ -199,21 +205,19 @@ void PeerCommunicator::runPrimeReceiver(){
             return;
         }
         //printf("Got a Message: %llu is a prime.\n", receivedPrime); //Nützlich für Tests.
+
         if (linkedListInitialized == false){ //Initialisiert die LinkedList...
             LinkedList::initNode(head, receivedPrime);
             linkedListInitialized = true;
         }else{
             PrimeListLast = LinkedList::addNode(PrimeListLast, receivedPrime);
         }
-        if(receivedPrime > maxPrime) maxPrime = receivedPrime; //MaxPrime ist in main.cpp definiert und beschreibt die höchste Primzahl, die der Prozess kennt.
-        receivedPrime = 0; //Mal gucken was passiert.
-    }
-}
 
-void PeerCommunicator::printByteAsString (char b){
-    int i;
-    for (i = 0; i < 8; i++) {
-      printf("%d", !!((b << i) & 0x80));
+        //Aktualisiert maxPrime. maxPrime ist in main.cpp definiert und beschreibt die höchste Primzahl, die der Prozess kennt.
+        if(receivedPrime > maxPrime){
+            maxPrime = receivedPrime;
+        }
+
+        receivedPrime = 0; //Setzt die Zahl aus hygienischen Gründen zurück.
     }
-    printf("\n");
 }

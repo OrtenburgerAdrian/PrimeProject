@@ -20,14 +20,11 @@ extern WorkList* wl;
 class PeerCommunicator
 {
     public:
-        static void run(int mode);
-        static void sendMessage(unsigned long long maybePrime, bool isLocalPrime);
-        static char getMessage();
+        static void run(int mode); //Initialisiert den Kommunikationsprozess zwischen mehreren Peers.
     protected:
     private:
-        static std::string ask(std::string question);
-        static void runReceiver(int mode);
-        static void runTransmitter(int mode);
-        static void runPrimeReceiver();
-        static void printByteAsString (char b);
+        static std::string ask(std::string question); //Hilfsfunktion, die genutzt wird um IPs abzufragen.
+        static void runReceiver(int mode); //Funktion zur Speisung eines Threads: Empfängt Nachrichten des Vorgängers und speichert die Informationen in der WorkList.
+        static void runTransmitter(int mode); //Funktion zur Speisung eines Threads: Holt berechnete Informationen aus der WorkList und sendet sie an den nächsten Peer.
+        static void runPrimeReceiver(); ////Funktion zur Speisung eines Threads: Empfängt neue Primzahlen vom letzten Peer und speichert diese in der LinkedList.
 };

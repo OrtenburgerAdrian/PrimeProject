@@ -16,14 +16,12 @@
 #include <thread>
 #include <mutex>
 #include <vector>
-
-#ifdef __linux__
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
-#endif
+//Vielleicht sind nicht mehr alle includes nötig...
 
 #include "LinkedList.hpp"
 #include "Observer.hpp"
@@ -32,16 +30,14 @@
 #include "tcpiptk.hpp"
 #include "Log.hpp"
 
-//#ifdef __linux__
 #define PORT    30000
 #define MAXMSG  512
 
 /**
 *   Der Observer hat zwei Hauptkomponenten neben dem relativ aufwaendigen Initialisierungsprozess:
-*       1.  Empfange eingehende Nachrichten.
-*       2.  Sammle und werte die Nachrichten aus.
-*       3.  Teile den angemeldeten Communicatorn in gleichen Teilen neu gefundene Primzahlen zu.
-*   RandomAccessRingBuffer realisiert Punkt 2 zu und gleichzeitig die Kommunikation zwischen Listener- und Tellerthread.
+*       1.  Empfange eingehende Nachrichten und werte die Nachrichten aus.
+*       2.  Teile den angemeldeten Communicatorn in gleichen Teilen neu gefundene Primzahlen zu.
+*   RandomAccessRingBuffer realisiert Punkt 1 und gleichzeitig die Kommunikation zwischen Listener- und Tellerthread.
 *   Wir nutzen dafuer den Fakt, dass maximal 250.000 Zahlen in Vorraus gerechnet wird und nur ungerade Zahlen behandelt werden.
 *   Außerdem können wir für vollständig bearbeitete Zahlen davon ausgehen, dass der Listenerthread nicht mehr darauf zugreift.
 *
@@ -55,12 +51,14 @@ static std::vector<int> clientList;
 static fd_set active_fd_set;
 
 /**
- *  Wir speichern die Anzahl der gemeldeten Clients UND wie viele davon true gemeldet haben.
+ *  Eine Zahl im RandomAccessRingBuffer kodiert die Anzahl der gemeldeten Clients UND wie viele davon true gemeldet haben.
  *  Wir speichern NICHT die Zahl, auf die sich diese Informationen beziehen. - Diese ergibt sich mit der Programmweiten Variable maxPrime.
- *  Client meldet sich int + 1000 UND wenn true int + 1
+ *  Wenn sich ein Klient für eine Zahl meldet, wird die Zahl hinter dem entsprechenden Index um 1000 erhöht
+ *  UND zusätzlich nochmal um 1 erhöht, wenn die Rückmeldung positiv ist, also die Zahl für den Klienten keinen gemeinsamen Teiler hatte.
  *  Rückwärts können wir also auflösen...
- *  Anzahl der zurückgemeldeten Clients: int clients = clientProcessingCounter[maybePrime] / 1000
- *  Anzahl der positiven Rückmeldungen:  int bools = clientProcessingCounter[maybePrime] % 1000
+ *  Anzahl der zurückgemeldeten Clients: int clients = clientProcessingCounter[maybePrime] / 1000;
+ *  Anzahl der positiven Rückmeldungen:  int bools = clientProcessingCounter[maybePrime] % 1000;
+ *  Die maximale Zahl an Klienten wird hiermit auf 999 beschränkt.
  */
 static std::mutex mutex_randomAccessRingBuffer;
 static const int randomAccessRingBufferSize = 250000;
@@ -128,7 +126,7 @@ void Observer::run_listener(){
     bool bool_read;
 
     while (true){
-        /* Block until input arrives on one or more active sockets. */
+        // Blocking the thread until input arrives on one or more active sockets.
         fd_set read_fd_set = active_fd_set;
         int selectret = select (FD_SETSIZE, &read_fd_set, NULL, NULL, NULL);
         if (selectret < 0){
@@ -136,10 +134,10 @@ void Observer::run_listener(){
             exit (EXIT_FAILURE);
         }
 
-        /* Service all the sockets with input pending. */
+        // Service all the sockets with input pending.
         for (const int &currentFileDescriptor : clientList){
             if (FD_ISSET (currentFileDescriptor, &read_fd_set)){
-                /* Data arriving on an already-connected socket. */
+                // Data arriving on an already-connected socket.
                 if (tcpiptk::getMessage(currentFileDescriptor, &ull_read, sizeof(unsigned long long)) == 0){
                     fprintf (stderr, "Server: connection lost.\n");
                     close (currentFileDescriptor);
@@ -148,7 +146,7 @@ void Observer::run_listener(){
                 }
 
                 bool_read = (ull_read % 2) == 1 ? true : false; //Dekodiert den Boolean aus der Zahl: Wenn die Zahl ungerade ist, dann war der boolean beim Encodieren 0 (also true);
-                ull_read -= bool_read ? 0 : 1; //Zieht den boolean von unserer Zahl ab, falls dieser eincodierd wurde. (Ansonsten passiert nichts, weil bool_read 0 ist.)
+                ull_read -= bool_read ? 0 : 1; //Zieht den boolean von unserer Zahl ab, falls dieser einkodiert wurde. (Ansonsten passiert nichts, weil bool_read 0 ist.)
 
                 //printf("Got a Solution: %llu is %sa prime for a  Client.\n", ull_read, bool_read ? "" : "not "); //Nützlich für Tests.
 
@@ -156,13 +154,15 @@ void Observer::run_listener(){
                 {
                     //Enkodiert die Information in den randomAccessRingBuffer.
                     int relativeIndex = (ull_read - nextNumberToCheck) / 2;
-                    if (relativeIndex >= randomAccessRingBufferSize){ //Eigentlich nur zur Sicherheit. Kann nicht übertreten werden, weil die Clienten nicht über 250k Zahlen über die letzte Primzahl gehen.
-                        // Letztes mal sind wir nach einigen Stunden in diese Abfrage gefallen. Wir konnten den Fehler nicht beweisen, deshalb haben wir erstmal das Logging erhöht.
-                        printf("lazyBufferOverflow, idiot! - relativeIndex: %i \n", relativeIndex);
+
+                    //Eigentlich nur zur Sicherheit. Kann nicht übertreten werden, weil die Clienten nicht über 250k Zahlen über die letzte Primzahl gehen.
+                    if (relativeIndex >= randomAccessRingBufferSize){ // Letztes mal sind wir nach einigen Stunden in diese Abfrage gefallen. Wir konnten den Fehler nicht beweisen, deshalb haben wir erstmal das Logging erhöht.
+                        printf("lazyBufferOverflow, but how?! - relativeIndex: %i \n", relativeIndex);
                         fprintf (stderr, "lazyBufferOverflow, idiot! \n");
                         return;
                     }
 
+                    // Schreibt die erhaltene Informationen im RingBuffer. Siehe Kommentare am Kopf der Datei.
                     int index = (randomAccessRingBufferBaseIndex + relativeIndex) % randomAccessRingBufferSize;
                     randomAccessRingBuffer[index] += bool_read ? 1001 : 1000;
                 }
@@ -172,7 +172,7 @@ void Observer::run_listener(){
     }
 }
 
-// Interpretiert die vorverarbeiteten Zahlen und versendet die Primzahlen.
+// Interpretiert die vorverarbeiteten Zahlen und versendet gefundene Primzahlen.
 void Observer::run_teller(){
     //Hinweis, hier brauchen wir den Mutex NICHT um zu lesen.
     //Wenn sich alle Clienten zurückgemeldet haben, greift der Listenerthread nicht mehr auf die Adresse zu.

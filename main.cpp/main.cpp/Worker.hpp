@@ -3,7 +3,11 @@
 #include <mutex>
 #include "LinkedList.hpp"
 
-//Anzah der benoetigten Worker-Threads, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
+/**
+ *  Enthält den Rahmen, um IsItAPrime als Client/Server-Anwendung auszuführen. Thread-Sicher
+**/
+
+//Anzahl der benoetigten Worker-Threads, wenn numberOfWorker=0, dann wird trotzdem einer gestartet.
 extern int numberOfWorker;			//def. in main.cpp
 
 /*Adresse der ersten Node.*/
@@ -18,6 +22,6 @@ public:
 	/*Startet die Worker-Threads.*/
 	static void start();
 
-	/*Die Rahmen-Funktion, für die MultiComputing-Worker-Threads.*/
+	/*Die Rahmenfunktion, für die MultiComputing-Worker-Threads.*/
 	static void thread_calculate();
 };

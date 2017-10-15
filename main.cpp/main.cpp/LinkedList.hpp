@@ -10,9 +10,9 @@ struct LinkedList {
 	int primeArrayFuellstand;//Zeigt an wie weit das Array bereits beschrieben ist (In jeder Node außer der letzten 1.000.000).
 
 	/*
-	Initialisiert die erste Node und Speichert die ertste Primzahl. Die Node muss vorher deklarirt sein.
+	Initialisiert die erste Node und Speichert die erste Primzahl. Die Node muss vorher deklariert sein.
 
-	@ *last : Adresse der ersten Node, bei der Initialisierung der erten Node ist last=head.
+	@ *last : Adresse der ersten Node, bei der Initialisierung der ersten Node ist last=head.
 	@ n : Zuspeichernede Zahl.
 	@ return : Adresse der letzten Node.
 	*/

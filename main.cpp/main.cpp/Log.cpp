@@ -1,16 +1,17 @@
 ﻿//Adrian
 #pragma once
 #include "Log.hpp"
-/*Um zuentscheiden, welche Logfunktionen gebraucht werden*/
+
+/*Basisfunktion, welche Logfunktionen nach gegebenen Einstellungen ausführt.*/
 void Log::log(unsigned long long prime) {
-	if (moreLog == true) { Log::logprime(prime); } //Eigentlich nur wichtig, um pruefen zukoennen, dass alle Primzahlen richtig sind.
+	if (moreLog == true) { Log::logprime(prime); } //Eigentlich nur wichtig, um pruefen zu koennen, dass alle Primzahlen richtig sind.
 	Log::logtime();
 }
 
 
 /*
-Loggt die uebergeben Zahl in .txt Dateien, damit die Datei nicht zu grosz wird, ist die groesze auf 1.000.000 Zahlen beschränkt.
-Der Name dieser Datein setzt sich aus "logPrim" + PC-Standard-Time in Sekunden + ".txt" zusammen.
+Loggt die uebergebene Zahl in .txt Dateien. Damit die Datei nicht zu grosz wird, ist die groesze auf 1.000.000 Zahlen beschränkt.
+Der Name dieser Dateien setzt sich aus "logPrime" + PC-Standard-Time in Sekunden + ".txt" zusammen.
 
 @ prime : Zu loggende Primzahl.
 */
@@ -18,8 +19,8 @@ void Log::logprime(unsigned long long prime) {
 	/*Ich habe mich entschieden die Log-Dateien nicht zu wechseln, wenn sie eine bestimme groesze erreichen,
 	sondern wenn ein bestimmte Anzahl an Zahlen geloggt wurde. Denn einen Counter mitlaufen zu lassen ist performanter.*/
 
-	std::stringstream ss; //wird gebraucht um aus time einen String zu machen.
-	static std::ofstream logPrime;	//File descriptor
+	std::stringstream ss; //Wird gebraucht um aus time einen String zu machen.
+	static std::ofstream logPrime;	//Stellt die zu schreibende Datei dar.
 	static int maxCount = 1000000;	//Soviele PrimZahlen werden in eine Logdatei geschrieben.
 	static int count = 0;			//Soviele PrimZahlen wurden bereits in die Logdatei geschrieben.
 
@@ -28,9 +29,11 @@ void Log::logprime(unsigned long long prime) {
 		count++;
 	}
 	else {
-		if (count >= maxCount) { //Wenn der count >= maxCount ist, muss ein file descriptor offen sein
+        //Nur beim Erstellen der ersten Log-Datei im Programmablauf ist die Bedingung "false".
+		if (count >= maxCount) { //Wenn der count >= maxCount ist, muss ein file descriptor offen sein.
 			logPrime.close();
 		}
+
 		time_t t = time(0); // Systemzeit in sec.
 		ss << t;     //time wird zu einem String convertiert.
 		std::string dateiName = "./logPrime" + ss.str() + ".txt";
@@ -56,12 +59,12 @@ void Log::logtime() {
 	if (t > lastTime) {
 		lastTime = t;
 		if (logTime.is_open()) {
-			logTime << count << ":" << maxPrime << "	:	" << t - st << std::endl;//In Datei schreiben
+			logTime << count << ":" << maxPrime << "	:	" << t - st << std::endl; //In Datei schreiben
 		}
 		else {
 			std::string dateiName = "./logTime.txt";
 			logTime.open(dateiName.c_str(), std::ios::app);
-			logTime << count << ":" << maxPrime << "	:	" << t - st << std::endl;//In Datei schreiben
+			logTime << count << ":" << maxPrime << "	:	" << t - st << std::endl; //In Datei schreiben
 		}
 		std::cout << count << ":" << maxPrime << "	:	" << ((t - st) / 60) << ":" << ((t - st) % 60) << std::endl;//In Console schreiben
 	}

@@ -9,10 +9,7 @@
 #include <bitset>
 #include <thread>
 #include <mutex>
-
-#ifdef __linux__
 #include <unistd.h>
-#endif
 
 #include "Observer.hpp"
 #include "Communicator.hpp"
@@ -20,9 +17,9 @@
 #include "tcpiptk.hpp"
 
 static int connectedSocketfd;
-static std::mutex fdWriteMutex; //Nötig, da das senden von Nachrichten anscheinend nicht Threadsicher ist.
+static std::mutex fdWriteMutex; //Nötig, da das senden von Nachrichten nicht Threadsicher ist.
 
-// Fragt noetige Parameter ab.
+// Fragt nötige Parameter ab.
 void Communicator::run(){
     std::string ip;
     std::cout << "Please enter a valid ServerIP:\n>";
@@ -30,13 +27,12 @@ void Communicator::run(){
     Communicator::run(ip);
 }
 
-// Initialisiert die Communication mit dem Observer und nimmt Nachrichten an.
+// Initialisiert die Kommunikation mit dem Observer und nimmt Nachrichten an.
 void Communicator::run(std::string ip) {
     int initPort = 30000;
     connectedSocketfd = tcpiptk::connectSocket(ip.c_str(), initPort);
 
-    bool linkedListInitialized = false; //Der Umgang mit Adrians LinkedList ist zwar sonderbar, funktioniert aber.
-    //void * message = malloc(sizeof(unsigned long long));
+    bool linkedListInitialized = false; //Der Umgang mit Adrians LinkedList ist zwar sonderbar, funktioniert aber gut.
     unsigned long long prime;
 
     // Receiving loop.
@@ -48,7 +44,7 @@ void Communicator::run(std::string ip) {
             return;
         }
         //printf("Got a Message from Observer: %llu is definitely a prime.\n", prime); //Nützlich für Tests.
-        if (linkedListInitialized == false){ //Initialisiert die LinkedList...
+        if (linkedListInitialized == false){ //Initialisiert die LinkedList... Da der Communicator die empfangenen Primzahlen speichert, ist er auch für die LinkedList zuständig.
             LinkedList::initNode(head, prime);
             linkedListInitialized = true;
         }else{
@@ -59,14 +55,14 @@ void Communicator::run(std::string ip) {
     }
 }
 
-//Diese Funktion wird von den Threads genutzt, um dem Observer mitzuteilen, ob eine Zahl für den Prozess eine Primzahl ist.
+//Diese Funktion wird von den Threads genutzt, um dem Observer mitzuteilen, ob eine Zahl für den Prozess eine Primzahl ist oder nicht.
 void Communicator::sendMessage(unsigned long long maybePrime, bool isLocalPrime){
     //printf("I am telling the Observer, that %llu is %sa prime for me.\n", maybePrime, isLocalPrime ? "" : "not "); //Nützlich für Tests.
 
     //Um das Netzwerk und den Observer zu entlasten, kodieren wir den Boolean in die Zahl. Das geht nur, weil maybePrime immer ungerade ist.
     maybePrime += isLocalPrime ? 0 : 1; //Addiert den Boolean auf die fragliche Primzahl.
     fdWriteMutex.lock();
-    tcpiptk::writeMessage(connectedSocketfd, &maybePrime, sizeof(unsigned long long)); //Mit hoher wahrscheinlichkeit nicht Thread-Safe, deshalb der Mutex.
+    tcpiptk::writeMessage(connectedSocketfd, &maybePrime, sizeof(unsigned long long));
     fdWriteMutex.unlock();
 }
 

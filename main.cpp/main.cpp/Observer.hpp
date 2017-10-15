@@ -5,9 +5,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-#if defined __linux__
 #include <semaphore.h>
-#endif
 
 #include "LinkedList.hpp"
 #include "Observer.hpp"
@@ -21,13 +19,10 @@ extern int numberOfWorker;
 
 class Observer
 {
-#if defined __linux__
-	static void run_listener();
-	static void run_teller();
+	static void run_listener(); //Funktion, um einen Thread zu speisen. Führt in eine Listenerschleife, die eingehende Nachrichten der Klienten verarbeitet.
+	static void run_teller(); //Funktion, um einen Thread zu speisen. Führt in eine Sendeschleife, die gesicherte Primzahlen an Klienten schickt.
 
 public:
-	static void run();
-	static void run(int expectedClientCount);
-#endif
-
+	static void run(); // Startet den Observer und fragt die Zahl der erwarteten Klienten ab.
+	static void run(int expectedClientCount); //Startet den Observer mit der übergebenen Zahl an Klienten.
 };

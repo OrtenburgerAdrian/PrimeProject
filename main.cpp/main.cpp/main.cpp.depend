@@ -1785,3 +1785,194 @@
 	"Communicator.hpp"
 	<unistd.h>
 
+1508086569 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/Communicator.cpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<cstdint>
+	<cstring>
+	<bitset>
+	<thread>
+	<mutex>
+	<unistd.h>
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"tcpiptk.hpp"
+
+1508097682 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/Observer.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<semaphore.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+
+1508096366 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/LinkedList.hpp
+	"PrimeArray.hpp"
+	<iostream>
+
+1508086149 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/PrimeArray.hpp
+
+1508096062 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/Communicator.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+
+1508086149 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/Worker.hpp
+	<mutex>
+	"LinkedList.hpp"
+
+1508086149 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/tcpiptk.hpp
+
+1508087132 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/IsItAPrime.cpp
+	"IsItAPrime.hpp"
+
+1508086148 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/IsItAPrime.hpp
+	"LinkedList.hpp"
+
+1508088771 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/LinkedList.cpp
+	"LinkedList.hpp"
+
+1508087883 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/Log.cpp
+	"Log.hpp"
+
+1508096366 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/Log.hpp
+	<iostream>
+	<fstream>
+	<time.h>
+	<sstream>
+
+1508097909 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/main.cpp
+	"LinkedList.hpp"
+	"SingelCore.hpp"
+	"MultiCore.hpp"
+	"PeerWorker.hpp"
+	"WorkList.hpp"
+	<unistd.h>
+	"Observer.hpp"
+	"Communicator.hpp"
+	"PeerCommunicator.hpp"
+
+1508086149 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/SingelCore.hpp
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Log.hpp"
+
+1508097326 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/MultiCore.hpp
+	<mutex>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Log.hpp"
+
+1508086149 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/PeerWorker.hpp
+	<iostream>
+	<fstream>
+	<time.h>
+	<sstream>
+	"WorkList.hpp"
+
+1508095111 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/WorkList.hpp
+	<semaphore.h>
+	<mutex>
+	<vector>
+	<atomic>
+	<time.h>
+
+1508097897 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/PeerCommunicator.hpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"WorkList.hpp"
+	"tcpiptk.hpp"
+
+1508097918 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/MultiCore.cpp
+	<mutex>
+	"IsItAPrime.hpp"
+	"LinkedList.hpp"
+	"Log.hpp"
+	"Threads.hpp"
+	"MultiCore.hpp"
+
+1508086149 /home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/Threads.hpp
+	"Worker.hpp"
+	"MultiCore.hpp"
+	<thread>
+	"PeerWorker.hpp"
+
+1508090720 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/Observer.cpp
+	<stdio.h>
+	<string>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<iostream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<sstream>
+	<cstring>
+	<map>
+	<semaphore.h>
+	<thread>
+	<mutex>
+	<vector>
+	<unistd.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<sys/types.h>
+	"LinkedList.hpp"
+	"Observer.hpp"
+	"Communicator.hpp"
+	"Worker.hpp"
+	"tcpiptk.hpp"
+	"Log.hpp"
+
+1508093219 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/PeerCommunicator.cpp
+	"PeerCommunicator.hpp"
+	"Log.hpp"
+	"vector"
+	"thread"
+	<unistd.h>
+	<sys/socket.h>
+
+1508092000 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/PeerWorker.cpp
+	"PeerWorker.hpp"
+	"Threads.hpp"
+
+1508094318 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/tcpiptk.cpp
+	<stdlib.h>
+	<strings.h>
+	<string.h>
+	<unistd.h>
+	<sstream>
+	<stdio.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+	<arpa/inet.h>
+	<ifaddrs.h>
+	"tcpiptk.hpp"
+
+1508092397 source:/home/berdnues/Desktop/PrimeProject8/main.cpp/main.cpp/Worker.cpp
+	"Worker.hpp"
+	"Threads.hpp"
+	"Communicator.hpp"
+	<unistd.h>
+

@@ -13,10 +13,10 @@ public:
 	Startet die uebergebene Anzahl an Worker-Threads, und laesst diese die richtige Ramen-Funktion ausfuehren.
 
 	@ numOfWorker : Die Anzahl der Threads welche gestartet werden sollen; wenn numOfWorker=0, dann wird trozdem einer gestartet (max. 32 Threads).
-	@ initiator : Ein String, welcher bestimmt, welche Ramen-Funktion von den Threads ausgefuert werden soll ("worker"/"multiCore").
+	@ initiator : Ein String, welcher bestimmt, welche Rahmenfunktion von den Threads ausgefuert werden soll ("worker"/"multiCore"/"peerWorker").
 	*/
 
-	
+
 	static void start(std::string initiator, int numberOfWorker) {
 		if (initiator == "worker")
 		{

@@ -1,4 +1,11 @@
 //Benjamin
+
+
+/**
+ *  Mit dieser Komponente wird die Nachrichtenübermittlung abgehandelt.
+ *  Diese bietet für die Verbindung und Nachrichtenübermittlung die relativ rohen Methoden "createSocket", "connectSocket", "getMessage" und "writeMessage".
+**/
+
 class tcpiptk{
 public:
     static std::string getPeerName(int sockfd);

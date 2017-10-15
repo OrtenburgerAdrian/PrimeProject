@@ -16,6 +16,12 @@
 #include <ifaddrs.h>
 #include "tcpiptk.hpp"
 
+
+/**
+ *  Mit dieser Komponente wird die Nachrichtenübermittlung abgehandelt.
+ *  Diese bietet für die Verbindung und Nachrichtenübermittlung die relativ rohen Methoden "createSocket", "connectSocket", "getMessage" und "writeMessage".
+**/
+
 int listeningSocketfd;
 int connectedSocketfd;
 int establishedSocketfd;
@@ -59,6 +65,7 @@ int tcpiptk::createSocket (int portno){
 
 	 return listeningSocketfd;
 }
+
 int tcpiptk::connectSocket (char const * hostname, int portno){
     struct sockaddr_in serv_addr;
     struct hostent *server;
@@ -110,6 +117,7 @@ int tcpiptk::acceptConnection(int sockfd){
 
 	return establishedSocketfd;
 }
+
 int tcpiptk::writeMessage(int sockfd, const void *message, size_t length){
     int n = write(sockfd,message,length);
     if (n < 0){

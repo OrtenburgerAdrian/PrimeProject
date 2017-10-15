@@ -1,6 +1,4 @@
 //Adrian
-
-#if defined __linux__
 #pragma once
 #include <mutex>
 #include "IsItAPrime.hpp"
@@ -9,7 +7,7 @@
 #include "Threads.hpp"
 #include "MultiCore.hpp"
 
-/*Diese Funktion ist die Rahmen-Funktion, um local auf einen PC mit mehren Threads, Primzahlen zuberechen*/
+/*Diese Funktion ist die Rahmen-Funktion, um Lokal auf einen PC mit mehren Threads, Primzahlen zu berechnen.*/
 void MultiCore::threadprog() {
 	static unsigned long long i = 1; //Ein Counter welcher für alle Threads gilt, dieser wird gebraucht1 damit die Threads wissen welche Zahlen sie als naechstes pruefen muessen.
 	unsigned long long i2;
@@ -43,9 +41,8 @@ void MultiCore::threadprog() {
 
 /*Startet die Worker-Threads und laesst diese die Funktion "MultiCore::threadprog()" ausfuehren.*/
 void MultiCore::run() {
-	LinkedList::initNode(head, 3); // Eine Primzahl ist ausreichend um das Programm zu starten.
+	LinkedList::initNode(head, 3); // Eine Primzahl ist hier ausreichend um das Programm zu starten.
 	maxPrime = 3; //Da nun die erste Primzahl in der LinkedList 3 ist, muss diese auch gesetzt werden.
-	numberOfWorker++; // Da die numberOfWorker bei ihrer Initialisierung -1 gerechnet wurden, was hier nicht von vorteil ist, da keine PC-Leistung für einen weiteren Thread gespart werden sollte.
+	numberOfWorker++; // In der main.cpp wurden die numberOfWorker -1 gerechnet, um Platz für die Kommunikationsthreads zu schaffen. Das wird hier nicht benötigt.
 	Threads::start("multiCore", numberOfWorker);
 }
-#endif
